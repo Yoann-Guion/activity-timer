@@ -16,6 +16,9 @@ export function Navbar() {
   const changeLocale = useChangeLocale();
   const currentLocale = useCurrentLocale();
 
+  // Extract the path without the locale prefix
+  const pathnameWithoutLocale = pathname.replace(/^\/(fr|en)/, "") || "/";
+
   // Navigation items configuration
   const navItems = [
     {
@@ -52,11 +55,12 @@ export function Navbar() {
         {navItems.map((item) => (
           <li key={item.href} className="w-full">
             <Link
-              href={item.href}
+              href={`/${currentLocale}${item.href}`}
               className={cn(
                 "flex items-center justify-center sm:justify-start p-2 rounded-md transition-colors",
                 // Highlight active item
-                pathname.endsWith(item.href)
+                pathnameWithoutLocale === item.href ||
+                  pathnameWithoutLocale.startsWith(`${item.href}/`)
                   ? "bg-primary text-primary-foreground"
                   : "hover:bg-muted"
               )}
