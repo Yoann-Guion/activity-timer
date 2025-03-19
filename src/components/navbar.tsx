@@ -4,10 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, PlusCircle, BarChart, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  useI18n,
+  useChangeLocale,
+  useCurrentLocale,
+} from "../../locales/client";
 
 export function Navbar() {
-  // Get current path to highlight active navigation item
+  const t = useI18n();
   const pathname = usePathname();
+  const changeLocale = useChangeLocale();
+  const currentLocale = useCurrentLocale();
 
   // Navigation items configuration
   const navItems = [
@@ -49,7 +56,7 @@ export function Navbar() {
               className={cn(
                 "flex items-center justify-center sm:justify-start p-2 rounded-md transition-colors",
                 // Highlight active item
-                pathname === item.href
+                pathname.endsWith(item.href)
                   ? "bg-primary text-primary-foreground"
                   : "hover:bg-muted"
               )}
