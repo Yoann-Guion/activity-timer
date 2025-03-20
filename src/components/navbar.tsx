@@ -2,32 +2,42 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlusCircle, BarChart, Clock } from "lucide-react";
+import { Home, PlusCircle, BarChart, Clock, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  useChangeLocale,
+  useCurrentLocale,
+  useScopedI18n,
+} from "../../locales/client";
 
 export function Navbar() {
-  // Get current path to highlight active navigation item
+  const tNav = useScopedI18n("nav");
   const pathname = usePathname();
+  const changeLocale = useChangeLocale();
+  const currentLocale = useCurrentLocale();
+
+  // Extract the path without the locale prefix
+  const pathnameWithoutLocale = pathname.replace(/^\/(fr|en)/, "") || "/";
 
   // Navigation items configuration
   const navItems = [
     {
-      name: "Accueil",
+      name: tNav("home"),
       href: "/",
       icon: Home,
     },
     {
-      name: "Ajouter",
+      name: tNav("add"),
       href: "/activities/new",
       icon: PlusCircle,
     },
     {
-      name: "Chronomètre",
+      name: tNav("timer"),
       href: "/timer",
       icon: Clock,
     },
     {
-      name: "Résumé",
+      name: tNav("summary"),
       href: "/summary",
       icon: BarChart,
     },
@@ -45,11 +55,12 @@ export function Navbar() {
         {navItems.map((item) => (
           <li key={item.href} className="w-full">
             <Link
-              href={item.href}
+              href={`/${currentLocale}${item.href}`}
               className={cn(
                 "flex items-center justify-center sm:justify-start p-2 rounded-md transition-colors",
                 // Highlight active item
-                pathname === item.href
+                pathnameWithoutLocale === item.href ||
+                  pathnameWithoutLocale.startsWith(`${item.href}/`)
                   ? "bg-primary text-primary-foreground"
                   : "hover:bg-muted"
               )}
@@ -60,7 +71,45 @@ export function Navbar() {
             </Link>
           </li>
         ))}
+
+        {/* Language switcher - mobile (as a nav item) */}
+        <li className="sm:hidden w-full">
+          <button
+            onClick={() => changeLocale(currentLocale === "fr" ? "en" : "fr")}
+            className="flex items-center justify-center p-2 rounded-md transition-colors hover:bg-muted w-full"
+          >
+            <Globe className="h-5 w-5" />
+          </button>
+        </li>
       </ul>
+
+      {/* Language switcher - desktop (at the bottom) */}
+      <div className="hidden sm:flex sm:justify-center sm:mt-auto sm:mb-4 sm:border-t sm:pt-4">
+        <div className="flex gap-2">
+          <button
+            onClick={() => changeLocale("fr")}
+            className={cn(
+              "px-3 py-1 text-sm rounded transition-colors",
+              currentLocale === "fr"
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted hover:bg-muted/80"
+            )}
+          >
+            FR
+          </button>
+          <button
+            onClick={() => changeLocale("en")}
+            className={cn(
+              "px-3 py-1 text-sm rounded transition-colors",
+              currentLocale === "en"
+                ? "bg-primary text-primary-foreground"
+                : "bg-muted hover:bg-muted/80"
+            )}
+          >
+            EN
+          </button>
+        </div>
+      </div>
     </nav>
   );
 }

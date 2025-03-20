@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Card,
@@ -10,30 +12,35 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useScopedI18n } from "../../../../../locales/client";
 
 export default function NewActivity() {
+  const tCommon = useScopedI18n("common");
+  const tNewActivity = useScopedI18n("pages.newActivity");
+
   return (
     <div className="container mx-auto max-w-md">
       <Card>
         <CardHeader>
-          <CardTitle>Nouvelle Activité</CardTitle>
-          <CardDescription>
-            Créez une nouvelle activité avec un objectif de temps hebdomadaire
-          </CardDescription>
+          <CardTitle>{tNewActivity("title")}</CardTitle>
+          <CardDescription>{tNewActivity("description")} </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Activity name input */}
           <div className="space-y-2">
-            <Label htmlFor="name">Nom de l'activité</Label>
-            <Input id="name" placeholder="Ex: Piano, Lecture, Sport..." />
+            <Label htmlFor="name">{tNewActivity("form.name.label")}</Label>
+            <Input
+              id="name"
+              placeholder={tNewActivity("form.name.placeholder")}
+            />
           </div>
 
           {/* Weekly goal time inputs */}
           <div>
-            <Label>Objectif hebdomadaire</Label>
+            <Label>{tNewActivity("form.weeklyGoal.label")}</Label>
             <div className="flex gap-2 mt-3">
               <div className="space-y-2 flex-1">
-                <Label htmlFor="hours">Heures</Label>
+                <Label htmlFor="hours">{tCommon("time.hours")}</Label>
                 <Input
                   id="hours"
                   type="number"
@@ -43,7 +50,7 @@ export default function NewActivity() {
                 />
               </div>
               <div className="space-y-2 flex-1">
-                <Label htmlFor="minutes">Minutes</Label>
+                <Label htmlFor="minutes">{tCommon("time.minutes")}</Label>
                 <Input
                   id="minutes"
                   type="number"
@@ -57,7 +64,7 @@ export default function NewActivity() {
 
           {/* Color picker */}
           <div className="space-y-2">
-            <Label htmlFor="color">Couleur</Label>
+            <Label htmlFor="color">{tNewActivity("form.color.label")} </Label>
             <div className="flex gap-2">
               <Input
                 id="color"
@@ -71,9 +78,9 @@ export default function NewActivity() {
         </CardContent>
         <CardFooter className="flex justify-between">
           <Link href="/">
-            <Button variant="outline">Annuler</Button>
+            <Button variant="outline">{tCommon("actions.cancel")}</Button>
           </Link>
-          <Button>Créer</Button>
+          <Button>{tCommon("actions.create")}</Button>
         </CardFooter>
       </Card>
     </div>
