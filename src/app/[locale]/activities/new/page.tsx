@@ -70,9 +70,8 @@ export default function NewActivity() {
                 id="color"
                 type="color"
                 defaultValue="#3b82f6"
-                className="w-12 h-10 p-1"
+                className="grow w-12 h-10 p-1"
               />
-              <Input type="text" defaultValue="#3b82f6" className="flex-1" />
             </div>
           </div>
         </CardContent>

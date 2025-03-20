@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlusCircle, BarChart, Clock, Globe } from "lucide-react";
+import { Home, PlusCircle, BarChart, Clock, Earth } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   useChangeLocale,
@@ -78,7 +78,7 @@ export function Navbar() {
             onClick={() => changeLocale(currentLocale === "fr" ? "en" : "fr")}
             className="flex items-center justify-center p-2 rounded-md transition-colors hover:bg-muted w-full"
           >
-            <Globe className="h-5 w-5" />
+            <Earth className="h-5 w-5" />
           </button>
         </li>
       </ul>
