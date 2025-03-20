@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import { Home, PlusCircle, BarChart, Clock, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
-  useI18n,
   useChangeLocale,
   useCurrentLocale,
+  useScopedI18n,
 } from "../../locales/client";
 
 export function Navbar() {
-  const t = useI18n();
+  const tNav = useScopedI18n("navigation");
   const pathname = usePathname();
   const changeLocale = useChangeLocale();
   const currentLocale = useCurrentLocale();
@@ -22,22 +22,22 @@ export function Navbar() {
   // Navigation items configuration
   const navItems = [
     {
-      name: "Accueil",
+      name: tNav("home"),
       href: "/",
       icon: Home,
     },
     {
-      name: "Ajouter",
+      name: tNav("add"),
       href: "/activities/new",
       icon: PlusCircle,
     },
     {
-      name: "Chronomètre",
+      name: tNav("timer"),
       href: "/timer",
       icon: Clock,
     },
     {
-      name: "Résumé",
+      name: tNav("summary"),
       href: "/summary",
       icon: BarChart,
     },

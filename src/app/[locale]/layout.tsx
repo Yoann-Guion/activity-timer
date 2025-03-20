@@ -1,27 +1,41 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { I18nProviderClient } from "../../../locales/client";
 
-const inter = Inter({ subsets: ["latin"] });
+const geistSans = Geist({
+  weight: "400",
+  style: "normal",
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
 
+const geistMono = Geist_Mono({
+  weight: "400",
+  style: "normal",
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 export const metadata: Metadata = {
   title: "Activity Timer App",
   description: "Suivez vos activités hebdomadaires et atteignez vos objectifs",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={inter.className}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <I18nProviderClient locale={locale}>
           <ThemeProvider
             attribute="class"
