@@ -1,31 +1,36 @@
+"use client";
+
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScopedI18n } from "../../../locales/client";
 
 export default function Home() {
+  const tCommon = useScopedI18n("common");
+  const tHome = useScopedI18n("pages.home");
   return (
     <div className="container mx-auto max-w-4xl">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Mes Activités</h1>
+        <h1 className="text-2xl font-bold">{tHome("title")}</h1>
         <Link href="/activities/new">
           <Button>
             <PlusCircle className="mr-2 h-4 w-4" />
-            Nouvelle Activité
+            {tHome("newActivity")}
           </Button>
         </Link>
       </div>
 
       <div className="text-center py-12">
         <h2 className="text-xl font-semibold mb-4">
-          Aucune activité pour le moment
+          {tCommon("emptyState.noActivities")}
         </h2>
         <p className="text-muted-foreground mb-6">
-          Commencez par créer une activité pour suivre votre temps
+          {tCommon("emptyState.createFirst")}
         </p>
         <Link href="/activities/new">
           <Button>
             <PlusCircle className="mr-2 h-4 w-4" />
-            Créer ma première activité
+            {tHome("createFirst")}
           </Button>
         </Link>
       </div>

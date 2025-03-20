@@ -11,7 +11,7 @@ import {
 } from "../../locales/client";
 
 export function Navbar() {
-  const tNav = useScopedI18n("navigation");
+  const tNav = useScopedI18n("nav");
   const pathname = usePathname();
   const changeLocale = useChangeLocale();
   const currentLocale = useCurrentLocale();
