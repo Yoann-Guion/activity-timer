@@ -75,6 +75,7 @@ export default {
     summary: {
       title: "Résumé Hebdomadaire",
       currentWeek: "Semaine en cours",
+      dateRange: "du {start} au {end}",
       overview: {
         title: "Vue d'ensemble",
         description: "Progression globale de vos activités cette semaine",

@@ -74,6 +74,7 @@ export default {
     summary: {
       title: "Weekly Summary",
       currentWeek: "Current week",
+      dateRange: "from {start} to {end}",
       overview: {
         title: "Overview",
         description: "Global progress of your activities this week",
