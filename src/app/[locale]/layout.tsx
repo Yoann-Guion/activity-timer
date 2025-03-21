@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
 export const metadata: Metadata = {
   title: "Activity Timer App",
   description: "Suivez vos activités hebdomadaires et atteignez vos objectifs",
