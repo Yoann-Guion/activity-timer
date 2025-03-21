@@ -9,6 +9,7 @@ import {
   useCurrentLocale,
   useScopedI18n,
 } from "../../locales/client";
+import { ThemeToggle } from "./theme-toggle";
 
 export function Navbar() {
   const tNav = useScopedI18n("nav");
@@ -83,8 +84,14 @@ export function Navbar() {
         </li>
       </ul>
 
-      {/* Language switcher - desktop (at the bottom) */}
-      <div className="hidden sm:flex sm:justify-center sm:mt-auto sm:mb-4 sm:border-t sm:pt-4">
+      {/* Language switcher and theme toggle - desktop */}
+      <div className="hidden sm:flex sm:flex-col sm:items-center sm:mt-auto sm:mb-4 sm:border-t sm:pt-4">
+        {/* Theme toggle */}
+        <div className="mb-6">
+          <ThemeToggle />
+        </div>
+
+        {/* Language switcher */}
         <div className="flex gap-2">
           <button
             onClick={() => changeLocale("fr")}
@@ -109,6 +116,11 @@ export function Navbar() {
             EN
           </button>
         </div>
+      </div>
+
+      {/* Theme toggle - mobile */}
+      <div className="fixed top-4 right-4 sm:hidden">
+        <ThemeToggle />
       </div>
     </nav>
   );
