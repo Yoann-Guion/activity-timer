@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlusCircle, BarChart, Clock, Earth } from "lucide-react";
+import { Home, PlusCircle, BarChart, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   useChangeLocale,
@@ -10,6 +10,7 @@ import {
   useScopedI18n,
 } from "../../locales/client";
 import { ThemeToggle } from "./theme-toggle";
+import { SettingsMenu } from "./settings-menu";
 
 export function Navbar() {
   const tNav = useScopedI18n("nav");
@@ -73,14 +74,9 @@ export function Navbar() {
           </li>
         ))}
 
-        {/* Language switcher - mobile (as a nav item) */}
+        {/* Settings menu with language switcher and theme toggle - mobile */}
         <li className="sm:hidden w-full">
-          <button
-            onClick={() => changeLocale(currentLocale === "fr" ? "en" : "fr")}
-            className="flex items-center justify-center p-2 rounded-md transition-colors hover:bg-muted w-full"
-          >
-            <Earth className="h-5 w-5" />
-          </button>
+          <SettingsMenu />
         </li>
       </ul>
 
@@ -116,11 +112,6 @@ export function Navbar() {
             EN
           </button>
         </div>
-      </div>
-
-      {/* Theme toggle - mobile */}
-      <div className="fixed top-4 right-4 sm:hidden">
-        <ThemeToggle />
       </div>
     </nav>
   );

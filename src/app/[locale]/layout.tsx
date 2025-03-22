@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { I18nProviderClient } from "../../../locales/client";
+import { TransitionProvider } from "@/components/animation/TransitionProvider";
 
 const geistSans = Geist({
   weight: "400",
@@ -18,6 +19,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
 export const metadata: Metadata = {
   title: "Activity Timer App",
   description: "Suivez vos activités hebdomadaires et atteignez vos objectifs",
@@ -46,7 +48,9 @@ export default async function RootLayout({
           >
             <div className="flex flex-col sm:flex-row min-h-screen">
               <Navbar />
-              <main className="flex-1 p-4 pb-20 sm:pb-4">{children}</main>
+              <main className="flex-1 p-4 pb-20 sm:pb-4">
+                <TransitionProvider>{children}</TransitionProvider>
+              </main>
             </div>
           </ThemeProvider>
         </I18nProviderClient>
