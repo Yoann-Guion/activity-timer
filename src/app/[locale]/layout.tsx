@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
 import { I18nProviderClient } from "../../../locales/client";
 import { TransitionProvider } from "@/components/animation/TransitionProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   weight: "400",
@@ -54,6 +55,7 @@ export default async function RootLayout({
             </div>
           </ThemeProvider>
         </I18nProviderClient>
+        <Analytics />
       </body>
     </html>
   );
