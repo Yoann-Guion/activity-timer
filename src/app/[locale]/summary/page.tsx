@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useCurrentLocale, useScopedI18n } from "../../../../locales/client";
 import { getWeekEndDate, getWeekStartDate } from "@/lib/utils";
+import { PageTransition } from "@/components/animation/PageTransition";
 
 export default function Summary() {
   const tCommon = useScopedI18n("common.emptyState");
@@ -25,24 +26,26 @@ export default function Summary() {
   };
 
   return (
-    <div className="container mx-auto max-w-4xl">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold">{tSummary("title")} </h1>
-        <p className="text-muted-foreground">
-          {tSummary("currentWeek")}&nbsp;:&nbsp;
-          {tSummary("dateRange", {
-            start: formatDate(weekStart),
-            end: formatDate(weekEnd),
-          })}
-        </p>
-      </div>
+    <PageTransition>
+      <div className="container mx-auto max-w-4xl">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold">{tSummary("title")} </h1>
+          <p className="text-muted-foreground">
+            {tSummary("currentWeek")}&nbsp;:&nbsp;
+            {tSummary("dateRange", {
+              start: formatDate(weekStart),
+              end: formatDate(weekEnd),
+            })}
+          </p>
+        </div>
 
-      <div className="text-center py-12">
-        <h2 className="text-xl font-semibold mb-4">
-          {tCommon("noActivities")}
-        </h2>
-        <p className="text-muted-foreground">{tCommon("createFirst")}</p>
+        <div className="text-center py-12">
+          <h2 className="text-xl font-semibold mb-4">
+            {tCommon("noActivities")}
+          </h2>
+          <p className="text-muted-foreground">{tCommon("createFirst")}</p>
+        </div>
       </div>
-    </div>
+    </PageTransition>
   );
 }
