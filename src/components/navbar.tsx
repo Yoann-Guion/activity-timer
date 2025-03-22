@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlusCircle, BarChart, Clock, Earth } from "lucide-react";
+import { Home, PlusCircle, BarChart, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   useChangeLocale,
