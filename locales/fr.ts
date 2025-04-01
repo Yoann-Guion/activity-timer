@@ -81,8 +81,8 @@ export default {
         description: "Progression globale de vos activités cette semaine",
       },
       goalReached: "Objectif atteint !",
-      goalProgress: "{percentage}% de l'objectif",
-      remaining: "{time} restants",
+      goalProgress: " de l'objectif",
+      remaining: " restants",
       extra: "+{time}",
       stats: {
         goalsReached: {
