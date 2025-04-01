@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Play, PlusCircle } from "lucide-react";
+import { Play, PlusCircle, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 import { PageTransition } from "@/components/animation/PageTransition";
@@ -59,8 +59,14 @@ export default function Home() {
                   className="absolute top-0 left-0 w-full h-2.5"
                   style={{ backgroundColor: activity.color }}
                 />
-                <CardHeader>
+                <CardHeader className="pt-1 flex justify-between items-center">
                   <CardTitle>{activity.name}</CardTitle>
+                  <button
+                    // onClick={() => handleDelete(activity.id)}
+                    className="text-gray-400 hover:text-red-500 transition-colors"
+                  >
+                    <Trash2 className="h-5 w-5" />
+                  </button>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
