@@ -43,12 +43,9 @@ export default function NewActivity() {
 
     if (name.trim() && totalMinutes > 0) {
       addActivity({
-        id: uuidv4(),
         name: name.trim(),
         weeklyGoal: totalMinutes,
-        weeklyProgress: 0,
         color,
-        createdAt: new Date(),
       });
       console.log("Activity added:", {
         name: name,

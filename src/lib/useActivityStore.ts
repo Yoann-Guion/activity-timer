@@ -2,12 +2,12 @@
 
 import { v4 as uuidv4 } from "uuid";
 
-import { IActivity } from "@/@types/activity";
+import { IActivity, INewActivity } from "@/@types/activity";
 import { create } from "zustand";
 // import { persist } from "zustand/middleware";
 interface ActivityStore {
   activities: IActivity[];
-  addActivity: (activity: IActivity) => void;
+  addActivity: (activity: INewActivity) => void;
   deleteActivity: (id: string) => void;
 }
 
@@ -16,7 +16,7 @@ export const useActivityStore = create<ActivityStore>((set) => ({
 
   addActivity: (activity) =>
     set((state) => {
-      const newActivity = {
+      const newActivity: IActivity = {
         id: uuidv4(),
         name: activity.name,
         weeklyGoal: activity.weeklyGoal,
@@ -27,7 +27,7 @@ export const useActivityStore = create<ActivityStore>((set) => ({
       return { activities: [...state.activities, newActivity] };
     }),
 
-  deleteActivity: (id: string) =>
+  deleteActivity: (id) =>
     set((state) => ({
       activities: state.activities.filter((activity) => activity.id !== id),
     })),
