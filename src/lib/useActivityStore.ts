@@ -4,10 +4,11 @@ import { v4 as uuidv4 } from "uuid";
 
 import { IActivity } from "@/@types/activity";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+// import { persist } from "zustand/middleware";
 interface ActivityStore {
   activities: IActivity[];
   addActivity: (activity: IActivity) => void;
+  deleteActivity: (id: string) => void;
 }
 
 export const useActivityStore = create<ActivityStore>((set) => ({
