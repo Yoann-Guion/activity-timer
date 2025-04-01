@@ -21,7 +21,7 @@ export default function Home() {
   const tHome = useScopedI18n("pages.home");
   const currentLocale = useCurrentLocale();
 
-  const { activities } = useActivityStore();
+  const { activities, deleteActivity } = useActivityStore();
 
   return (
     <PageTransition>
@@ -62,7 +62,7 @@ export default function Home() {
                 <CardHeader className="pt-1 flex justify-between items-center">
                   <CardTitle>{activity.name}</CardTitle>
                   <button
-                    // onClick={() => handleDelete(activity.id)}
+                    onClick={() => deleteActivity(activity.id)}
                     className="text-gray-400 hover:text-red-500 transition-colors"
                   >
                     <Trash2 className="h-5 w-5" />

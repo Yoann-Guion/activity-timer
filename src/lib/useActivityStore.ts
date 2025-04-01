@@ -25,4 +25,9 @@ export const useActivityStore = create<ActivityStore>((set) => ({
       };
       return { activities: [...state.activities, newActivity] };
     }),
+
+  deleteActivity: (id: string) =>
+    set((state) => ({
+      activities: state.activities.filter((activity) => activity.id !== id),
+    })),
 }));
