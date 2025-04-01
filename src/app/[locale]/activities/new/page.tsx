@@ -118,7 +118,7 @@ export default function NewActivity() {
                 <Label htmlFor="color">
                   {tNewActivity("form.color.label")}{" "}
                 </Label>
-                <div className="flex gap-2">
+                <div className="flex gap-2 pb-2">
                   <Input
                     id="color"
                     type="color"
