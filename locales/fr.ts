@@ -55,6 +55,10 @@ export default {
         color: {
           label: "Couleur",
         },
+        timeMissing: {
+          title: "Veuillez remplir l'objectif hebdomadaire",
+          description: "L'objectif hebdomadaire doit être supérieur à 0",
+        },
       },
     },
 

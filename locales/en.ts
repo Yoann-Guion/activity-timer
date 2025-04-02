@@ -54,6 +54,10 @@ export default {
         color: {
           label: "Color",
         },
+        timeMissing: {
+          title: "Please fill in the weekly goal",
+          description: "The weekly goal must be greater than 0",
+        },
       },
     },
 

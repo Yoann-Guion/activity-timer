@@ -13,11 +13,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+
 import { useScopedI18n } from "../../../../../locales/client";
 import { PageTransition } from "@/components/animation/PageTransition";
 import { useState } from "react";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { v4 as uuidv4 } from "uuid";
 
 export default function NewActivity() {
   const router = useRouter();
@@ -41,20 +42,23 @@ export default function NewActivity() {
     const totalMinutes =
       (Number.parseInt(hours) || 0) * 60 + (Number.parseInt(minutes) || 0);
 
+    // Disploy a toast if the total minutes is 0
+    if (totalMinutes === 0) {
+      toast.error(tNewActivity("form.timeMissing.title"), {
+        description: tNewActivity("form.timeMissing.description"),
+      });
+      return;
+    }
+
     if (name.trim() && totalMinutes > 0) {
       addActivity({
         name: name.trim(),
         weeklyGoal: totalMinutes,
         color,
       });
-      console.log("Activity added:", {
-        name: name,
-        weeklyGoal: totalMinutes,
-      });
+
       router.push("/");
     }
-
-    // todo : rajouter un message si le temps est 0
   };
 
   return (
