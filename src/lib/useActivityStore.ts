@@ -21,7 +21,7 @@ interface ActivityStore {
   stopTimer: () => void;
 }
 
-export const useActivityStore = create<ActivityStore>((set, get) => ({
+export const useActivityStore = create<ActivityStore>((set) => ({
   activities: [],
   timers: [],
   activeTimer: null,
