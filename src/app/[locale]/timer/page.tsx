@@ -91,7 +91,14 @@ export default function Timer() {
             {activeTimer ? (
               <div className="text-center">
                 <h2 className="text-xl font-semibold mb-2">
-                  {activeActivity?.name}
+                  <div className="flex items-center">
+                    <div
+                      className="w-3 h-3 rounded-full mr-2"
+                      style={{ backgroundColor: activeActivity?.color }}
+                    />
+
+                    <span>{activeActivity?.name}</span>
+                  </div>
                 </h2>
                 <div className="text-5xl font-mono font-bold my-8">
                   {formatTime(elapsedTime)}
@@ -122,7 +129,14 @@ export default function Timer() {
                       {activities.length > 0 ? (
                         activities.map((activity) => (
                           <SelectItem key={activity.id} value={activity.id}>
-                            {activity.name}
+                            <div className="flex items-center">
+                              <div
+                                className="w-3 h-3 rounded-full mr-2"
+                                style={{ backgroundColor: activity.color }}
+                              />
+
+                              <span>{activity.name}</span>
+                            </div>
                           </SelectItem>
                         ))
                       ) : (
@@ -139,13 +153,26 @@ export default function Timer() {
                     <div className="flex justify-between items-center">
                       <div>
                         <h3 className="font-medium">
-                          {
-                            activities.find((a) => a.id === selectedActivityId)
-                              ?.name
-                          }
+                          <div className="flex items-center">
+                            <div
+                              className="w-3 h-3 rounded-full mr-2"
+                              style={{
+                                backgroundColor: activities.find(
+                                  (a) => a.id === selectedActivityId
+                                )?.color,
+                              }}
+                            />
+                            <span>
+                              {
+                                activities.find(
+                                  (a) => a.id === selectedActivityId
+                                )?.name
+                              }
+                            </span>
+                          </div>
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          Objectif:{" "}
+                          Objectif :{" "}
                           {formatMinutes(
                             activities.find((a) => a.id === selectedActivityId)
                               ?.weeklyGoal || 0
