@@ -9,6 +9,7 @@ export default {
       cancel: "Cancel",
       create: "Create",
       save: "Save",
+      resume: "Resume",
     },
     emptyState: {
       noActivities: "No activities yet",

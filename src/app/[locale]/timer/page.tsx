@@ -27,7 +27,15 @@ export default function Timer() {
   const tCommon = useScopedI18n("common");
   const tTimer = useScopedI18n("pages.timer");
 
-  const { activities, startTimer, activeTimer } = useActivityStore();
+  const {
+    activities,
+    startTimer,
+    activeTimer,
+    pauseTimer,
+    resumeTimer,
+    pauseStartTime,
+    totalPausedTime,
+  } = useActivityStore();
   // State for the selected activity
   const [selectedActivityId, setSelectedActivityId] = useState<string>("");
   // State for the elapsed time
@@ -45,16 +53,30 @@ export default function Timer() {
       return;
     }
 
+    // If the timer is paused, do not update the elapsed time
+    if (pauseStartTime !== null) return;
+
+    // Calculate the elapsed time in seconds
     const interval = setInterval(() => {
-      const elapsed = Math.floor(
-        (new Date().getTime() - new Date(activeTimer.startTime).getTime()) /
-          1000
-      );
+      const now = new Date().getTime();
+      const startTime = new Date(activeTimer.startTime).getTime();
+
+      // Calculer le temps écoulé en soustrayant le temps total de pause
+      const elapsed = Math.floor((now - startTime - totalPausedTime) / 1000);
       setElapsedTime(elapsed);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [activeTimer]);
+  }, [activeTimer, pauseStartTime, totalPausedTime]);
+
+  // Function to handle the pause/resume button
+  const togglePause = () => {
+    if (pauseStartTime === null) {
+      pauseTimer();
+    } else {
+      resumeTimer();
+    }
+  };
 
   return (
     <PageTransition>
@@ -155,9 +177,18 @@ export default function Timer() {
           <CardFooter className="flex justify-center gap-4">
             {activeTimer ? (
               <>
-                <Button variant="outline" size="lg">
-                  <Pause className="mr-2 h-4 w-4" />
-                  {tCommon("actions.pause")}
+                <Button variant="outline" size="lg" onClick={togglePause}>
+                  {pauseStartTime !== null ? (
+                    <>
+                      <Play className="mr-2 h-4 w-4" />{" "}
+                      {tCommon("actions.resume")}
+                    </>
+                  ) : (
+                    <>
+                      <Pause className="mr-2 h-4 w-4" />{" "}
+                      {tCommon("actions.pause")}
+                    </>
+                  )}
                 </Button>
                 <Button variant="destructive" size="lg">
                   <Square className="mr-2 h-4 w-4" />

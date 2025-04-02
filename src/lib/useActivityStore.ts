@@ -9,17 +9,23 @@ interface ActivityStore {
   activities: IActivity[];
   timers: TimerSession[];
   activeTimer: TimerSession | null;
+  pauseStartTime: number | null;
+  totalPausedTime: number;
 
   // Actions
   addActivity: (activity: INewActivity) => void;
   deleteActivity: (id: string) => void;
   startTimer: (activityId: string) => void;
+  pauseTimer: () => void;
+  resumeTimer: () => void;
 }
 
 export const useActivityStore = create<ActivityStore>((set, get) => ({
   activities: [],
   timers: [],
   activeTimer: null,
+  pauseStartTime: null,
+  totalPausedTime: 0,
 
   // Add a new activity to the store
   addActivity: (activity) =>
@@ -41,6 +47,7 @@ export const useActivityStore = create<ActivityStore>((set, get) => ({
       activities: state.activities.filter((activity) => activity.id !== id),
     })),
 
+  // Start a timer for a selected activity
   startTimer: (activityId) =>
     set((state) => {
       // Create a new timer
@@ -53,10 +60,38 @@ export const useActivityStore = create<ActivityStore>((set, get) => ({
         isActive: true,
       };
 
-      // Add the new timer to the store and set it as the active timer
+      // Add the new timer to the store, set it as the active timer and reset pause state
       return {
         timers: [...state.timers, newTimer],
         activeTimer: newTimer,
+        pauseStartTime: null,
+        totalPausedTime: 0,
+      };
+    }),
+
+  // Pause the active timer
+  pauseTimer: () =>
+    set((state) => {
+      // Only pause if there's an active timer and it's not already paused
+      if (!state.activeTimer || state.pauseStartTime !== null) return state;
+      return {
+        pauseStartTime: new Date().getTime(),
+      };
+    }),
+
+  // Resume the active timer
+  resumeTimer: () =>
+    set((state) => {
+      // Only resume if there's an active timer and it's currently paused
+      if (!state.activeTimer || state.pauseStartTime === null) return state;
+
+      // Calculate how long this pause lasted
+      const pauseDuration = new Date().getTime() - state.pauseStartTime;
+
+      // Clear pause start time and add the duration to total paused time (null indicates timer is running)
+      return {
+        pauseStartTime: null,
+        totalPausedTime: state.totalPausedTime + pauseDuration,
       };
     }),
 }));
