@@ -15,13 +15,15 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { formatMinutes } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const tCommon = useScopedI18n("common");
   const tHome = useScopedI18n("pages.home");
   const currentLocale = useCurrentLocale();
 
-  const { activities, deleteActivity } = useActivityStore();
+  const { activities, deleteActivity, startTimer } = useActivityStore();
 
   return (
     <PageTransition>
@@ -88,7 +90,14 @@ export default function Home() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button variant="outline" className="w-full">
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => {
+                      startTimer(activity.id);
+                      router.push(`/${currentLocale}/timer`);
+                    }}
+                  >
                     <Play className="mr-2 h-4 w-4" />
                     Démarrer
                   </Button>

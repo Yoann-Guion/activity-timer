@@ -7,6 +7,21 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
+ * Format seconds into a human-readable string
+ * @param seconds - Number of seconds to format
+ * @returns Formatted string in the format "HH:MM:SS"
+ */
+export const formatTime = (seconds: number) => {
+  const hours = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+
+  return `${hours.toString().padStart(2, "0")}:${mins
+    .toString()
+    .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+};
+
+/**
  * Format minutes into a human-readable string
  * Examples:
  * - 75 minutes -> "1h 15min"

@@ -7,6 +7,15 @@ export interface IActivity {
   createdAt: Date;
 }
 
+export interface TimerSession {
+  id: string;
+  activityId: string;
+  startTime: Date;
+  endTime: Date | null;
+  duration: number;
+  isActive: boolean;
+}
+
 /**
  * Type for new activity before being added to the store
  * @property {string} name - Name of the activity.
