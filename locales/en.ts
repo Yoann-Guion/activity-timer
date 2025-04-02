@@ -9,6 +9,7 @@ export default {
       cancel: "Cancel",
       create: "Create",
       save: "Save",
+      resume: "Resume",
     },
     emptyState: {
       noActivities: "No activities yet",
@@ -37,6 +38,11 @@ export default {
       newActivity: "New activity",
       createFirst: "Create my first activity",
       weeklyProgress: "Weekly progress",
+      timerAlreadyRunning: {
+        title:
+          "An active timer is already running. Please stop it before starting a new one.",
+        link: "Go to the Timer page",
+      },
     },
 
     // New activity page
@@ -53,6 +59,10 @@ export default {
         },
         color: {
           label: "Color",
+        },
+        timeMissing: {
+          title: "Please fill in the weekly goal",
+          description: "The weekly goal must be greater than 0",
         },
       },
     },

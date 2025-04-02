@@ -1,3 +1,6 @@
+import { link } from "fs";
+import { title } from "process";
+
 export default {
   // Common reusable elements
   common: {
@@ -9,6 +12,7 @@ export default {
       cancel: "Annuler",
       create: "Créer",
       save: "Enregistrer",
+      resume: "Reprendre",
     },
     emptyState: {
       noActivities: "Aucune activité pour le moment",
@@ -37,6 +41,11 @@ export default {
       newActivity: "Nouvelle activité",
       createFirst: "Créer ma première activité",
       weeklyProgress: "Progression hebdomadaire",
+      timerAlreadyRunning: {
+        title:
+          "Un chronomètre est déjà en cours. Veuillez l'arrêter avant d'en démarrer un nouveau.",
+        link: "Aller à la page Chronomètre",
+      },
     },
 
     // New activity page
@@ -54,6 +63,10 @@ export default {
         },
         color: {
           label: "Couleur",
+        },
+        timeMissing: {
+          title: "Veuillez remplir l'objectif hebdomadaire",
+          description: "L'objectif hebdomadaire doit être supérieur à 0",
         },
       },
     },

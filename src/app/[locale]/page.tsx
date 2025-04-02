@@ -15,13 +15,17 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { formatMinutes } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Home() {
+  const router = useRouter();
   const tCommon = useScopedI18n("common");
   const tHome = useScopedI18n("pages.home");
   const currentLocale = useCurrentLocale();
 
-  const { activities, deleteActivity } = useActivityStore();
+  const { activities, deleteActivity, startTimer, activeTimer } =
+    useActivityStore();
 
   return (
     <PageTransition>
@@ -72,7 +76,7 @@ export default function Home() {
                   <div className="space-y-4">
                     <div>
                       <div className="flex justify-between text-sm mb-1">
-                        <span>Progression hebdomadaire</span>
+                        <span>{tHome("weeklyProgress")}</span>
                         <span>
                           {formatMinutes(activity.weeklyProgress)} / &nbsp;
                           {formatMinutes(activity.weeklyGoal)}
@@ -88,7 +92,33 @@ export default function Home() {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button variant="outline" className="w-full">
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => {
+                      if (activeTimer) {
+                        if (activeTimer.activityId === activity.id) {
+                          router.push(`/${currentLocale}/timer`);
+                          return;
+                        }
+                        toast.error(
+                          <div>
+                            {tHome("timerAlreadyRunning.title")}
+                            <br />
+                            <Link
+                              href={`/${currentLocale}/timer`}
+                              className="block mt-2 text-blue-500 font-medium hover:underline"
+                            >
+                              {tHome("timerAlreadyRunning.link")}
+                            </Link>
+                          </div>
+                        );
+                        return;
+                      }
+                      startTimer(activity.id);
+                      router.push(`/${currentLocale}/timer`);
+                    }}
+                  >
                     <Play className="mr-2 h-4 w-4" />
                     Démarrer
                   </Button>
