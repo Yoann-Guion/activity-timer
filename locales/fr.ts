@@ -1,3 +1,6 @@
+import { link } from "fs";
+import { title } from "process";
+
 export default {
   // Common reusable elements
   common: {
@@ -38,6 +41,11 @@ export default {
       newActivity: "Nouvelle activité",
       createFirst: "Créer ma première activité",
       weeklyProgress: "Progression hebdomadaire",
+      timerAlreadyRunning: {
+        title:
+          "Un chronomètre est déjà en cours. Veuillez l'arrêter avant d'en démarrer un nouveau.",
+        link: "Aller à la page Chronomètre",
+      },
     },
 
     // New activity page

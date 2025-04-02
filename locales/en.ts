@@ -38,6 +38,11 @@ export default {
       newActivity: "New activity",
       createFirst: "Create my first activity",
       weeklyProgress: "Weekly progress",
+      timerAlreadyRunning: {
+        title:
+          "An active timer is already running. Please stop it before starting a new one.",
+        link: "Go to the Timer page",
+      },
     },
 
     // New activity page

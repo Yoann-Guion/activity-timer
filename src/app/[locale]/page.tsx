@@ -16,6 +16,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { formatMinutes } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Home() {
   const router = useRouter();
@@ -23,7 +24,8 @@ export default function Home() {
   const tHome = useScopedI18n("pages.home");
   const currentLocale = useCurrentLocale();
 
-  const { activities, deleteActivity, startTimer } = useActivityStore();
+  const { activities, deleteActivity, startTimer, activeTimer } =
+    useActivityStore();
 
   return (
     <PageTransition>
@@ -74,7 +76,7 @@ export default function Home() {
                   <div className="space-y-4">
                     <div>
                       <div className="flex justify-between text-sm mb-1">
-                        <span>Progression hebdomadaire</span>
+                        <span>{tHome("weeklyProgress")}</span>
                         <span>
                           {formatMinutes(activity.weeklyProgress)} / &nbsp;
                           {formatMinutes(activity.weeklyGoal)}
@@ -94,6 +96,25 @@ export default function Home() {
                     variant="outline"
                     className="w-full"
                     onClick={() => {
+                      if (activeTimer) {
+                        if (activeTimer.activityId === activity.id) {
+                          router.push(`/${currentLocale}/timer`);
+                          return;
+                        }
+                        toast.error(
+                          <div>
+                            {tHome("timerAlreadyRunning.title")}
+                            <br />
+                            <Link
+                              href={`/${currentLocale}/timer`}
+                              className="block mt-2 text-blue-500 font-medium hover:underline"
+                            >
+                              {tHome("timerAlreadyRunning.link")}
+                            </Link>
+                          </div>
+                        );
+                        return;
+                      }
                       startTimer(activity.id);
                       router.push(`/${currentLocale}/timer`);
                     }}
