@@ -35,6 +35,7 @@ export default function Timer() {
     resumeTimer,
     pauseStartTime,
     totalPausedTime,
+    stopTimer,
   } = useActivityStore();
   // State for the selected activity
   const [selectedActivityId, setSelectedActivityId] = useState<string>("");
@@ -164,12 +165,14 @@ export default function Timer() {
                   </div>
                 )}
 
-                <div className="text-center py-8">
-                  <Clock className="mx-auto h-16 w-16 text-muted-foreground" />
-                  <p className="mt-4 text-muted-foreground">
-                    {tTimer("chooseActivity")}
-                  </p>
-                </div>
+                {!selectedActivityId && (
+                  <div className="text-center py-8">
+                    <Clock className="mx-auto h-16 w-16 text-muted-foreground" />
+                    <p className="mt-4 text-muted-foreground">
+                      {tTimer("chooseActivity")}
+                    </p>
+                  </div>
+                )}
               </div>
             )}
           </CardContent>
@@ -190,7 +193,7 @@ export default function Timer() {
                     </>
                   )}
                 </Button>
-                <Button variant="destructive" size="lg">
+                <Button variant="destructive" size="lg" onClick={stopTimer}>
                   <Square className="mr-2 h-4 w-4" />
                   {tCommon("actions.stop")}
                 </Button>

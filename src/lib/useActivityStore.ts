@@ -18,6 +18,7 @@ interface ActivityStore {
   startTimer: (activityId: string) => void;
   pauseTimer: () => void;
   resumeTimer: () => void;
+  stopTimer: () => void;
 }
 
 export const useActivityStore = create<ActivityStore>((set, get) => ({
@@ -94,4 +95,43 @@ export const useActivityStore = create<ActivityStore>((set, get) => ({
         totalPausedTime: state.totalPausedTime + pauseDuration,
       };
     }),
+
+  stopTimer: () => {
+    set((state) => {
+      // Only stop if there's an active timer
+      if (!state.activeTimer) return state;
+
+      // Update the active timer with the end time and duration
+      const updatedTimer = {
+        ...state.activeTimer,
+        endTime: new Date(),
+        duration:
+          (new Date().getTime() -
+            new Date(state.activeTimer.startTime).getTime()) /
+            1000 -
+          state.totalPausedTime,
+        isActive: false,
+      };
+
+      // Update the weekly progress of the activity
+      const updatedActivities = state.activities.map((activity) => {
+        if (activity.id === updatedTimer.activityId) {
+          return {
+            ...activity,
+            weeklyProgress:
+              activity.weeklyProgress + updatedTimer.duration / 60,
+          };
+        }
+        return activity;
+      });
+
+      return {
+        activities: updatedActivities,
+        timers: [...state.timers, updatedTimer],
+        activeTimer: null,
+        pauseStartTime: null,
+        totalPausedTime: 0,
+      };
+    });
+  },
 }));
