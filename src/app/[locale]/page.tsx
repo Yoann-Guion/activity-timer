@@ -18,7 +18,7 @@ import { formatMinutes } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useState } from "react";
-import { EditActivityDialog } from "@/components/editActivityDialog";
+import { EditActivityDialog } from "@/components/dialog/editActivityDialog";
 
 export default function Home() {
   const router = useRouter();

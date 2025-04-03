@@ -9,7 +9,7 @@ import {
   useCurrentLocale,
   useScopedI18n,
 } from "../../locales/client";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "./theme/theme-toggle";
 import { SettingsMenu } from "./settings-menu";
 
 export function Navbar() {

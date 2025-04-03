@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { IActivity } from "@/@types/activity";
 import { convertFromTotalMinutes, convertToTotalMinutes } from "@/lib/utils";
-import { useScopedI18n } from "../../locales/client";
+import { useScopedI18n } from "../../../locales/client";
 
 export function EditActivityDialog({
   activity,
