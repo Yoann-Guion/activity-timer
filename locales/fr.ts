@@ -46,6 +46,13 @@ export default {
           "Un chronomètre est déjà en cours. Veuillez l'arrêter avant d'en démarrer un nouveau.",
         link: "Aller à la page Chronomètre",
       },
+      editActivity: {
+        title: "Modifier l'activité",
+        description: "Ajustez les détails de votre activité selon vos besoins",
+        name: "Nom",
+        weeklyGoal: "Objectif",
+        color: "Couleur",
+      },
     },
 
     // New activity page

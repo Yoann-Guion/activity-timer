@@ -19,6 +19,7 @@ import { useScopedI18n } from "../../../../../locales/client";
 import { PageTransition } from "@/components/animation/PageTransition";
 import { useState } from "react";
 import { useActivityStore } from "@/lib/useActivityStore";
+import { convertToTotalMinutes } from "@/lib/utils";
 
 export default function NewActivity() {
   const router = useRouter();
@@ -32,15 +33,14 @@ export default function NewActivity() {
   const [name, setName] = useState("");
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
-  const [color, setColor] = useState("#F76B15");
+  const [color, setColor] = useState("#0090FF");
 
   // Function to handle form submission who adds a new activity
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Convert hours and minutes to total minutes
-    const totalMinutes =
-      (Number.parseInt(hours) || 0) * 60 + (Number.parseInt(minutes) || 0);
+    // Convert hours and minutes into minutes only
+    const totalMinutes = convertToTotalMinutes(hours, minutes);
 
     // Disploy a toast if the total minutes is 0
     if (totalMinutes === 0) {
@@ -117,13 +117,13 @@ export default function NewActivity() {
               {/* Color picker */}
               <div className="space-y-2">
                 <Label htmlFor="color">
-                  {tNewActivity("form.color.label")}{" "}
+                  {tNewActivity("form.color.label")}
                 </Label>
                 <div className="flex gap-2 pb-2">
                   <Input
                     id="color"
                     type="color"
-                    className="grow w-12 h-10 p-1"
+                    className="grow w-full h-10 p-1"
                     value={color}
                     onChange={(e) => setColor(e.target.value)}
                   />

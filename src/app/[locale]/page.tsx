@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Play, PlusCircle, Trash2 } from "lucide-react";
+import { Play, PlusCircle, Trash2, FilePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 import { PageTransition } from "@/components/animation/PageTransition";
@@ -17,12 +17,16 @@ import { Progress } from "@/components/ui/progress";
 import { formatMinutes } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useState } from "react";
+import { EditActivityDialog } from "@/components/editActivityDialog";
 
 export default function Home() {
   const router = useRouter();
   const tCommon = useScopedI18n("common");
   const tHome = useScopedI18n("pages.home");
   const currentLocale = useCurrentLocale();
+
+  const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
 
   const { activities, deleteActivity, startTimer, activeTimer } =
     useActivityStore();
@@ -65,12 +69,27 @@ export default function Home() {
                 />
                 <CardHeader className="pt-1 flex justify-between items-center">
                   <CardTitle>{activity.name}</CardTitle>
-                  <button
-                    onClick={() => deleteActivity(activity.id)}
-                    className="text-gray-400 hover:text-red-500 transition-colors"
-                  >
-                    <Trash2 className="h-5 w-5" />
-                  </button>
+                  <div className="flex items-end space-x-2">
+                    <button
+                      onClick={() => setUpdateDialogOpen(true)}
+                      className="text-gray-400 hover:text-green-500 transition-colors"
+                    >
+                      <FilePen className="h-5 w-5" />
+                    </button>
+
+                    <EditActivityDialog
+                      activity={activity}
+                      open={updateDialogOpen}
+                      onOpenChange={setUpdateDialogOpen}
+                    />
+
+                    <button
+                      onClick={() => deleteActivity(activity.id)}
+                      className="text-gray-400 hover:text-red-500 transition-colors"
+                    >
+                      <Trash2 className="h-5 w-5" />
+                    </button>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">

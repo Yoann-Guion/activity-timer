@@ -43,6 +43,13 @@ export default {
           "An active timer is already running. Please stop it before starting a new one.",
         link: "Go to the Timer page",
       },
+      editActivity: {
+        title: "Edit activity",
+        description: "Adjust your activity details as needed",
+        name: "Name",
+        weeklyGoal: "Goal",
+        color: "Color",
+      },
     },
 
     // New activity page

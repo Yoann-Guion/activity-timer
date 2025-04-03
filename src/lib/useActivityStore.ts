@@ -14,6 +14,7 @@ interface ActivityStore {
 
   // Actions
   addActivity: (activity: INewActivity) => void;
+  updateActivity: (activity: IActivity) => void;
   deleteActivity: (id: string) => void;
   startTimer: (activityId: string) => void;
   pauseTimer: () => void;
@@ -41,6 +42,14 @@ export const useActivityStore = create<ActivityStore>((set) => ({
       };
       return { activities: [...state.activities, newActivity] };
     }),
+
+  // Update an existing activity in the store
+  updateActivity: (updatedActivity) =>
+    set((state) => ({
+      activities: state.activities.map((activity) =>
+        activity.id === updatedActivity.id ? updatedActivity : activity
+      ),
+    })),
 
   // Delete an activity from the store
   deleteActivity: (id) =>
