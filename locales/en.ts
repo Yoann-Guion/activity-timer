@@ -10,6 +10,7 @@ export default {
       create: "Create",
       save: "Save",
       resume: "Resume",
+      delete: "Delete",
     },
     emptyState: {
       noActivities: "No activities yet",
@@ -49,6 +50,11 @@ export default {
         name: "Name",
         weeklyGoal: "Goal",
         color: "Color",
+      },
+      deleteActivity: {
+        title: "Delete activity",
+        description:
+          "Are you sure you want to delete the activity {activity.name}? This action is irreversible.",
       },
     },
 

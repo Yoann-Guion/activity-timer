@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useState } from "react";
 import { EditActivityDialog } from "@/components/dialog/editActivityDialog";
+import { DeleteActivityDialog } from "@/components/dialog/deleteActivityDialog";
 
 export default function Home() {
   const router = useRouter();
@@ -26,10 +27,11 @@ export default function Home() {
   const tHome = useScopedI18n("pages.home");
   const currentLocale = useCurrentLocale();
 
+  // States for the update dialog and delete confirmation
   const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-  const { activities, deleteActivity, startTimer, activeTimer } =
-    useActivityStore();
+  const { activities, startTimer, activeTimer } = useActivityStore();
 
   return (
     <PageTransition>
@@ -84,11 +86,17 @@ export default function Home() {
                     />
 
                     <button
-                      onClick={() => deleteActivity(activity.id)}
+                      onClick={() => setDeleteDialogOpen(true)}
                       className="text-gray-400 hover:text-red-500 transition-colors"
                     >
                       <Trash2 className="h-5 w-5" />
                     </button>
+
+                    <DeleteActivityDialog
+                      activity={activity}
+                      open={deleteDialogOpen}
+                      onOpenChange={setDeleteDialogOpen}
+                    />
                   </div>
                 </CardHeader>
                 <CardContent>

@@ -13,6 +13,7 @@ export default {
       create: "Créer",
       save: "Enregistrer",
       resume: "Reprendre",
+      delete: "Supprimer",
     },
     emptyState: {
       noActivities: "Aucune activité pour le moment",
@@ -52,6 +53,11 @@ export default {
         name: "Nom",
         weeklyGoal: "Objectif",
         color: "Couleur",
+      },
+      deleteActivity: {
+        title: "Supprimer l'activité",
+        description:
+          "Êtes-vous sûr de vouloir supprimer l'activité {activity.name} ? Cette action est irréversible.",
       },
     },
 
