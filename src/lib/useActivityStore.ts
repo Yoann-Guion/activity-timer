@@ -96,10 +96,16 @@ export const useActivityStore = create<ActivityStore>((set) => ({
       };
     }),
 
+  // Stop the active timer and update the activity's weekly progress
   stopTimer: () => {
     set((state) => {
       // Only stop if there's an active timer
       if (!state.activeTimer) return state;
+
+      // Calculate the total paused time including current pause if timer is paused
+      const totalPauseTime = state.pauseStartTime
+        ? state.totalPausedTime + (new Date().getTime() - state.pauseStartTime)
+        : state.totalPausedTime;
 
       // Update the active timer with the end time and duration
       const updatedTimer = {
@@ -107,9 +113,9 @@ export const useActivityStore = create<ActivityStore>((set) => ({
         endTime: new Date(),
         duration:
           (new Date().getTime() -
-            new Date(state.activeTimer.startTime).getTime()) /
-            1000 -
-          state.totalPausedTime,
+            new Date(state.activeTimer.startTime).getTime() -
+            totalPauseTime) /
+          1000,
         isActive: false,
       };
 
@@ -125,9 +131,12 @@ export const useActivityStore = create<ActivityStore>((set) => ({
         return activity;
       });
 
+      // Update the store and reset the active timer and pause state
       return {
         activities: updatedActivities,
-        timers: [...state.timers, updatedTimer],
+        timers: state.timers.map((timer) =>
+          timer.id === state.activeTimer?.id ? updatedTimer : timer
+        ),
         activeTimer: null,
         pauseStartTime: null,
         totalPausedTime: 0,
