@@ -48,9 +48,9 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="flex flex-col sm:flex-row min-h-screen">
+            <div className="flex min-h-screen">
               <Navbar />
-              <main className="flex-1 p-4 pb-20 sm:pb-4">
+              <main className="flex-1 p-4 pb-20 sm:pb-4 sm:ml-64 w-full">
                 <TransitionProvider>{children}</TransitionProvider>
               </main>
             </div>
