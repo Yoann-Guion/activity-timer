@@ -7,6 +7,39 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
+ * Convert hours and minutes into minutes only
+ * @param hours - Number of hours
+ * @param minutes - Number of minutes
+ * @returns Total minutes
+ */
+export const convertToTotalMinutes = (
+  hours: string | number,
+  minutes: string | number
+): number => {
+  return (
+    (Number.parseInt(hours.toString()) || 0) * 60 +
+    (Number.parseInt(minutes.toString()) || 0)
+  );
+};
+
+/**
+ * Convert total minutes into hours and minutes
+ * @param totalMinutes - Total minutes to convert
+ * @returns Object containing hours and minutes as strings
+ */
+export const convertFromTotalMinutes = (
+  totalMinutes: number
+): { hours: string; minutes: string } => {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  return {
+    hours: hours.toString(),
+    minutes: minutes.toString(),
+  };
+};
+
+/**
  * Format seconds into a human-readable string
  * @param seconds - Number of seconds to format
  * @returns Formatted string in the format "HH:MM:SS"

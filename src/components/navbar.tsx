@@ -9,7 +9,7 @@ import {
   useCurrentLocale,
   useScopedI18n,
 } from "../../locales/client";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "./theme/theme-toggle";
 import { SettingsMenu } from "./settings-menu";
 
 export function Navbar() {
@@ -46,7 +46,7 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border p-2 sm:relative sm:border-t-0 sm:border-r sm:h-screen sm:w-64">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border p-2 sm:fixed sm:top-0 sm:bottom-0 sm:right-auto sm:flex sm:flex-col sm:border-t-0 sm:border-r sm:h-screen sm:w-64">
       {/* App title - visible only on desktop */}
       <div className="hidden sm:flex sm:flex-col sm:items-center sm:justify-center sm:h-20 sm:border-b">
         <h1 className="text-xl font-bold">Activity Timer</h1>
@@ -88,7 +88,7 @@ export function Navbar() {
         </div>
 
         {/* Language switcher */}
-        <div className="flex gap-2">
+        <div className="flex gap-2 mb-6">
           <button
             onClick={() => changeLocale("fr")}
             className={cn(
@@ -112,6 +112,18 @@ export function Navbar() {
             EN
           </button>
         </div>
+        <Link
+          href={`/${currentLocale}/legal`}
+          className={cn(
+            "text-xs hover:underline",
+            // Highlight active item
+            pathnameWithoutLocale.startsWith("/legal")
+              ? "text-primary"
+              : "text-muted-foreground"
+          )}
+        >
+          {tNav("legal")}
+        </Link>
       </div>
     </nav>
   );

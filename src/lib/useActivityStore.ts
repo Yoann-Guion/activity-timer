@@ -14,6 +14,7 @@ interface ActivityStore {
 
   // Actions
   addActivity: (activity: INewActivity) => void;
+  updateActivity: (activity: IActivity) => void;
   deleteActivity: (id: string) => void;
   startTimer: (activityId: string) => void;
   pauseTimer: () => void;
@@ -41,6 +42,14 @@ export const useActivityStore = create<ActivityStore>((set) => ({
       };
       return { activities: [...state.activities, newActivity] };
     }),
+
+  // Update an existing activity in the store
+  updateActivity: (updatedActivity) =>
+    set((state) => ({
+      activities: state.activities.map((activity) =>
+        activity.id === updatedActivity.id ? updatedActivity : activity
+      ),
+    })),
 
   // Delete an activity from the store
   deleteActivity: (id) =>
@@ -96,10 +105,16 @@ export const useActivityStore = create<ActivityStore>((set) => ({
       };
     }),
 
+  // Stop the active timer and update the activity's weekly progress
   stopTimer: () => {
     set((state) => {
       // Only stop if there's an active timer
       if (!state.activeTimer) return state;
+
+      // Calculate the total paused time including current pause if timer is paused
+      const totalPauseTime = state.pauseStartTime
+        ? state.totalPausedTime + (new Date().getTime() - state.pauseStartTime)
+        : state.totalPausedTime;
 
       // Update the active timer with the end time and duration
       const updatedTimer = {
@@ -107,9 +122,9 @@ export const useActivityStore = create<ActivityStore>((set) => ({
         endTime: new Date(),
         duration:
           (new Date().getTime() -
-            new Date(state.activeTimer.startTime).getTime()) /
-            1000 -
-          state.totalPausedTime,
+            new Date(state.activeTimer.startTime).getTime() -
+            totalPauseTime) /
+          1000,
         isActive: false,
       };
 
@@ -125,9 +140,12 @@ export const useActivityStore = create<ActivityStore>((set) => ({
         return activity;
       });
 
+      // Update the store and reset the active timer and pause state
       return {
         activities: updatedActivities,
-        timers: [...state.timers, updatedTimer],
+        timers: state.timers.map((timer) =>
+          timer.id === state.activeTimer?.id ? updatedTimer : timer
+        ),
         activeTimer: null,
         pauseStartTime: null,
         totalPausedTime: 0,
