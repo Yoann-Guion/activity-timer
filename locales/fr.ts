@@ -164,8 +164,7 @@ export default {
         liability: "Responsabilité",
         data: "Collecte de données personnelles",
         cookies: "Cookies",
-        ip: "Propriété intellectuelle",
-        credits: "Crédits et ressources utilisées",
+        propertie: "Code source et propriété intellectuelle",
         law: "Droit applicable",
         lastUpdate: "Dernière mise à jour",
       },
@@ -179,13 +178,8 @@ export default {
         data: "Ce site utilise Vercel Analytics pour collecter des données anonymes sur la fréquentation et l'utilisation du site (par exemple, le nombre de visiteurs, les pages vues, etc.). Ces données sont utilisées à des fins statistiques et ne permettent pas d'identifier les utilisateurs individuellement. En utilisant ce site, vous consentez à la collecte de ces données.",
         cookies:
           "Ce site n'utilise pas de cookies à des fins de suivi ou de personnalisation pour le moment. Cependant, il est possible que des cookies nécessaires au bon fonctionnement de certaines fonctionnalités (comme les outils d'analyse) soient installés.",
-        ip: "Tous les éléments présents sur ce site (textes, images, logos, etc.) sont la propriété exclusive de l'auteur, sauf mention contraire. Toute reproduction, distribution ou modification sans autorisation préalable est interdite.",
-        credits: {
-          before: "Ce site utilise les icônes de ",
-          linkText: "Lucide",
-          after: ", une bibliothèque open-source sous licence MIT.",
-        },
-        law: "Les présentes mentions légales sont soumises au droit français. En cas de litige, les tribunaux français seront seuls compétents.",
+        propertie:
+          "Le code source de cette application est open source et disponible sur GitHub sous licence MIT. Vous êtes libre de l’utiliser, le modifier et le redistribuer, tant que vous respectez les conditions de la licence. Les ressources utilisées dans cette application (comme les icônes Lucide ou les composants Shadcn) sont elles aussi sous licence open source, selon les conditions de leurs auteurs respectifs.",
         lastUpdate: "Ces mentions légales ont été mises à jour le {date}.",
       },
     },
