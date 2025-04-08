@@ -72,6 +72,35 @@ export function formatMinutes(minutes: number): string {
 }
 
 /**
+ * Format a date according to the specified locale ('fr' or 'en')
+ *
+ * @param date - Date to format
+ * @param locale - Locale for formatting ('fr' for French, 'en' for English)
+ * @returns Formatted date string
+ */
+export function formatDate(date: Date, locale: string): string {
+  if (!date) return "";
+
+  if (locale === "fr") {
+    // Format français: 08 avril 2025
+    const options: Intl.DateTimeFormatOptions = {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    };
+    return date.toLocaleDateString("fr-FR", options);
+  } else {
+    // Format anglais: April 08, 2025 (plus standard en anglais)
+    const options: Intl.DateTimeFormatOptions = {
+      month: "long",
+      day: "2-digit",
+      year: "numeric",
+    };
+    return date.toLocaleDateString("en-US", options);
+  }
+}
+
+/**
  * Get the start date of the current week (Monday)
  * Used for weekly progress tracking
  */

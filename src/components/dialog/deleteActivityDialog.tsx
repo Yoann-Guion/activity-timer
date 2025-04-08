@@ -13,6 +13,7 @@ import { useActivityStore } from "@/lib/useActivityStore";
 import { IActivity } from "@/@types/activity";
 import { AlertTriangle } from "lucide-react";
 import { useScopedI18n } from "../../../locales/client";
+import { useRouter, usePathname } from "next/navigation";
 
 export function DeleteActivityDialog({
   activity,
@@ -23,6 +24,8 @@ export function DeleteActivityDialog({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const tActions = useScopedI18n("common.actions");
   const tDeleteActivity = useScopedI18n("pages.home.deleteActivity");
   const { deleteActivity } = useActivityStore();
@@ -31,6 +34,11 @@ export function DeleteActivityDialog({
   const handleDelete = () => {
     deleteActivity(activity.id);
     onOpenChange(false);
+
+    // Redirect to the home page if the current path is not the home page
+    if (pathname !== "/") {
+      router.push("/");
+    }
   };
 
   return (

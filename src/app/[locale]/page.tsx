@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Play, PlusCircle, Trash2, FilePen } from "lucide-react";
+import { Play, PlusCircle, Trash2, FilePen, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 import { PageTransition } from "@/components/animation/PageTransition";
@@ -33,12 +33,14 @@ export default function Home() {
 
   const { activities, startTimer, activeTimer } = useActivityStore();
 
+  console.log(activities);
+
   return (
     <PageTransition>
       <div className="container mx-auto max-w-4xl">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">{tHome("title")}</h1>
-          <Link href={`/${currentLocale}/activities/new`}>
+          <Link href={`/${currentLocale}/activity/new`}>
             <Button>
               <PlusCircle className="mr-2 h-4 w-4" />
               {tHome("newActivity")}
@@ -54,7 +56,7 @@ export default function Home() {
             <p className="text-muted-foreground mb-6">
               {tCommon("emptyState.createFirst")}
             </p>
-            <Link href={`/${currentLocale}/activities/new`}>
+            <Link href={`/${currentLocale}/activity/new`}>
               <Button>
                 <PlusCircle className="mr-2 h-4 w-4" />
                 {tHome("createFirst")}
@@ -72,6 +74,13 @@ export default function Home() {
                 <CardHeader className="pt-1 flex justify-between items-center">
                   <CardTitle>{activity.name}</CardTitle>
                   <div className="flex items-end space-x-2">
+                    <Link
+                      href={`/${currentLocale}/activity/${activity.id}`}
+                      className="text-gray-400 hover:text-blue-500 transition-colors"
+                    >
+                      <Info className="h-5 w-5" />
+                    </Link>
+
                     <button
                       onClick={() => setUpdateDialogOpen(true)}
                       className="text-gray-400 hover:text-green-500 transition-colors"

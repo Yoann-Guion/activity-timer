@@ -2,7 +2,12 @@
 
 import { v4 as uuidv4 } from "uuid";
 
-import { IActivity, INewActivity, TimerSession } from "@/@types/activity";
+import {
+  IActivity,
+  INewActivity,
+  ISession,
+  TimerSession,
+} from "@/@types/activity";
 import { create } from "zustand";
 // import { persist } from "zustand/middleware";
 interface ActivityStore {
@@ -39,6 +44,7 @@ export const useActivityStore = create<ActivityStore>((set) => ({
         weeklyProgress: 0,
         color: activity.color,
         createdAt: new Date(),
+        sessions: [],
       };
       return { activities: [...state.activities, newActivity] };
     }),
@@ -105,7 +111,7 @@ export const useActivityStore = create<ActivityStore>((set) => ({
       };
     }),
 
-  // Stop the active timer and update the activity's weekly progress
+  // Stop the active timer, update the activity's weekly progress and save the session
   stopTimer: () => {
     set((state) => {
       // Only stop if there's an active timer
@@ -116,10 +122,12 @@ export const useActivityStore = create<ActivityStore>((set) => ({
         ? state.totalPausedTime + (new Date().getTime() - state.pauseStartTime)
         : state.totalPausedTime;
 
+      const endTime = new Date();
+
       // Update the active timer with the end time and duration
       const updatedTimer = {
         ...state.activeTimer,
-        endTime: new Date(),
+        endTime,
         duration:
           (new Date().getTime() -
             new Date(state.activeTimer.startTime).getTime() -
@@ -131,10 +139,21 @@ export const useActivityStore = create<ActivityStore>((set) => ({
       // Update the weekly progress of the activity
       const updatedActivities = state.activities.map((activity) => {
         if (activity.id === updatedTimer.activityId) {
+          // Create a new session
+          const newSession: ISession = {
+            id: updatedTimer.id,
+            activityId: activity.id,
+            startTime: updatedTimer.startTime,
+            endTime,
+            duration: updatedTimer.duration / 60, // in minutes
+            pausedTime: totalPauseTime / 1000, // in seconds
+          };
+          // Update the activity's weekly progress and add the new session
           return {
             ...activity,
             weeklyProgress:
               activity.weeklyProgress + updatedTimer.duration / 60,
+            sessions: [...(activity.sessions || []), newSession],
           };
         }
         return activity;
