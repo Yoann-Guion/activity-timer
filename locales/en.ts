@@ -4,6 +4,8 @@ export default {
     appName: "Activity Timer",
     accessibility: {
       openMenu: "Open settings menu for {name}",
+      edit: "Edit {name}",
+      delete: "Delete {name}",
       viewDetails: "See details of {name}",
       activityOptions: "Options for activity {name}",
     },

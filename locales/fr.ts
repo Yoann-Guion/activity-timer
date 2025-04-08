@@ -7,6 +7,8 @@ export default {
     appName: "Activity Timer",
     accessibility: {
       openMenu: "Ouvrir le menu d'options pour {name}",
+      edit: "Modifier {name}",
+      delete: "Supprimer {name}",
       viewDetails: "Voir les détails de {name}",
       activityOptions: "Options pour l'activité {name}",
     },
