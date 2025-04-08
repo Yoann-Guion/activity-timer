@@ -180,6 +180,7 @@ export default {
           "Ce site n'utilise pas de cookies à des fins de suivi ou de personnalisation pour le moment. Cependant, il est possible que des cookies nécessaires au bon fonctionnement de certaines fonctionnalités (comme les outils d'analyse) soient installés.",
         propertie:
           "Le code source de cette application est open source et disponible sur GitHub sous licence MIT. Vous êtes libre de l’utiliser, le modifier et le redistribuer, tant que vous respectez les conditions de la licence. Les ressources utilisées dans cette application (comme les icônes Lucide ou les composants Shadcn) sont elles aussi sous licence open source, selon les conditions de leurs auteurs respectifs.",
+        law: "Les présentes mentions légales sont soumises au droit français. En cas de litige, les tribunaux français seront seuls compétents.",
         lastUpdate: "Ces mentions légales ont été mises à jour le {date}.",
       },
     },

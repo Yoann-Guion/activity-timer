@@ -1,5 +1,21 @@
 # Changelog - Activity Timer
 
+## [v0.7] - 2025-04-08
+### Added
+- Activity details page with session interface
+- Translations for activity details page
+- Accessibility labels and translations for ActivityActions
+- Updated legal notices
+- LICENSE file
+
+### Improved
+- Refactored ActivityActions into a separate component and updated its usage in details and summary pages
+
+### Fixed
+- Updated pnpm-lock.yaml
+- Updated Next.js version 
+- Fixed related translation issues
+
 ## [v0.6] - 2025-04-04
 ### Added
 - Legal notice page
