@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Play, PlusCircle, Trash2, FilePen, Info } from "lucide-react";
+import { Play, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 import { PageTransition } from "@/components/animation/PageTransition";
@@ -17,19 +17,13 @@ import { Progress } from "@/components/ui/progress";
 import { formatMinutes } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useState } from "react";
-import { EditActivityDialog } from "@/components/dialog/editActivityDialog";
-import { DeleteActivityDialog } from "@/components/dialog/deleteActivityDialog";
+import { ActivityActions } from "@/components/activityActions";
 
 export default function Home() {
   const router = useRouter();
   const tCommon = useScopedI18n("common");
   const tHome = useScopedI18n("pages.home");
   const currentLocale = useCurrentLocale();
-
-  // States for the update dialog and delete confirmation
-  const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const { activities, startTimer, activeTimer } = useActivityStore();
 
@@ -74,38 +68,9 @@ export default function Home() {
                 <CardHeader className="pt-1 flex justify-between items-center">
                   <CardTitle>{activity.name}</CardTitle>
                   <div className="flex items-end space-x-2">
-                    <Link
-                      href={`/${currentLocale}/activity/${activity.id}`}
-                      className="text-gray-400 hover:text-blue-500 transition-colors"
-                    >
-                      <Info className="h-5 w-5" />
-                    </Link>
-
-                    <button
-                      onClick={() => setUpdateDialogOpen(true)}
-                      className="text-gray-400 hover:text-green-500 transition-colors"
-                    >
-                      <FilePen className="h-5 w-5" />
-                    </button>
-
-                    <EditActivityDialog
-                      activity={activity}
-                      open={updateDialogOpen}
-                      onOpenChange={setUpdateDialogOpen}
-                    />
-
-                    <button
-                      onClick={() => setDeleteDialogOpen(true)}
-                      className="text-gray-400 hover:text-red-500 transition-colors"
-                    >
-                      <Trash2 className="h-5 w-5" />
-                    </button>
-
-                    <DeleteActivityDialog
-                      activity={activity}
-                      open={deleteDialogOpen}
-                      onOpenChange={setDeleteDialogOpen}
-                    />
+                    <div className="ml-2">
+                      <ActivityActions activity={activity} />
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent>

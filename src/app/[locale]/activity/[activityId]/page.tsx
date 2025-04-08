@@ -2,13 +2,13 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { IActivity } from "@/@types/activity";
 import { PageTransition } from "@/components/animation/PageTransition";
-import { EditActivityDialog } from "@/components/dialog/editActivityDialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { Play, FilePen, Trash2 } from "lucide-react";
+import { Play } from "lucide-react";
 import { formatDate, formatMinutes } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
@@ -18,8 +18,7 @@ import {
   useI18n,
   useScopedI18n,
 } from "../../../../../locales/client";
-import { DeleteActivityDialog } from "@/components/dialog/deleteActivityDialog";
-import Link from "next/link";
+import { ActivityActions } from "@/components/activityActions";
 
 export default function ActivityDetails() {
   const params = useParams();
@@ -34,11 +33,8 @@ export default function ActivityDetails() {
   const [activity, setActivity] = useState<IActivity | null>(null);
   // State for the percentage of the progress bar
   const [percentage, setPercentage] = useState(0);
-  // States for the update dialog and delete confirmation
-  const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-  // Get the activity Id from the URL
+  // Get the activity id from the URL
   const activityId = params.activityId as string;
 
   useEffect(() => {
@@ -95,31 +91,9 @@ export default function ActivityDetails() {
               </div>
             </CardTitle>
             <div className="flex items-end space-x-2">
-              <button
-                onClick={() => setUpdateDialogOpen(true)}
-                className="text-gray-400 hover:text-green-500 transition-colors"
-              >
-                <FilePen className="h-5 w-5" />
-              </button>
-
-              <EditActivityDialog
-                activity={activity}
-                open={updateDialogOpen}
-                onOpenChange={setUpdateDialogOpen}
-              />
-
-              <button
-                onClick={() => setDeleteDialogOpen(true)}
-                className="text-gray-400 hover:text-red-500 transition-colors"
-              >
-                <Trash2 className="h-5 w-5" />
-              </button>
-
-              <DeleteActivityDialog
-                activity={activity}
-                open={deleteDialogOpen}
-                onOpenChange={setDeleteDialogOpen}
-              />
+              <div className="ml-2">
+                <ActivityActions activity={activity} />
+              </div>
             </div>
           </CardHeader>
           <CardContent>
