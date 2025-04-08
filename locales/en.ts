@@ -2,6 +2,11 @@ export default {
   // Common reusable elements
   common: {
     appName: "Activity Timer",
+    accessibility: {
+      openMenu: "Open settings menu for {name}",
+      viewDetails: "See details of {name}",
+      activityOptions: "Options for activity {name}",
+    },
     actions: {
       start: "Start",
       pause: "Pause",
@@ -10,6 +15,8 @@ export default {
       create: "Create",
       save: "Save",
       resume: "Resume",
+      details: "Details",
+      edit: "Edit",
       delete: "Delete",
     },
     emptyState: {

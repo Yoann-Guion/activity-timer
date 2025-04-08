@@ -1,10 +1,15 @@
 import { Description } from "@radix-ui/react-dialog";
-import { link } from "fs";
+import { access, link } from "fs";
 
 export default {
   // Common reusable elements
   common: {
     appName: "Activity Timer",
+    accessibility: {
+      openMenu: "Ouvrir le menu d'options pour {name}",
+      viewDetails: "Voir les détails de {name}",
+      activityOptions: "Options pour l'activité {name}",
+    },
     actions: {
       start: "Démarrer",
       pause: "Pause",
@@ -13,6 +18,8 @@ export default {
       create: "Créer",
       save: "Enregistrer",
       resume: "Reprendre",
+      details: "Détails",
+      edit: "Modifier",
       delete: "Supprimer",
     },
     emptyState: {
