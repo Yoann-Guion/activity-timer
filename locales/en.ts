@@ -85,6 +85,25 @@ export default {
       },
     },
 
+    // Activity details page
+    details: {
+      noActivity: {
+        title: "Activity not found",
+        description: "The activity you are looking for does not exist.",
+        link: "Go back to the home page",
+      },
+      createdAt: "created on ",
+      totalProgress: "Total progress",
+      sessionHistory: "Session history",
+      table: {
+        caption: "Session history of ",
+        start: "Start",
+        end: "End",
+        duration: "Duration",
+        progress: "Progress",
+      },
+    },
+
     // Timer page
     timer: {
       title: "Timer",

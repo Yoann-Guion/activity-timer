@@ -12,7 +12,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { IActivity } from "@/@types/activity";
 import { formatDate, formatMinutes } from "@/lib/utils";
-import { useCurrentLocale } from "../../../locales/client";
+import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 
 interface SessionsTableProps {
   activity: IActivity;
@@ -20,25 +20,27 @@ interface SessionsTableProps {
 
 export function SessionsTable({ activity }: SessionsTableProps) {
   const currentLocale = useCurrentLocale();
+  const tTable = useScopedI18n("pages.details.table");
 
   return (
     <div className="mt-6">
       <Table>
         <TableCaption>
-          Historique des sessions pour l'activité {activity.name}
+          {tTable("caption")}
+          {activity.name}
         </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Date</TableHead>
-            <TableHead>Début</TableHead>
-            <TableHead>Fin</TableHead>
-            <TableHead className="text-right">Durée</TableHead>
-            <TableHead className="text-right">Progression</TableHead>
+            <TableHead>{tTable("start")} </TableHead>
+            <TableHead>{tTable("end")} </TableHead>
+            <TableHead className="text-right">{tTable("duration")} </TableHead>
+            <TableHead className="text-right">{tTable("progress")} </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {activity.sessions.map((session) => {
-            // Calculer le pourcentage que cette session représente par rapport à l'objectif
+            // Calculate the percentage of the session duration compared to the weekly goal
             const sessionPercentage =
               (session.duration / activity.weeklyGoal) * 100;
 

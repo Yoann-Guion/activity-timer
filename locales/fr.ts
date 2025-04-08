@@ -1,6 +1,5 @@
+import { Description } from "@radix-ui/react-dialog";
 import { link } from "fs";
-import { title } from "process";
-import { text } from "stream/consumers";
 
 export default {
   // Common reusable elements
@@ -87,6 +86,25 @@ export default {
           title: "Veuillez remplir l'objectif hebdomadaire",
           description: "L'objectif hebdomadaire doit être supérieur à 0",
         },
+      },
+    },
+
+    // Activity details page
+    details: {
+      noActivity: {
+        title: "Activité non trouvée",
+        description: "Cette activité n'existe pas ou a été supprimée.",
+        link: "Retourner à l'accueil",
+      },
+      createdAt: "créé le ",
+      totalProgress: "Progression totale",
+      sessionHistory: "Historique des sessions",
+      table: {
+        caption: "Historique des sessions pour l'activité ",
+        start: "Début",
+        end: "Fin",
+        duration: "Durée",
+        progress: "Progression",
       },
     },
 
