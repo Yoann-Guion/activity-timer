@@ -1,3 +1,4 @@
+// Interface for activity data
 export interface IActivity {
   id: string;
   name: string;
@@ -5,15 +6,7 @@ export interface IActivity {
   weeklyProgress: number;
   color: string;
   createdAt: Date;
-}
-
-export interface TimerSession {
-  id: string;
-  activityId: string;
-  startTime: Date;
-  endTime: Date | null;
-  duration: number;
-  isActive: boolean;
+  sessions: ISession[];
 }
 
 /**
@@ -24,5 +17,25 @@ export interface TimerSession {
  */
 export type INewActivity = Omit<
   IActivity,
-  "id" | "weeklyProgress" | "createdAt"
+  "id" | "weeklyProgress" | "createdAt" | "sessions"
 >;
+
+// Interface for timer
+export interface TimerSession {
+  id: string;
+  activityId: string;
+  startTime: Date;
+  endTime: Date | null;
+  duration: number;
+  isActive: boolean;
+}
+
+// Interface for session data
+export interface ISession {
+  id: string;
+  activityId: string;
+  startTime: Date;
+  endTime: Date;
+  duration: number;
+  pausedTime?: number;
+}

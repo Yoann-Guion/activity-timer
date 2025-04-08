@@ -30,7 +30,7 @@ export function Navbar() {
     },
     {
       name: tNav("add"),
-      href: "/activities/new",
+      href: "/activity/new",
       icon: PlusCircle,
     },
     {

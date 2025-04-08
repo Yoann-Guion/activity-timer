@@ -60,6 +60,10 @@ Vous pouvez proposer des améliorations via pull request ou ouvrir des issues po
 - [ ] Sauvegarde des activités en base de données pour permettre un accès sur plusieurs appareils
 - [ ] Pouvoir choisir sa progression : journalière / hebdomadaire / mensuelle...
 
+## Licence
+
+Ce projet est open source et disponible sous la [licence MIT](./LICENSE).  
+
 
 
 
@@ -122,6 +126,9 @@ You can suggest improvements via pull requests or open issues to report bugs.
 - [ ] Store activities in a database to allow multi-device access
 - [ ] Choose your progress: daily / weekly / monthly...
 
+## License
+
+This project is open source and available under the [MIT License](./LICENSE).  
 
 
 

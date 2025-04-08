@@ -8,7 +8,7 @@ export default function LegalPage() {
   const currentLocale = useCurrentLocale();
 
   // Format the last update date based on the current locale
-  const lastUpdateDate = new Date("2024-04-04");
+  const lastUpdateDate = new Date("2024-04-08");
   const formattedDate =
     currentLocale === "fr"
       ? lastUpdateDate.toLocaleDateString("fr-FR", {
@@ -92,27 +92,9 @@ export default function LegalPage() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">{t("title.ip")}</h2>
+          <h2 className="text-xl font-semibold mb-3">{t("title.propertie")}</h2>
           <div className="pl-4 border-l-2 border-primary/20">
-            <p>{t("text.ip")}</p>
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">{t("title.credits")}</h2>
-          <div className="pl-4 border-l-2 border-primary/20">
-            <p>
-              {t("text.credits.before")}
-              <a
-                href="https://lucide.dev/"
-                className="text-blue-500 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {t("text.credits.linkText")}
-              </a>
-              {t("text.credits.after")}
-            </p>
+            <p>{t("text.propertie")}</p>
           </div>
         </section>
 

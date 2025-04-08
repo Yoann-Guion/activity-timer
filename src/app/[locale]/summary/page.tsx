@@ -13,6 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { ActivityActions } from "@/components/activityActions";
 
 export default function Summary() {
   const tCommon = useScopedI18n("common.emptyState");
@@ -81,9 +82,16 @@ export default function Summary() {
                               style={{ backgroundColor: activity.color }}
                             />
                             <span>{activity.name}</span>
+                            <div className="ml-2">
+                              <ActivityActions
+                                activity={activity}
+                                compact={true}
+                              />
+                            </div>
                           </div>
+
                           <span className="text-sm">
-                            {formatMinutes(activity.weeklyProgress)} /{" "}
+                            {formatMinutes(activity.weeklyProgress)} /
                             {formatMinutes(activity.weeklyGoal)}
                           </span>
                         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Play, PlusCircle, Trash2, FilePen } from "lucide-react";
+import { Play, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 import { PageTransition } from "@/components/animation/PageTransition";
@@ -17,9 +17,7 @@ import { Progress } from "@/components/ui/progress";
 import { formatMinutes } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useState } from "react";
-import { EditActivityDialog } from "@/components/dialog/editActivityDialog";
-import { DeleteActivityDialog } from "@/components/dialog/deleteActivityDialog";
+import { ActivityActions } from "@/components/activityActions";
 
 export default function Home() {
   const router = useRouter();
@@ -27,18 +25,16 @@ export default function Home() {
   const tHome = useScopedI18n("pages.home");
   const currentLocale = useCurrentLocale();
 
-  // States for the update dialog and delete confirmation
-  const [updateDialogOpen, setUpdateDialogOpen] = useState(false);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-
   const { activities, startTimer, activeTimer } = useActivityStore();
+
+  console.log(activities);
 
   return (
     <PageTransition>
       <div className="container mx-auto max-w-4xl">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-bold">{tHome("title")}</h1>
-          <Link href={`/${currentLocale}/activities/new`}>
+          <Link href={`/${currentLocale}/activity/new`}>
             <Button>
               <PlusCircle className="mr-2 h-4 w-4" />
               {tHome("newActivity")}
@@ -54,7 +50,7 @@ export default function Home() {
             <p className="text-muted-foreground mb-6">
               {tCommon("emptyState.createFirst")}
             </p>
-            <Link href={`/${currentLocale}/activities/new`}>
+            <Link href={`/${currentLocale}/activity/new`}>
               <Button>
                 <PlusCircle className="mr-2 h-4 w-4" />
                 {tHome("createFirst")}
@@ -72,31 +68,9 @@ export default function Home() {
                 <CardHeader className="pt-1 flex justify-between items-center">
                   <CardTitle>{activity.name}</CardTitle>
                   <div className="flex items-end space-x-2">
-                    <button
-                      onClick={() => setUpdateDialogOpen(true)}
-                      className="text-gray-400 hover:text-green-500 transition-colors"
-                    >
-                      <FilePen className="h-5 w-5" />
-                    </button>
-
-                    <EditActivityDialog
-                      activity={activity}
-                      open={updateDialogOpen}
-                      onOpenChange={setUpdateDialogOpen}
-                    />
-
-                    <button
-                      onClick={() => setDeleteDialogOpen(true)}
-                      className="text-gray-400 hover:text-red-500 transition-colors"
-                    >
-                      <Trash2 className="h-5 w-5" />
-                    </button>
-
-                    <DeleteActivityDialog
-                      activity={activity}
-                      open={deleteDialogOpen}
-                      onOpenChange={setDeleteDialogOpen}
-                    />
+                    <div className="ml-2">
+                      <ActivityActions activity={activity} />
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent>
