@@ -51,8 +51,18 @@ export function SessionsTable({ activity }: SessionsTableProps) {
                     {formatDate(session.startTime, currentLocale)}
                   </div>
                 </TableCell>
-                <TableCell>{session.startTime.toLocaleTimeString()}</TableCell>
-                <TableCell>{session.endTime.toLocaleTimeString()}</TableCell>
+                <TableCell>
+                  {session.startTime.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </TableCell>
+                <TableCell>
+                  {session.endTime.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </TableCell>
                 <TableCell className="text-right font-medium">
                   {formatMinutes(session.duration)}
                 </TableCell>
