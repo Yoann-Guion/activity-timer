@@ -52,13 +52,13 @@ export function SessionsTable({ activity }: SessionsTableProps) {
                   </div>
                 </TableCell>
                 <TableCell>
-                  {session.startTime.toLocaleTimeString([], {
+                  {new Date(session.startTime).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}
                 </TableCell>
                 <TableCell>
-                  {session.endTime.toLocaleTimeString([], {
+                  {new Date(session.endTime).toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}

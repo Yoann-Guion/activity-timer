@@ -81,22 +81,24 @@ export function formatMinutes(minutes: number): string {
 export function formatDate(date: Date, locale: string): string {
   if (!date) return "";
 
+  const currentDate = new Date(date);
+
   if (locale === "fr") {
-    // Format français: 08 avril 2025
+    // French format:  08 avril 2025
     const options: Intl.DateTimeFormatOptions = {
       day: "2-digit",
       month: "long",
       year: "numeric",
     };
-    return date.toLocaleDateString("fr-FR", options);
+    return currentDate.toLocaleDateString("fr-FR", options);
   } else {
-    // Format anglais: April 08, 2025 (plus standard en anglais)
+    // English format: April 08, 2025
     const options: Intl.DateTimeFormatOptions = {
       month: "long",
       day: "2-digit",
       year: "numeric",
     };
-    return date.toLocaleDateString("en-US", options);
+    return currentDate.toLocaleDateString("en-US", options);
   }
 }
 
