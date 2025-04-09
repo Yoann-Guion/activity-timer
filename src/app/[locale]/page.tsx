@@ -17,7 +17,7 @@ import { Progress } from "@/components/ui/progress";
 import { formatMinutes } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { ActivityActions } from "@/components/activityActions";
+import { ActivityActions } from "@/components/activity/ActivityActions";
 
 export default function Home() {
   const router = useRouter();

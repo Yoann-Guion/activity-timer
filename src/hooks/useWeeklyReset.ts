@@ -25,5 +25,5 @@ export function useWeeklyReset() {
       // Save the current week number in local storage
       localStorage.setItem("lastResetWeek", currentWeek);
     }
-  }, []);
+  }, [resetWeeklyProgress]);
 }

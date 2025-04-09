@@ -10,9 +10,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { IActivity } from "@/@types/activity";
-import { EditActivityDialog } from "./dialog/editActivityDialog";
-import { DeleteActivityDialog } from "./dialog/deleteActivityDialog";
-import { useCurrentLocale, useScopedI18n } from "../../locales/client";
+import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
+import { EditActivityDialog } from "../dialog/EditActivityDialog";
+import { DeleteActivityDialog } from "../dialog/DeleteActivityDialog";
 
 interface ActivityActionsProps {
   activity: IActivity;

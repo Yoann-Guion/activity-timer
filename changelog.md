@@ -9,7 +9,7 @@
 - LICENSE file
 
 ### Improved
-- Refactored ActivityActions into a separate component and updated its usage in details and summary pages
+- Refactored ActivityActions into a separate component and updated its usage in home, details and summary pages
 
 ### Fixed
 - Updated pnpm-lock.yaml

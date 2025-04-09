@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { ActivityActions } from "@/components/activityActions";
+import { ActivityActions } from "@/components/activity/ActivityActions";
 
 export default function Summary() {
   const tCommon = useScopedI18n("common.emptyState");

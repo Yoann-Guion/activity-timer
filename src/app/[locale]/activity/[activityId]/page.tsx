@@ -12,13 +12,13 @@ import { Play } from "lucide-react";
 import { formatDate, formatMinutes } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "sonner";
-import { SessionsTable } from "@/components/activity/sessionsTable";
+import { SessionsTable } from "@/components/activity/SessionsTable";
 import {
   useCurrentLocale,
   useI18n,
   useScopedI18n,
 } from "../../../../../locales/client";
-import { ActivityActions } from "@/components/activityActions";
+import { ActivityActions } from "@/components/activity/ActivityActions";
 
 export default function ActivityDetails() {
   const params = useParams();

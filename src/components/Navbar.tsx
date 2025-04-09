@@ -9,8 +9,8 @@ import {
   useCurrentLocale,
   useScopedI18n,
 } from "../../locales/client";
-import { ThemeToggle } from "./theme/theme-toggle";
-import { SettingsMenu } from "./settings-menu";
+import { ThemeToggle } from "./theme/ThemeToggle";
+import { SettingsMenu } from "./SettingsMenu";
 
 export function Navbar() {
   const tNav = useScopedI18n("nav");
