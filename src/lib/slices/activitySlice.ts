@@ -10,6 +10,7 @@ export interface ActivitySlice {
   updateActivity: (activity: IActivity) => void;
   deleteActivity: (id: string) => void;
   addSessionToActivity: (session: ISession) => void;
+  resetWeeklyProgress: () => void;
 }
 
 /**
@@ -67,5 +68,15 @@ export const createActivitySlice: StateCreator<
         }
         return activity;
       }),
+    })),
+
+  // Reset the weekly progress of all activities
+  resetWeeklyProgress: () =>
+    set((state) => ({
+      activities: state.activities.map((activity) => ({
+        ...activity,
+        weeklyProgress: 0,
+        sessions: [],
+      })),
     })),
 });

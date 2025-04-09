@@ -7,6 +7,7 @@ import { I18nProviderClient } from "../../../locales/client";
 import { TransitionProvider } from "@/components/animation/TransitionProvider";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "sonner";
+import WeeklyResetManager from "@/components/activity/WeeklyResetManager";
 
 const geistSans = Geist({
   weight: "400",
@@ -41,6 +42,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        <WeeklyResetManager />
         <I18nProviderClient locale={locale}>
           <ThemeProvider
             attribute="class"
