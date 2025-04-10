@@ -1,5 +1,18 @@
 # Changelog - Activity Timer
 
+## [v0.8] - 2025-04-10
+### Added
+- Zustand slices for activity and timer to separate concerns
+- Persistence in localStorage for activities via Zustand store
+- Weekly reset functionality for activity progress
+
+### Improved
+- Renamed various components for clarity
+- Reorganized imports and enhanced component structure across multiple files
+
+### Fixed
+- Correctly handled `Date` objects when deserialized from localStorage
+
 ## [v0.7] - 2025-04-08
 ### Added
 - Activity details page with session interface
