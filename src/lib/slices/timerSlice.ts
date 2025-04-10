@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import { ISession, TimerSession } from "@/@types/activity";
 import { StateCreator } from "zustand";
+import { ISession, TimerSession } from "@/@types/activity";
 
 export interface TimerSlice {
   timers: TimerSession[];

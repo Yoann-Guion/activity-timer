@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { IActivity } from "@/@types/activity";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,7 +14,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { IActivity } from "@/@types/activity";
 import { convertFromTotalMinutes, convertToTotalMinutes } from "@/lib/utils";
 import { useScopedI18n } from "../../../locales/client";
 

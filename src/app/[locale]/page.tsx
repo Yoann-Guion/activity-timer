@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Play, PlusCircle } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
-import { PageTransition } from "@/components/animation/PageTransition";
-import { useActivityStore } from "@/lib/useActivityStore";
 import {
   Card,
   CardContent,
@@ -14,10 +14,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { formatMinutes } from "@/lib/utils";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { ActivityActions } from "@/components/activity/ActivityActions";
+import { PageTransition } from "@/components/animation/PageTransition";
+import { useActivityStore } from "@/lib/useActivityStore";
+import { formatMinutes } from "@/lib/utils";
+import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 
 export default function Home() {
   const router = useRouter();

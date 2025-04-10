@@ -3,22 +3,26 @@
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { toast } from "sonner";
+import { Play } from "lucide-react";
+
 import { IActivity } from "@/@types/activity";
-import { PageTransition } from "@/components/animation/PageTransition";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useActivityStore } from "@/lib/useActivityStore";
-import { Play } from "lucide-react";
-import { formatDate, formatMinutes } from "@/lib/utils";
 import { Progress } from "@/components/ui/progress";
-import { toast } from "sonner";
+
+import { PageTransition } from "@/components/animation/PageTransition";
+import { ActivityActions } from "@/components/activity/ActivityActions";
 import { SessionsTable } from "@/components/activity/SessionsTable";
+
+import { useActivityStore } from "@/lib/useActivityStore";
+import { formatDate, formatMinutes } from "@/lib/utils";
 import {
   useCurrentLocale,
   useI18n,
   useScopedI18n,
 } from "../../../../../locales/client";
-import { ActivityActions } from "@/components/activity/ActivityActions";
 
 export default function ActivityDetails() {
   const params = useParams();

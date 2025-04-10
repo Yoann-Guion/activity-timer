@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import { IActivity, INewActivity, ISession } from "@/@types/activity";
 import { StateCreator } from "zustand";
+import { IActivity, INewActivity, ISession } from "@/@types/activity";
 
 export interface ActivitySlice {
   activities: IActivity[];

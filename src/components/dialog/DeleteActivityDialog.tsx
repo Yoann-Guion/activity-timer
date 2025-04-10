@@ -1,5 +1,8 @@
 "use client";
 
+import { useRouter, usePathname } from "next/navigation";
+import { AlertTriangle } from "lucide-react";
+import { IActivity } from "@/@types/activity";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,10 +13,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { IActivity } from "@/@types/activity";
-import { AlertTriangle } from "lucide-react";
 import { useScopedI18n } from "../../../locales/client";
-import { useRouter, usePathname } from "next/navigation";
 
 export function DeleteActivityDialog({
   activity,

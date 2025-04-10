@@ -1,5 +1,7 @@
 "use client";
 
+import { IActivity } from "@/@types/activity";
+import { Progress } from "@/components/ui/progress";
 import {
   Table,
   TableBody,
@@ -9,8 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Progress } from "@/components/ui/progress";
-import { IActivity } from "@/@types/activity";
 import { formatDate, formatMinutes } from "@/lib/utils";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 

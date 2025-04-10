@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
 import { ReactNode } from "react";
+import { motion } from "motion/react";
 
 interface PageTransitionProps {
   children: ReactNode;
