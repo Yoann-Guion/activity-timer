@@ -1,5 +1,18 @@
 # Changelog - Activity Timer
 
+## [v0.8] - 2025-04-10
+### Added
+- Zustand slices for activity and timer to separate concerns
+- Persistence in localStorage for activities via Zustand store
+- Weekly reset functionality for activity progress
+
+### Improved
+- Renamed various components for clarity
+- Reorganized imports and enhanced component structure across multiple files
+
+### Fixed
+- Correctly handled `Date` objects when deserialized from localStorage
+
 ## [v0.7] - 2025-04-08
 ### Added
 - Activity details page with session interface
@@ -9,7 +22,7 @@
 - LICENSE file
 
 ### Improved
-- Refactored ActivityActions into a separate component and updated its usage in details and summary pages
+- Refactored ActivityActions into a separate component and updated its usage in home, details and summary pages
 
 ### Fixed
 - Updated pnpm-lock.yaml

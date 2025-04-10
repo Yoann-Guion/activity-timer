@@ -1,18 +1,18 @@
-import { Ellipsis, Info, FilePen, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { Ellipsis, Info, FilePen, Trash2 } from "lucide-react";
+import { IActivity } from "@/@types/activity";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { IActivity } from "@/@types/activity";
-import { EditActivityDialog } from "./dialog/editActivityDialog";
-import { DeleteActivityDialog } from "./dialog/deleteActivityDialog";
-import { useCurrentLocale, useScopedI18n } from "../../locales/client";
+import { DeleteActivityDialog } from "../dialog/DeleteActivityDialog";
+import { EditActivityDialog } from "../dialog/EditActivityDialog";
+import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 
 interface ActivityActionsProps {
   activity: IActivity;

@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,16 +13,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
-
-import { useScopedI18n } from "../../../../../locales/client";
 import { PageTransition } from "@/components/animation/PageTransition";
-import { useState } from "react";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { convertToTotalMinutes } from "@/lib/utils";
+import { useScopedI18n } from "../../../../../locales/client";
 
 export default function NewActivity() {
   const router = useRouter();

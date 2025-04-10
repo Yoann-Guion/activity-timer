@@ -1,8 +1,8 @@
 "use client";
 
-import { AnimatePresence } from "motion/react";
-import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { AnimatePresence } from "motion/react";
 
 interface TransitionProviderProps {
   children: ReactNode;

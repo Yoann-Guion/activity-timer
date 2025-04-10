@@ -1,6 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Clock, Pause, Play, Square } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,7 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -17,11 +19,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useScopedI18n } from "../../../../locales/client";
 import { PageTransition } from "@/components/animation/PageTransition";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { useEffect, useState } from "react";
 import { formatMinutes, formatTime } from "@/lib/utils";
+import { useScopedI18n } from "../../../../locales/client";
 
 export default function Timer() {
   const tCommon = useScopedI18n("common");

@@ -1,5 +1,7 @@
 "use client";
 
+import { IActivity } from "@/@types/activity";
+import { Progress } from "@/components/ui/progress";
 import {
   Table,
   TableBody,
@@ -9,8 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Progress } from "@/components/ui/progress";
-import { IActivity } from "@/@types/activity";
 import { formatDate, formatMinutes } from "@/lib/utils";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 
@@ -51,8 +51,18 @@ export function SessionsTable({ activity }: SessionsTableProps) {
                     {formatDate(session.startTime, currentLocale)}
                   </div>
                 </TableCell>
-                <TableCell>{session.startTime.toLocaleTimeString()}</TableCell>
-                <TableCell>{session.endTime.toLocaleTimeString()}</TableCell>
+                <TableCell>
+                  {new Date(session.startTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </TableCell>
+                <TableCell>
+                  {new Date(session.endTime).toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </TableCell>
                 <TableCell className="text-right font-medium">
                   {formatMinutes(session.duration)}
                 </TableCell>

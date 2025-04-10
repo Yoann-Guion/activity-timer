@@ -3,14 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, PlusCircle, BarChart, Clock } from "lucide-react";
+import { ThemeToggle } from "./theme/ThemeToggle";
+import { SettingsMenu } from "./SettingsMenu";
 import { cn } from "@/lib/utils";
 import {
   useChangeLocale,
   useCurrentLocale,
   useScopedI18n,
 } from "../../locales/client";
-import { ThemeToggle } from "./theme/theme-toggle";
-import { SettingsMenu } from "./settings-menu";
 
 export function Navbar() {
   const tNav = useScopedI18n("nav");

@@ -1,10 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { useCurrentLocale, useScopedI18n } from "../../../../locales/client";
-import { formatMinutes, getWeekEndDate, getWeekStartDate } from "@/lib/utils";
-import { PageTransition } from "@/components/animation/PageTransition";
-import { useActivityStore } from "@/lib/useActivityStore";
 import {
   Card,
   CardContent,
@@ -13,7 +9,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { ActivityActions } from "@/components/activityActions";
+import { PageTransition } from "@/components/animation/PageTransition";
+import { ActivityActions } from "@/components/activity/ActivityActions";
+import { useActivityStore } from "@/lib/useActivityStore";
+import { formatMinutes, getWeekEndDate, getWeekStartDate } from "@/lib/utils";
+import { useCurrentLocale, useScopedI18n } from "../../../../locales/client";
 
 export default function Summary() {
   const tCommon = useScopedI18n("common.emptyState");
