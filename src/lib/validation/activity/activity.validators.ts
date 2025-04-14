@@ -38,11 +38,11 @@ export const buildValidatedActivity = (
 };
 
 // Validation and date parsing for activities from storage (JSON)
-const parseDates = (item: any) => ({
+const parseDates = (item: ValidatedActivity) => ({
   ...item,
   createdAt: item.createdAt ? new Date(item.createdAt) : null,
   sessions: Array.isArray(item.sessions)
-    ? item.sessions.map((s: any) => ({
+    ? item.sessions.map((s) => ({
         ...s,
         startTime: new Date(s.startTime),
         endTime: new Date(s.endTime),

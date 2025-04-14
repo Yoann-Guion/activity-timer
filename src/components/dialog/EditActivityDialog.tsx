@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { IActivity } from "@/@types/activity";
+import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -22,7 +22,7 @@ export function EditActivityDialog({
   open,
   onOpenChange,
 }: {
-  activity: IActivity;
+  activity: ValidatedActivity;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {

@@ -3,8 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { IActivity } from "@/@types/activity";
-
+import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { useActivityStore } from "@/lib/useActivityStore";
 import NoActivity from "../activity/NoActivity";
 import ActivityDetailsCard from "../cards/ActivityDetailsCard";
@@ -15,7 +14,7 @@ export default function ActivityDetailsContainer() {
   const { activities } = useActivityStore();
 
   // State for the activity
-  const [activity, setActivity] = useState<IActivity | null>(null);
+  const [activity, setActivity] = useState<ValidatedActivity | null>(null);
   // State for the percentage of the progress bar
   const [percentage, setPercentage] = useState(0);
 

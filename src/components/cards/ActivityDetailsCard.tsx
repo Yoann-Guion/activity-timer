@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
-import { IActivity } from "@/@types/activity";
+import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { ActivityActions } from "../activity/ActivityActions";
 import { SessionsTable } from "../activity/SessionsTable";
 import { Play } from "lucide-react";
@@ -17,7 +17,7 @@ import { formatDate, formatMinutes } from "@/lib/utils";
 import { useActivityStore } from "@/lib/useActivityStore";
 
 interface ActivityDetailsCardProps {
-  activity: IActivity;
+  activity: ValidatedActivity;
   percentage: number;
 }
 

@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { IActivity } from "@/@types/activity";
+import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { useScopedI18n } from "../../../locales/client";
 
 interface AchievedGoalsProps {
-  activities: IActivity[];
+  activities: ValidatedActivity[];
 }
 
 export default function AchievedGoals({ activities }: AchievedGoalsProps) {

@@ -2,7 +2,7 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import { AlertTriangle } from "lucide-react";
-import { IActivity } from "@/@types/activity";
+import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,7 +20,7 @@ export function DeleteActivityDialog({
   open,
   onOpenChange,
 }: {
-  activity: IActivity;
+  activity: ValidatedActivity;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
