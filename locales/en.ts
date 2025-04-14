@@ -91,6 +91,10 @@ export default {
           title: "Please fill in the weekly goal",
           description: "The weekly goal must be greater than 0",
         },
+        validationError: {
+          title: "Creation impossible",
+          description: "Please check the information you have entered",
+        },
       },
     },
 

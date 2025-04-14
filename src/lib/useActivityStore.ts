@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { ActivitySlice, createActivitySlice } from "./slices/activitySlice";
 import { createTimerSlice, TimerSlice } from "./slices/timerSlice";
+import { validateActivitiesFromStorage } from "./validation/activity/activity.validators";
 
 // Combine both slices into one store
 export type StoreState = ActivitySlice & TimerSlice;
@@ -23,6 +24,12 @@ export const useActivityStore = create<StoreState>()(
       partialize: (state) => ({
         activities: state.activities,
       }),
+      // Rehydrate the store with validated activities
+      onRehydrateStorage: () => (state) => {
+        if (state && state.activities) {
+          state.activities = validateActivitiesFromStorage(state.activities);
+        }
+      },
     }
   )
 );

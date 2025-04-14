@@ -1,15 +1,19 @@
-import { v4 as uuidv4 } from "uuid";
 import { StateCreator } from "zustand";
-import { IActivity, INewActivity, ISession } from "@/@types/activity";
+import { buildValidatedActivity } from "../validation/activity/activity.validators";
+import {
+  ValidatedActivity,
+  ValidatedNewActivity,
+  ValidatedSession,
+} from "../validation/activity/activity.types";
 
 export interface ActivitySlice {
-  activities: IActivity[];
+  activities: ValidatedActivity[];
 
   // Actions
-  addActivity: (activity: INewActivity) => void;
-  updateActivity: (activity: IActivity) => void;
+  addActivity: (activity: ValidatedNewActivity) => void;
+  updateActivity: (activity: ValidatedActivity) => void;
   deleteActivity: (id: string) => void;
-  addSessionToActivity: (session: ISession) => void;
+  addSessionToActivity: (session: ValidatedSession) => void;
   resetWeeklyProgress: () => void;
 }
 
@@ -29,15 +33,11 @@ export const createActivitySlice: StateCreator<
   // Add a new activity to the store
   addActivity: (activity) =>
     set((state) => {
-      const newActivity: IActivity = {
-        id: uuidv4(),
-        name: activity.name,
-        weeklyGoal: activity.weeklyGoal,
-        weeklyProgress: 0,
-        color: activity.color,
-        createdAt: new Date(),
-        sessions: [],
-      };
+      const newActivity = buildValidatedActivity(activity);
+      if (!newActivity) {
+        // todo : voir pour afficher toast ?
+        return state;
+      }
       return { activities: [...state.activities, newActivity] };
     }),
 

@@ -95,6 +95,10 @@ export default {
           title: "Veuillez remplir l'objectif hebdomadaire",
           description: "L'objectif hebdomadaire doit être supérieur à 0",
         },
+        validationError: {
+          title: "Création impossible",
+          description: "Merci de vérifier les informations saisies.",
+        },
       },
     },
 

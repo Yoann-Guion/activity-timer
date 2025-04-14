@@ -18,6 +18,8 @@ import { Label } from "@/components/ui/label";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { convertToTotalMinutes } from "@/lib/utils";
 import { useScopedI18n } from "../../../locales/client";
+import build from "next/dist/build";
+import { buildValidatedActivity } from "@/lib/validation/activity/activity.validators";
 
 export default function NewActivityForm() {
   const router = useRouter();
@@ -48,15 +50,26 @@ export default function NewActivityForm() {
       return;
     }
 
-    if (name.trim() && totalMinutes > 0) {
-      addActivity({
-        name: name.trim(),
-        weeklyGoal: totalMinutes,
-        color,
-      });
+    // Create the object to validate
+    const rawInput = {
+      name,
+      weeklyGoal: totalMinutes,
+      color,
+    };
 
-      router.push("/");
+    // Validate the input with Zod
+    const newActivity = buildValidatedActivity(rawInput);
+
+    if (!newActivity) {
+      toast.error(tNewActivity("form.validationError.title"), {
+        description: tNewActivity("form.validationError.description"),
+      });
+      return;
     }
+
+    // Add the activity to the store and redirect to the home page
+    addActivity(newActivity);
+    router.push("/");
   };
 
   return (
