@@ -1,3 +1,5 @@
+// Utility functions for date formatting and calculations
+
 /**
  * Format a date according to the specified locale ('fr' or 'en')
  *

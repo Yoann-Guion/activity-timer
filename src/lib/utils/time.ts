@@ -1,4 +1,4 @@
-// Utility
+// Utility functions for time formatting and conversion
 
 /**
  * Convert hours and minutes into minutes only

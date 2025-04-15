@@ -1,19 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
 import { StateCreator } from "zustand";
 import { ISession, TimerSession } from "@/@types/activity";
-
-export interface TimerSlice {
-  timers: TimerSession[];
-  activeTimer: TimerSession | null;
-  pauseStartTime: number | null;
-  totalPausedTime: number;
-
-  // Actions
-  startTimer: (activityId: string) => void;
-  pauseTimer: () => void;
-  resumeTimer: () => void;
-  stopTimer: () => void;
-}
+import { ValidatedSession } from "../validation/activity/activity.types";
+import { TimerSliceState } from "../validation/timer/timer.types";
 
 /**
  * Creates the timer slice for the Zustand store
@@ -22,10 +11,12 @@ export interface TimerSlice {
  * @returns The timer slice with actions to manage timers
  */
 export const createTimerSlice: StateCreator<
-  TimerSlice & { addSessionToActivity: (session: ISession) => void },
+  TimerSliceState & {
+    addSessionToActivity: (session: ValidatedSession) => void;
+  },
   [],
   [],
-  TimerSlice
+  TimerSliceState
 > = (set, get) => ({
   timers: [],
   activeTimer: null,

@@ -27,6 +27,7 @@ export type SessionWithIsoDates = Omit<
   endTime: string;
 };
 
+// Interface for activity data
 export interface ActivitySliceState {
   activities: ValidatedActivity[];
 
