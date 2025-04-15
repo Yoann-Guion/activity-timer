@@ -11,7 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
-import { formatDate, formatMinutes } from "@/lib/utils";
+import { formatMinutes } from "@/lib/utils/time";
+import { formatDate } from "@/lib/utils/date";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 
 interface SessionsTableProps {

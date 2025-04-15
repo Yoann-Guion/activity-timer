@@ -3,9 +3,9 @@ import {
   HistorySliceState,
   HistorySliceWithDependencies,
 } from "../validation/history/history.types";
-import { getWeekEndDate, getWeekNumber, getWeekStartDate } from "../utils";
 import { weeklyHistoryEntrySchema } from "../validation/history/history.schemas";
 import { ValidatedActivity } from "../validation/activity/activity.types";
+import { getWeekEndDate, getWeekNumber, getWeekStartDate } from "../utils/date";
 
 /**
  * Creates the history slice for the Zustand store
@@ -32,6 +32,7 @@ export const createHistorySlice: StateCreator<
     const now = new Date();
     const weekNumber = getWeekNumber(now);
     const year = now.getFullYear();
+    const weekKey = `${year}-W${weekNumber}`;
     const startDate = getWeekStartDate().toISOString();
     const endDate = getWeekEndDate().toISOString();
 
@@ -55,8 +56,7 @@ export const createHistorySlice: StateCreator<
 
       // Creating and validating the history entry with Zod
       const historyEntry = weeklyHistoryEntrySchema.parse({
-        weekNumber,
-        year,
+        weekKey,
         startDate,
         endDate,
         activities: processedActivities,
@@ -73,12 +73,10 @@ export const createHistorySlice: StateCreator<
     }
   },
 
-  // Get the history for a specific week
-  getHistoryForWeek: (weekNumber, year) => {
+  // Get the history for a specific week using the weekKey
+  getHistoryForWeek: (weekKey: string) => {
     const { weeklyHistory } = get();
-    return weeklyHistory.find(
-      (entry) => entry.weekNumber === weekNumber && entry.year === year
-    );
+    return weeklyHistory.find((entry) => entry.weekKey === weekKey);
   },
 
   // Clear the history

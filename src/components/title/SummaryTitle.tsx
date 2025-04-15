@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { getWeekEndDate, getWeekStartDate } from "@/lib/utils";
+import { getWeekEndDate, getWeekStartDate } from "@/lib/utils/date";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 
 export default function SummaryTitle() {

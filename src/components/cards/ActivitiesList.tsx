@@ -16,7 +16,7 @@ import {
 import NoActivity from "../activity/NoActivity";
 import { ActivityActions } from "../activity/ActivityActions";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { formatMinutes } from "@/lib/utils";
+import { formatMinutes } from "@/lib/utils/time";
 import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
 import { Progress } from "../ui/progress";
 

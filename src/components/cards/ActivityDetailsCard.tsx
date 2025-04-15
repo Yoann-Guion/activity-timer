@@ -13,7 +13,8 @@ import {
   useI18n,
   useScopedI18n,
 } from "../../../locales/client";
-import { formatDate, formatMinutes } from "@/lib/utils";
+import { formatMinutes } from "@/lib/utils/time";
+import { formatDate } from "@/lib/utils/date";
 import { useActivityStore } from "@/lib/useActivityStore";
 
 interface ActivityDetailsCardProps {

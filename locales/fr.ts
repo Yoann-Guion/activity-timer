@@ -55,7 +55,7 @@ export default {
       title: "Mes activités",
       newActivity: "Nouvelle activité",
       createFirst: "Créer ma première activité",
-      weeklyProgress: "Progression hebdomadaire",
+      weeklyProgress: "Progression hebdo",
       timerAlreadyRunning: {
         title:
           "Un chronomètre est déjà en cours. Veuillez l'arrêter avant d'en démarrer un nouveau.",

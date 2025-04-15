@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Home, PlusCircle, BarChart, Clock } from "lucide-react";
 import { ThemeToggle } from "./theme/ThemeToggle";
 import { SettingsMenu } from "./SettingsMenu";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/classname";
 import {
   useChangeLocale,
   useCurrentLocale,

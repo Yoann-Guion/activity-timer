@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { convertToTotalMinutes } from "@/lib/utils";
+import { convertToTotalMinutes } from "@/lib/utils/time";
 import { buildValidatedActivity } from "@/lib/validation/activity/activity.validators";
 import { useScopedI18n } from "../../../locales/client";
 

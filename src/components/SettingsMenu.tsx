@@ -53,7 +53,7 @@ export function SettingsMenu() {
           <Button
             variant="outline"
             size="icon"
-            className="rounded-full h-9 w-9"
+            className="rounded-full h-9 w-9 border-black"
             onClick={() => changeLocale(currentLocale === "fr" ? "en" : "fr")}
           >
             <Earth className="h-[1.2rem] w-[1.2rem] text-black dark:text-white" />

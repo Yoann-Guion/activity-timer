@@ -8,7 +8,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { ActivityActions } from "@/components/activity/ActivityActions";
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
-import { formatMinutes } from "@/lib/utils";
+import { formatMinutes } from "@/lib/utils/time";
 import { useScopedI18n } from "../../../locales/client";
 
 interface ActivitiesOverviewProps {
@@ -48,7 +48,7 @@ export default function ActivitiesOverview({
                   </div>
 
                   <span className="text-sm">
-                    {formatMinutes(activity.weeklyProgress)} /
+                    {formatMinutes(activity.weeklyProgress)} / &nbsp;
                     {formatMinutes(activity.weeklyGoal)}
                   </span>
                 </div>

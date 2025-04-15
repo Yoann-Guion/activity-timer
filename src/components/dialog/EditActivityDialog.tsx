@@ -14,7 +14,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { convertFromTotalMinutes, convertToTotalMinutes } from "@/lib/utils";
+import {
+  convertFromTotalMinutes,
+  convertToTotalMinutes,
+} from "@/lib/utils/time";
 import { useScopedI18n } from "../../../locales/client";
 
 export function EditActivityDialog({

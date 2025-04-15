@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { formatMinutes, formatTime } from "@/lib/utils";
+import { formatMinutes, formatTime } from "@/lib/utils/time";
 import { useScopedI18n } from "../../../locales/client";
 
 export default function TimerCard() {
