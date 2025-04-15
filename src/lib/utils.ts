@@ -110,8 +110,12 @@ export function getWeekStartDate(): Date {
   const now = new Date();
   const dayOfWeek = now.getDay(); // 0 = sunday, 1 = monday...
   const diff = now.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // Adjust to start the week on Monday
-  const monday = new Date(now.setDate(diff));
+
+  // Create a new date object to avoid mutating the original date
+  const monday = new Date(now);
+  monday.setDate(diff);
   monday.setHours(0, 0, 0, 0);
+
   return monday;
 }
 

@@ -1,21 +1,6 @@
 import { StateCreator } from "zustand";
+import { ActivitySliceState } from "../validation/activity/activity.types";
 import { buildValidatedActivity } from "../validation/activity/activity.validators";
-import {
-  ValidatedActivity,
-  ValidatedNewActivity,
-  ValidatedSession,
-} from "../validation/activity/activity.types";
-
-export interface ActivitySlice {
-  activities: ValidatedActivity[];
-
-  // Actions
-  addActivity: (activity: ValidatedNewActivity) => void;
-  updateActivity: (activity: ValidatedActivity) => void;
-  deleteActivity: (id: string) => void;
-  addSessionToActivity: (session: ValidatedSession) => void;
-  resetWeeklyProgress: () => void;
-}
 
 /**
  * Creates the activity slice for the Zustand store
@@ -23,10 +8,10 @@ export interface ActivitySlice {
  * @returns The activity slice with actions to manage activities and sessions
  */
 export const createActivitySlice: StateCreator<
-  ActivitySlice,
+  ActivitySliceState,
   [],
   [],
-  ActivitySlice
+  ActivitySliceState
 > = (set) => ({
   activities: [],
 
