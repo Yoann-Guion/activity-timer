@@ -18,9 +18,9 @@ export const validateSession = (data: unknown) => SessionSchema.safeParse(data);
 
 // Function to build a new activity with validation
 export const buildValidatedActivity = (
-  input: unknown
+  activity: unknown
 ): ValidatedActivity | null => {
-  const result = NewActivitySchema.safeParse(input);
+  const result = NewActivitySchema.safeParse(activity);
   if (!result.success) {
     console.error("Validation failed when building activity:", result.error);
     return null;

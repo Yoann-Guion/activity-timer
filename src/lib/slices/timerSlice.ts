@@ -1,8 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import { StateCreator } from "zustand";
-import { ISession, TimerSession } from "@/@types/activity";
 import { ValidatedSession } from "../validation/activity/activity.types";
-import { TimerSliceState } from "../validation/timer/timer.types";
+import {
+  TimerSliceState,
+  ValidatedTimer,
+} from "../validation/timer/timer.types";
+import { createSessionFromTimer } from "../validation/timer/timer.validators";
 
 /**
  * Creates the timer slice for the Zustand store
@@ -27,7 +30,7 @@ export const createTimerSlice: StateCreator<
   startTimer: (activityId) =>
     set((state) => {
       // Create a new timer
-      const newTimer: TimerSession = {
+      const newTimer: ValidatedTimer = {
         id: uuidv4(),
         activityId,
         startTime: new Date(),
@@ -97,18 +100,18 @@ export const createTimerSlice: StateCreator<
         isActive: false,
       };
 
-      // Create a new session
-      const newSession: ISession = {
-        id: updatedTimer.id,
-        activityId: updatedTimer.activityId,
-        startTime: updatedTimer.startTime,
-        endTime,
-        duration: updatedTimer.duration / 60, // in minutes
-        pausedTime: totalPauseTime / 1000, // in seconds
-      };
+      // Create a validated session from the timer
+      const validatedSession = createSessionFromTimer(
+        updatedTimer,
+        totalPauseTime
+      );
 
-      // Add the session to the activity via the activity slice
-      get().addSessionToActivity(newSession);
+      if (validatedSession) {
+        // Add the session to the activity via the activity slice
+        get().addSessionToActivity(validatedSession);
+      } else {
+        console.error("La session n'a pas pu être créée à partir du timer");
+      }
 
       // Update the store and reset the active timer and pause state
       return {

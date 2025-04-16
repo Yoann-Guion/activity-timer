@@ -2,15 +2,18 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { ActivitySliceState } from "./validation/activity/activity.types";
+import { TimerSliceState } from "./validation/timer/timer.types";
 import { HistorySliceState } from "./validation/history/history.types";
 import { createActivitySlice } from "./slices/activitySlice";
-import { createTimerSlice, TimerSlice } from "./slices/timerSlice";
+import { createTimerSlice } from "./slices/timerSlice";
 import { createHistorySlice } from "./slices/historySlice";
 import { validateActivitiesFromStorage } from "./validation/activity/activity.validators";
 import { validateHistoryFromStorage } from "./validation/history/history.validators";
 
 // Combine all slices into one store
-export type StoreState = ActivitySliceState & TimerSlice & HistorySliceState;
+export type StoreState = ActivitySliceState &
+  TimerSliceState &
+  HistorySliceState;
 
 /**
  * Creates the Zustand store for managing activities and timers

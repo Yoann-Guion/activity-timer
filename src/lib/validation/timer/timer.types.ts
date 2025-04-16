@@ -1,12 +1,12 @@
 import { z } from "zod";
-import { TimerSessionSchema } from "./timer.schemas";
+import { TimerSchema } from "./timer.schemas";
 
-export type ValidatedTimerSession = z.infer<typeof TimerSessionSchema>;
+export type ValidatedTimer = z.infer<typeof TimerSchema>;
 
 // Interface for timer
 export interface TimerSliceState {
-  timers: ValidatedTimerSession[];
-  activeTimer: ValidatedTimerSession | null;
+  timers: ValidatedTimer[];
+  activeTimer: ValidatedTimer | null;
   pauseStartTime: number | null;
   totalPausedTime: number;
 
