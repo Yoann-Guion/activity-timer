@@ -1,5 +1,22 @@
 # Changelog - Activity Timer
 
+## [v0.9] - 2025-04-17
+### Added
+- Zod validation for activities and forms, integrated with Zustand rehydration
+- Validation for history and timer using Zod
+- History management with reset functionality and persistent data structure
+- Weekly summary page with selection of week and display of activity details
+
+### Improved
+- Restructured timer validation and types with Zod
+- Updated import paths for localization
+- Enhanced type safety by replacing `IActivity` and `TimerSession` with validated versions across store and components
+
+### Refactored
+- Refactored utility files into separate modules (`classname`, `time`, `date`)
+- Organized components by application section
+- Converted pages to server components
+
 ## [v0.8] - 2025-04-10
 ### Added
 - Zustand slices for activity and timer to separate concerns

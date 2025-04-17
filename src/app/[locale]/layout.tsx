@@ -14,6 +14,7 @@ const geistSans = Geist({
   style: "normal",
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -21,6 +22,7 @@ const geistMono = Geist_Mono({
   style: "normal",
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
