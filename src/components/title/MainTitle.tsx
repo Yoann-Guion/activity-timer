@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
 import { Button } from "../ui/button";
-import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
+import { useCurrentLocale, useScopedI18n } from "@locales/client";
 
 export default function MainTitle() {
   const tHome = useScopedI18n("pages.home");

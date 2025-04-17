@@ -18,7 +18,7 @@ import { Label } from "@/components/ui/label";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { convertToTotalMinutes } from "@/lib/utils/time";
 import { buildValidatedActivity } from "@/lib/validation/activity/activity.validators";
-import { useScopedI18n } from "../../../locales/client";
+import { useScopedI18n } from "@locales/client";
 
 export default function NewActivityForm() {
   const router = useRouter();

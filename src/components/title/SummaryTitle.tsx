@@ -1,9 +1,6 @@
 "use client";
 
 import { useMemo } from "react";
-import { formatWeekRange, getCurrentWeekKey } from "@/lib/utils/date";
-import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
-import { useAvailableWeeks } from "@/hooks/useAvailableWeeks";
 import {
   Select,
   SelectContent,
@@ -11,6 +8,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useAvailableWeeks } from "@/hooks/useAvailableWeeks";
+import { formatWeekRange, getCurrentWeekKey } from "@/lib/utils/date";
+import { useCurrentLocale, useScopedI18n } from "@locales/client";
 
 interface SummaryTitleProps {
   selectedWeek: string;
@@ -41,7 +41,7 @@ export default function SummaryTitle({
 
         <Select value={selectedWeek} onValueChange={setSelectedWeek}>
           <SelectTrigger>
-            <SelectValue placeholder="Choisir une semaine" />
+            <SelectValue placeholder={tSummary("inputPlaceholder")} />
           </SelectTrigger>
           <SelectContent>
             {weeks.map((weekKey) => (

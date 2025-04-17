@@ -13,7 +13,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { useScopedI18n } from "../../../locales/client";
+import { useScopedI18n } from "@locales/client";
 
 export function DeleteActivityDialog({
   activity,

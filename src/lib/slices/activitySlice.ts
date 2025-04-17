@@ -4,6 +4,7 @@ import { buildValidatedActivity } from "../validation/activity/activity.validato
 
 /**
  * Creates the activity slice for the Zustand store
+ *
  * @param set - The Zustand set function to update the store state
  * @returns The activity slice with actions to manage activities and sessions
  */

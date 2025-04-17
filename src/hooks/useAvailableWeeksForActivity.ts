@@ -1,18 +1,24 @@
 import { useActivityStore } from "@/lib/useActivityStore";
 import { getCurrentWeekKey } from "@/lib/utils/date";
 
+/**
+ * Custom hook to get the available weeks for a specific activity.
+ *
+ * @param {string} activityId - The ID of the activity.
+ * @returns {string[]} - An array of week keys where the activity was archived.
+ */
 export function useAvailableWeeksForActivity(activityId: string): string[] {
   const weeklyHistory = useActivityStore((state) => state.weeklyHistory || []);
   const currentWeekKey = getCurrentWeekKey();
 
-  // Filtrer les semaines où l'activité est présente
+  // Get the keys of the weeks where the activity was archived
   const archivedWeekKeys = weeklyHistory
     .filter((entry) =>
       entry.activities.some((activity) => activity.id === activityId)
     )
     .map((entry) => entry.weekKey);
 
-  // Si l'activité est aussi active cette semaine, on ajoute la semaine courante
+  // Check if the current week is already in the archived weeks
   const isCurrentActivity = useActivityStore(
     (state) => !!state.activities.find((a) => a.id === activityId)
   );
@@ -22,6 +28,6 @@ export function useAvailableWeeksForActivity(activityId: string): string[] {
       ? [...archivedWeekKeys, currentWeekKey]
       : archivedWeekKeys;
 
-  // Retourne les clés de semaine triées (de la plus récente à la plus ancienne)
+  // Sort the weeks in descending order
   return allWeeks.sort().reverse();
 }

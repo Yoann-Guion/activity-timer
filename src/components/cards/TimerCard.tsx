@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/select";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { formatMinutes, formatTime } from "@/lib/utils/time";
-import { useScopedI18n } from "../../../locales/client";
+import { useScopedI18n } from "@locales/client";
 
 export default function TimerCard() {
   const tCommon = useScopedI18n("common");
@@ -37,6 +37,7 @@ export default function TimerCard() {
     totalPausedTime,
     stopTimer,
   } = useActivityStore();
+
   // State for the selected activity
   const [selectedActivityId, setSelectedActivityId] = useState<string>("");
   // State for the elapsed time

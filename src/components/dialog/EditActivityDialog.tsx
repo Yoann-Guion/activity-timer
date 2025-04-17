@@ -18,7 +18,7 @@ import {
   convertFromTotalMinutes,
   convertToTotalMinutes,
 } from "@/lib/utils/time";
-import { useScopedI18n } from "../../../locales/client";
+import { useScopedI18n } from "@locales/client";
 
 export function EditActivityDialog({
   activity,

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -10,20 +11,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { Play } from "lucide-react";
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { ActivityActions } from "../activity/ActivityActions";
 import { SessionsTable } from "../activity/SessionsTable";
-import { Play } from "lucide-react";
-import Link from "next/link";
-import {
-  useCurrentLocale,
-  useI18n,
-  useScopedI18n,
-} from "../../../locales/client";
 import { formatMinutes } from "@/lib/utils/time";
 import { formatDate, formatWeekRange } from "@/lib/utils/date";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { useAvailableWeeksForActivity } from "@/hooks/useAvailableWeeksForActivity";
+import { useCurrentLocale, useI18n, useScopedI18n } from "@locales/client";
 
 interface ActivityDetailsCardProps {
   activity: ValidatedActivity;
@@ -140,7 +136,9 @@ export default function ActivityDetailsCard({
               <div className="mb-2">
                 <Select value={selectedWeek} onValueChange={setSelectedWeek}>
                   <SelectTrigger className="w-full md:w-80">
-                    <SelectValue placeholder="Choisir une semaine" />
+                    <SelectValue
+                      placeholder={t("pages.summary.inputPlaceholder")}
+                    />
                   </SelectTrigger>
                   <SelectContent>
                     {weeks.map((weekKey) => (

@@ -135,6 +135,7 @@ export default {
       title: "Weekly Summary",
       currentWeek: "Current week : ",
       selectedWeek: "Selected week : ",
+      inputPlaceholder: "Select a week",
       dateRange: "from {start} to {end}",
       overview: {
         title: "Overview",

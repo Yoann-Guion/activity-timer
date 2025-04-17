@@ -13,12 +13,12 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { Progress } from "../ui/progress";
 import NoActivity from "../activity/NoActivity";
 import { ActivityActions } from "../activity/ActivityActions";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { formatMinutes } from "@/lib/utils/time";
-import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
-import { Progress } from "../ui/progress";
+import { useCurrentLocale, useScopedI18n } from "@locales/client";
 
 export default function ActivitiesList() {
   const router = useRouter();

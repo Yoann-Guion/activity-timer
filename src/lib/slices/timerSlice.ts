@@ -9,6 +9,7 @@ import { createSessionFromTimer } from "../validation/timer/timer.validators";
 
 /**
  * Creates the timer slice for the Zustand store
+ *
  * @param set - The Zustand set function to update the store state
  * @param get - The Zustand get function to access the store state
  * @returns The timer slice with actions to manage timers

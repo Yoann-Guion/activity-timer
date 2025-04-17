@@ -1,6 +1,3 @@
-import { Description } from "@radix-ui/react-dialog";
-import { access, link } from "fs";
-
 export default {
   // Common reusable elements
   common: {
@@ -139,6 +136,7 @@ export default {
       title: "Résumé Hebdomadaire",
       currentWeek: "Semaine en cours : ",
       selectedWeek: "Semaine sélectionnée : ",
+      inputPlaceholder: "Sélectionner une semaine",
       dateRange: "du {start} au {end}",
       overview: {
         title: "Vue d'ensemble",

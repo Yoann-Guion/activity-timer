@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { ActivityActions } from "@/components/activity/ActivityActions";
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { formatMinutes } from "@/lib/utils/time";
-import { useScopedI18n } from "../../../locales/client";
+import { useScopedI18n } from "@locales/client";
 
 interface ActivitiesOverviewProps {
   activities: ValidatedActivity[];

@@ -13,6 +13,7 @@ import {
 
 /**
  * Creates the history slice for the Zustand store
+ *
  * @param set - The Zustand set function to update the store state
  * @param get - The Zustand get function to access the store state
  * @param activities - The activities slice state to access the current activities

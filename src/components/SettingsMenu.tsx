@@ -14,7 +14,7 @@ import {
   useChangeLocale,
   useCurrentLocale,
   useScopedI18n,
-} from "../../locales/client";
+} from "@locales/client";
 
 export function SettingsMenu() {
   const t = useScopedI18n("nav");

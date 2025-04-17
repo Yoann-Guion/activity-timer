@@ -10,7 +10,7 @@ import {
   useChangeLocale,
   useCurrentLocale,
   useScopedI18n,
-} from "../../locales/client";
+} from "@locales/client";
 
 export function Navbar() {
   const tNav = useScopedI18n("nav");

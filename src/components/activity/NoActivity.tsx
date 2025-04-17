@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
 import { Button } from "../ui/button";
-import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
+import { useCurrentLocale, useScopedI18n } from "@locales/client";
 
 export default function NoActivity() {
   const tCommon = useScopedI18n("common");

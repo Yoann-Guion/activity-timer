@@ -13,7 +13,7 @@ import {
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { formatMinutes } from "@/lib/utils/time";
 import { formatDate } from "@/lib/utils/date";
-import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
+import { useCurrentLocale, useScopedI18n } from "@locales/client";
 
 interface SessionsTableProps {
   activity: ValidatedActivity;

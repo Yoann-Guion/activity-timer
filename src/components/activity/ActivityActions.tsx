@@ -14,7 +14,7 @@ import {
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { DeleteActivityDialog } from "../dialog/DeleteActivityDialog";
 import { EditActivityDialog } from "../dialog/EditActivityDialog";
-import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
+import { useCurrentLocale, useScopedI18n } from "@locales/client";
 
 interface ActivityActionsProps {
   activity: ValidatedActivity;

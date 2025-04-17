@@ -1,6 +1,11 @@
 import { useActivityStore } from "@/lib/useActivityStore";
 import { getCurrentWeekKey } from "@/lib/utils/date";
 
+/**
+ * Custom hook to get the available weeks for activities.
+ *
+ * @returns {string[]} - An array of week keys where activities were archived.
+ */
 export function useAvailableWeeks(): string[] {
   const weeklyHistory = useActivityStore((state) => state.weeklyHistory || []);
   const currentWeekKey = getCurrentWeekKey();

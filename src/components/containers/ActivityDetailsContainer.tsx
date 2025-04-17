@@ -19,7 +19,7 @@ export default function ActivityDetailsContainer() {
   // State for the percentage of the progress bar
   const [percentage, setPercentage] = useState(0);
 
-  //
+  // Fetch the summary of the selected week
   const { activities } = useWeeklySummary(selectedWeek);
 
   // Get the activity id from the URL

@@ -1,7 +1,7 @@
 "use client";
 
 import { ScrollText } from "lucide-react";
-import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
+import { useCurrentLocale, useScopedI18n } from "@locales/client";
 
 export default function LegalContainer() {
   const t = useScopedI18n("pages.legal");
