@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { IActivity } from "@/@types/activity";
-import { formatMinutes } from "@/lib/utils";
-import { useScopedI18n } from "../../../locales/client";
+import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
+import { formatMinutes } from "@/lib/utils/time";
+import { useScopedI18n } from "@locales/client";
 
 interface TotalTimeDisplayProps {
-  activities: IActivity[];
+  activities: ValidatedActivity[];
 }
 
 export default function TotalTimeDisplay({

@@ -4,10 +4,16 @@ import ActivitiesOverview from "../cards/ActivitiesOverview";
 import AchievedGoals from "../cards/AchievedGoals";
 import TotalTimeDisplay from "../cards/TotalTimeDisplay";
 import NoActivity from "../activity/NoActivity";
-import { useActivityStore } from "@/lib/useActivityStore";
+import { useWeeklySummary } from "@/hooks/useWeeklyHistory";
 
-export default function OverviewContainer() {
-  const { activities } = useActivityStore();
+interface OverviewContainerProps {
+  selectedWeek: string;
+}
+
+export default function OverviewContainer({
+  selectedWeek,
+}: OverviewContainerProps) {
+  const { activities } = useWeeklySummary(selectedWeek);
 
   return (
     <>

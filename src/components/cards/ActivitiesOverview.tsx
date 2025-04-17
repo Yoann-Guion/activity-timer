@@ -7,12 +7,12 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { ActivityActions } from "@/components/activity/ActivityActions";
-import { IActivity } from "@/@types/activity";
-import { formatMinutes } from "@/lib/utils";
-import { useScopedI18n } from "../../../locales/client";
+import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
+import { formatMinutes } from "@/lib/utils/time";
+import { useScopedI18n } from "@locales/client";
 
 interface ActivitiesOverviewProps {
-  activities: IActivity[];
+  activities: ValidatedActivity[];
 }
 
 export default function ActivitiesOverview({
@@ -48,7 +48,7 @@ export default function ActivitiesOverview({
                   </div>
 
                   <span className="text-sm">
-                    {formatMinutes(activity.weeklyProgress)} /
+                    {formatMinutes(activity.weeklyProgress)} / &nbsp;
                     {formatMinutes(activity.weeklyGoal)}
                   </span>
                 </div>

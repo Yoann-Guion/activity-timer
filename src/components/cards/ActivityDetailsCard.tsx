@@ -1,29 +1,38 @@
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
-import { IActivity } from "@/@types/activity";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Play } from "lucide-react";
+import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { ActivityActions } from "../activity/ActivityActions";
 import { SessionsTable } from "../activity/SessionsTable";
-import { Play } from "lucide-react";
-import Link from "next/link";
-import {
-  useCurrentLocale,
-  useI18n,
-  useScopedI18n,
-} from "../../../locales/client";
-import { formatDate, formatMinutes } from "@/lib/utils";
+import { formatMinutes } from "@/lib/utils/time";
+import { formatDate, formatWeekRange } from "@/lib/utils/date";
 import { useActivityStore } from "@/lib/useActivityStore";
+import { useAvailableWeeksForActivity } from "@/hooks/useAvailableWeeksForActivity";
+import { useCurrentLocale, useI18n, useScopedI18n } from "@locales/client";
 
 interface ActivityDetailsCardProps {
-  activity: IActivity;
+  activity: ValidatedActivity;
   percentage: number;
+  selectedWeek: string;
+  setSelectedWeek: (weekKey: string) => void;
 }
 
 export default function ActivityDetailsCard({
   activity,
   percentage,
+  selectedWeek,
+  setSelectedWeek,
 }: ActivityDetailsCardProps) {
   const router = useRouter();
   const currentLocale = useCurrentLocale();
@@ -31,6 +40,9 @@ export default function ActivityDetailsCard({
   const tDetails = useScopedI18n("pages.details");
 
   const { activeTimer, startTimer } = useActivityStore();
+
+  // Get a list of available weeks
+  const weeks = useAvailableWeeksForActivity(activity.id);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -89,6 +101,7 @@ export default function ActivityDetailsCard({
                 <h3 className="text-lg font-medium">
                   {tDetails("sessionHistory")}
                 </h3>
+
                 <Button
                   onClick={() => {
                     if (activeTimer) {
@@ -118,6 +131,23 @@ export default function ActivityDetailsCard({
                   <Play className="mr-2 h-4 w-4" />
                   {t("common.actions.start")}
                 </Button>
+              </div>
+
+              <div className="mb-2">
+                <Select value={selectedWeek} onValueChange={setSelectedWeek}>
+                  <SelectTrigger className="w-full md:w-80">
+                    <SelectValue
+                      placeholder={t("pages.summary.inputPlaceholder")}
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {weeks.map((weekKey) => (
+                      <SelectItem key={weekKey} value={weekKey}>
+                        {formatWeekRange(weekKey, currentLocale)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <SessionsTable activity={activity} />
