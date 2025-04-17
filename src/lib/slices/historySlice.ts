@@ -5,7 +5,11 @@ import {
 } from "../validation/history/history.types";
 import { weeklyHistoryEntrySchema } from "../validation/history/history.schemas";
 import { ValidatedActivity } from "../validation/activity/activity.types";
-import { getWeekEndDate, getWeekNumber, getWeekStartDate } from "../utils/date";
+import {
+  getCurrentWeekKey,
+  getWeekEndDate,
+  getWeekStartDate,
+} from "../utils/date";
 
 /**
  * Creates the history slice for the Zustand store
@@ -26,13 +30,10 @@ export const createHistorySlice: StateCreator<
   saveWeekToHistory: () => {
     const { activities } = get();
 
-    // Si pas d'activités, on ne sauvegarde rien
+    // If there are no activities, do not proceed
     if (!activities || activities.length === 0) return;
 
-    const now = new Date();
-    const weekNumber = getWeekNumber(now);
-    const year = now.getFullYear();
-    const weekKey = `${year}-W${weekNumber}`;
+    const weekKey = getCurrentWeekKey();
     const startDate = getWeekStartDate().toISOString();
     const endDate = getWeekEndDate().toISOString();
 

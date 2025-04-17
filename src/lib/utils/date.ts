@@ -81,8 +81,19 @@ export function getWeekNumber(date: Date): number {
 }
 
 /**
+ * Gets the current week key in the format YYYY-WWW
+ * @returns string - Current week key (ex: "2025-W16")
+ */
+export function getCurrentWeekKey(): string {
+  const now = new Date();
+  const weekNumber = getWeekNumber(now);
+  const year = now.getFullYear();
+  return `${year}-W${weekNumber}`;
+}
+
+/**
  * Function to get the year and week number from a week key
- * @param weekKey - The week key in the format "2025-W16"
+ * @param weekKey - The week key in the format "YYYY-WWW" (ex: "2025-W16")
  * @returns { year: number, weekNumber: number }
  */
 export function getWeekInfoFromKey(weekKey: string) {
@@ -91,4 +102,88 @@ export function getWeekInfoFromKey(weekKey: string) {
     year: Number(yearStr),
     weekNumber: Number(weekStr),
   };
+}
+
+/**
+ * Gets the start and end dates for a specific week key
+ * @param weekKey - The week key in the format "YYYY-WWW"
+ * @returns { start: Date, end: Date }
+ */
+export function getWeekDatesFromKey(weekKey: string): {
+  start: Date;
+  end: Date;
+} {
+  const { year, weekNumber } = getWeekInfoFromKey(weekKey);
+
+  const januaryFirst = new Date(year, 0, 1);
+  const dayOfWeek = januaryFirst.getDay() || 7;
+  const firstMonday = new Date(year, 0, 1 + (8 - dayOfWeek));
+
+  const startDate = new Date(firstMonday);
+  startDate.setDate(firstMonday.getDate() + (weekNumber - 1) * 7);
+
+  const endDate = new Date(startDate);
+  endDate.setDate(startDate.getDate() + 6);
+
+  return { start: startDate, end: endDate };
+}
+
+/**
+ * Formats a week range in a user-friendly way
+ * @param weekKey - The week key in the format "YYYY-WWW"
+ * @param locale - The locale for formatting ('fr' for French, 'en' for English)
+ * @returns Formatted week range string
+ */
+export function formatWeekRange(weekKey: string, locale: string): string {
+  const weekNumber = parseInt(weekKey.split("-W")[1]);
+  const { start, end } = getWeekDatesFromKey(weekKey);
+
+  const sameMonth = start.getMonth() === end.getMonth();
+
+  if (locale === "fr") {
+    const dateFormatter = new Intl.DateTimeFormat("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
+    const fullEndDate = dateFormatter.format(end);
+    const fullStartDate = sameMonth
+      ? start.getDate().toString()
+      : dateFormatter.format(start).replace(` ${start.getFullYear()}`, "");
+
+    return `du ${fullStartDate} au ${fullEndDate} (semaine ${weekNumber})`;
+  } else {
+    const monthYearFormatter = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+      year: "numeric",
+    });
+
+    const dayFormatter = new Intl.DateTimeFormat("en-US", {
+      day: "numeric",
+    });
+
+    const monthFormatter = new Intl.DateTimeFormat("en-US", {
+      month: "long",
+    });
+
+    if (sameMonth) {
+      // Same month : "April 21-27, 2025 (week 17)"
+      const monthYear = monthYearFormatter.format(start);
+      const startDay = dayFormatter.format(start);
+      const endDay = dayFormatter.format(end);
+
+      return `${
+        monthYear.split(" ")[0]
+      } ${startDay} - ${endDay}, ${start.getFullYear()} (week ${weekNumber})`;
+    } else {
+      // Different months : "April 28 - May 4, 2025 (week 18)"
+      const startMonth = monthFormatter.format(start);
+      const startDay = dayFormatter.format(start);
+      const endMonth = monthFormatter.format(end);
+      const endDay = dayFormatter.format(end);
+
+      return `${startMonth} ${startDay} - ${endMonth} ${endDay}, ${end.getFullYear()} (week ${weekNumber})`;
+    }
+  }
 }

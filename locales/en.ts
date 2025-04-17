@@ -133,7 +133,8 @@ export default {
     // Summary page
     summary: {
       title: "Weekly Summary",
-      currentWeek: "Current week",
+      currentWeek: "Current week : ",
+      selectedWeek: "Selected week : ",
       dateRange: "from {start} to {end}",
       overview: {
         title: "Overview",
