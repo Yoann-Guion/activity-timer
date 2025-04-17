@@ -1,8 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Ellipsis, Info, FilePen, Trash2 } from "lucide-react";
-import { IActivity } from "@/@types/activity";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -10,12 +11,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { DeleteActivityDialog } from "../dialog/DeleteActivityDialog";
 import { EditActivityDialog } from "../dialog/EditActivityDialog";
-import { useCurrentLocale, useScopedI18n } from "../../../locales/client";
+import { useCurrentLocale, useScopedI18n } from "@locales/client";
 
 interface ActivityActionsProps {
-  activity: IActivity;
+  activity: ValidatedActivity;
   compact?: boolean; // Indicates if the component should be in compact mode
 }
 

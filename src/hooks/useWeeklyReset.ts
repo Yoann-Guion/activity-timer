@@ -1,7 +1,7 @@
 // hooks/useWeeklyReset.ts
 import { useEffect } from "react";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { getWeekNumber } from "@/lib/utils";
+import { getWeekNumber } from "@/lib/utils/date";
 
 // Hook to reset weekly progress
 export function useWeeklyReset() {

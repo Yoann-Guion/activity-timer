@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
-import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { TransitionProvider } from "@/components/animation/TransitionProvider";
-import { I18nProviderClient } from "../../../locales/client";
 import { Navbar } from "@/components/Navbar";
 import WeeklyResetManager from "@/components/activity/WeeklyResetManager";
+import { I18nProviderClient } from "@locales/client";
 import "./globals.css";
+import { Geist, Geist_Mono } from "next/font/google";
 
 const geistSans = Geist({
   weight: "400",
   style: "normal",
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -21,6 +22,7 @@ const geistMono = Geist_Mono({
   style: "normal",
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

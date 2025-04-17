@@ -1,6 +1,3 @@
-import { Description } from "@radix-ui/react-dialog";
-import { access, link } from "fs";
-
 export default {
   // Common reusable elements
   common: {
@@ -55,7 +52,7 @@ export default {
       title: "Mes activités",
       newActivity: "Nouvelle activité",
       createFirst: "Créer ma première activité",
-      weeklyProgress: "Progression hebdomadaire",
+      weeklyProgress: "Progression hebdo",
       timerAlreadyRunning: {
         title:
           "Un chronomètre est déjà en cours. Veuillez l'arrêter avant d'en démarrer un nouveau.",
@@ -95,6 +92,10 @@ export default {
           title: "Veuillez remplir l'objectif hebdomadaire",
           description: "L'objectif hebdomadaire doit être supérieur à 0",
         },
+        validationError: {
+          title: "Création impossible",
+          description: "Merci de vérifier les informations saisies.",
+        },
       },
     },
 
@@ -133,7 +134,9 @@ export default {
     // Summary page
     summary: {
       title: "Résumé Hebdomadaire",
-      currentWeek: "Semaine en cours",
+      currentWeek: "Semaine en cours : ",
+      selectedWeek: "Semaine sélectionnée : ",
+      inputPlaceholder: "Sélectionner une semaine",
       dateRange: "du {start} au {end}",
       overview: {
         title: "Vue d'ensemble",

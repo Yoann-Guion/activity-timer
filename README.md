@@ -8,18 +8,22 @@
 
 Activity Timer est une application web permettant de suivre et gérer ses activités avec un objectif hebdomadaire. Elle offre un suivi précis du temps passé sur chaque activité et permet d'ajouter, modifier et supprimer des entrées facilement.
 
+🔗 [Voir l'application en ligne](https://activity-timer.vercel.app)
+
 ### Fonctionnalités
 - 🎯 Création d'activités avec un objectif hebdomadaire (en heures et minutes)
 - ⏱️ Chronomètre intégré pour suivre le temps passé
-- 📊 Affichage de la progression hebdomadaire sous forme de barre de progression
-- 🎨 Personnalisation de chaque activité avec une couleur unique
+- 📊 Visualisation de la progression via une barre de progression hebdomadaire
+- 🗓️ Historique hebdomadaire des activités accessible dans un résumé dédié
+- 🎨 Personnalisation des activités par couleur
 - 🌗 Mode sombre/clair
 - 🌍 Support multilingue (français/anglais)
-- 📌 Stockage des activités via Zustand (bientôt persisté dans `localStorage`)
+- 📌 Stockage des activités via Zustand et persistance dans le localStorage
 
 ### Technologies utilisées
 - **Frontend** : Next.js, TypeScript, Zustand
 - **UI** : ShadCN/UI, Tailwind CSS
+- **Validation** : Zod
 - **Internationalisation** : i18n
 
 ### Installation et utilisation
@@ -46,19 +50,22 @@ pnpm dev
 Accède à l'application sur `http://localhost:3000`.
 
 ### Contribution
-Je travaille seul sur ce projet mais les contributions sont les bienvenues !  
-Vous pouvez proposer des améliorations via pull request ou ouvrir des issues pour signaler des bugs
+Je développe ce projet en solo dans le cadre de mon portfolio, mais les contributions sont les bienvenues !
+N’hésitez pas à ouvrir une issue ou une pull request pour proposer des idées, corriger un bug ou améliorer une fonctionnalité.
 
 ### TODO
-- [ ] Persistance des activités via `localStorage`
-- [ ] Amélioration du design des cartes avec possibilité de modifier les activités
-- [ ] Ajout d'un mode statistiques avancées pour garder en mémoire les précédentes semaines
+- [x] Persistance des activités via `localStorage`
+- [x] Design amélioré des cartes avec possibilité d’éditer et de supprimer les activités
+- [x] Sauvegarde hebdomadaire des objectifs atteints
+- [x] Affichage des objectifs des semaines précédentes dans la vue de résumé ainsi que dans le détail d'une activité
+- [ ] Amélioration de l'accessiblité
 - [ ] Ajout d'un guide d'utilisation (onBoarding) à la première connexion 
 
 #### Et pour la suite
-- [ ] Possiblité de s'authentifier
+- [ ] Possibilité de s'authentifier
 - [ ] Sauvegarde des activités en base de données pour permettre un accès sur plusieurs appareils
-- [ ] Pouvoir choisir sa progression : journalière / hebdomadaire / mensuelle...
+- [ ] Pouvoir choisir sa progression : journalière / hebdomadaire / mensuelle...  
+...Et j’ai encore plein d’idées en tête pour améliorer l’application au fil du temps
 
 ## Licence
 
@@ -70,31 +77,37 @@ Ce projet est open source et disponible sous la [licence MIT](./LICENSE).
 
 ## English
 
-## Description
-Activity Timer is a web application that allows users to track and manage their activities with a weekly goal. It provides precise tracking of time spent on each activity and enables easy addition, modification, and deletion of entries.
+### Description
 
-## Features
+Activity Timer is a web application that helps you track and manage your weekly activity goals. It offers accurate time tracking for each activity, with an easy interface to add, edit, or delete entries.
+
+🔗 [View the live application](https://activity-timer.vercel.app)
+
+### Features
 - 🎯 Create activities with a weekly goal (in hours and minutes)
 - ⏱️ Built-in timer to track time spent
-- 📊 Weekly progress display with a progress bar
+- 📊 Weekly progress bar for visual tracking
+- 🗓️ Weekly history view with summaries of past activity goals
 - 🎨 Customize each activity with a unique color
 - 🌗 Light/Dark mode support
 - 🌍 Multilingual support (French/English)
-- 📌 Activity storage using Zustand (soon to be persisted in `localStorage`)
+- 📌 State management with Zustand and localStorage persistence
 
-## Technologies Used
+### Tech Stack
 - **Frontend**: Next.js, TypeScript, Zustand
 - **UI**: ShadCN/UI, Tailwind CSS
+- **Validation**: Zod
 - **Internationalization**: i18n
 
-## Installation & Usage
-### Prerequisites
+### Installation & Usage
+#### Prerequisites
 - Node.js (v18+ recommended)
 - pnpm (or npm/yarn)
 
-### Installation
+#### Installation
+
 ```sh
-# Clone the project
+# Clone the repository
 git clone https://github.com/Yoann-Guion/activity-timer.git 
 # or
 git clone git@github.com:Yoann-Guion/activity-timer.git
@@ -104,33 +117,32 @@ cd activity-timer
 pnpm install
 ```
 
-### Run the project in development mode
+#### Start the development server
 ```sh
 pnpm dev
 ```
-Access the application at `http://localhost:3000`.
 
-## Contribution
-I am currently working on this project alone, but contributions are more than welcome!  
-You can suggest improvements via pull requests or open issues to report bugs.
+Access the app at http://localhost:3000.
 
+### Contributing
 
-## TODO
-- [ ] Persist activities via `localStorage`
-- [ ] Improve card design with editing functionality
-- [ ] Add an advanced statistics mode to track previous weeks
-- [ ] Implement an onboarding guide for first-time users
+This project is being developed solo as part of my portfolio, but contributions are very welcome!
+Feel free to open an issue or pull request to suggest ideas, fix bugs, or improve features.
 
-### Future Plans
-- [ ] Implement user authentication
-- [ ] Store activities in a database to allow multi-device access
-- [ ] Choose your progress: daily / weekly / monthly...
+### TODO
+- [x] Persist activities via localStorage
+- [x] Improved card design with edit/delete options
+- [x] Weekly save of completed activity goals
+- [x] Display past weeks' goals in the summary and activity detail views
+- [ ] Improve accessibility
+- [ ] Add a first-time onboarding guide
 
-## License
+### Coming next
+- [ ] User authentication
+- [ ] Store activities in a database to sync across devices
+- [ ] Choose goal frequency: daily / weekly / monthly
+...And I still have plenty of ideas to improve the app over time!
 
-This project is open source and available under the [MIT License](./LICENSE).  
+### License
 
-
-
-
-
+This project is open source and available under the MIT license.
