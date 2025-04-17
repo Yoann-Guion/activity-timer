@@ -40,7 +40,7 @@ export default function SummaryTitle({
         </p>
 
         <Select value={selectedWeek} onValueChange={setSelectedWeek}>
-          <SelectTrigger className="">
+          <SelectTrigger>
             <SelectValue placeholder="Choisir une semaine" />
           </SelectTrigger>
           <SelectContent>

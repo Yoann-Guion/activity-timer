@@ -13,7 +13,6 @@ interface OverviewContainerProps {
 export default function OverviewContainer({
   selectedWeek,
 }: OverviewContainerProps) {
-  // const { activities } = useActivityStore();
   const { activities } = useWeeklySummary(selectedWeek);
 
   return (

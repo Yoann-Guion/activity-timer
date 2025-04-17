@@ -4,19 +4,23 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
-import { useActivityStore } from "@/lib/useActivityStore";
 import NoActivity from "../activity/NoActivity";
 import ActivityDetailsCard from "../cards/ActivityDetailsCard";
+import { getCurrentWeekKey } from "@/lib/utils/date";
+import { useWeeklySummary } from "@/hooks/useWeeklyHistory";
 
 export default function ActivityDetailsContainer() {
   const params = useParams();
 
-  const { activities } = useActivityStore();
-
+  // State to manage the selected week
+  const [selectedWeek, setSelectedWeek] = useState(getCurrentWeekKey());
   // State for the activity
   const [activity, setActivity] = useState<ValidatedActivity | null>(null);
   // State for the percentage of the progress bar
   const [percentage, setPercentage] = useState(0);
+
+  //
+  const { activities } = useWeeklySummary(selectedWeek);
 
   // Get the activity id from the URL
   const activityId = params.activityId as string;
@@ -45,7 +49,12 @@ export default function ActivityDetailsContainer() {
       {!activity ? (
         <NoActivity />
       ) : (
-        <ActivityDetailsCard activity={activity} percentage={percentage} />
+        <ActivityDetailsCard
+          activity={activity}
+          percentage={percentage}
+          selectedWeek={selectedWeek}
+          setSelectedWeek={setSelectedWeek}
+        />
       )}
     </>
   );
