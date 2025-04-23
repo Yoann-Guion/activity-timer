@@ -32,16 +32,39 @@ export default {
     },
   },
 
+  accessibility: {
+    weekSelector: {
+      weekSelector: "Week selector",
+      selectWeekButton: "Select a week",
+      selectedWeekLabel: "Selected week",
+      availableWeeks: "Available weeks",
+      currentWeekLabel: "Current week",
+    },
+  },
+
   // Navigation
   nav: {
     home: "Home",
-    add: "Add",
+    add: "New Activity",
     timer: "Timer",
     summary: "Summary",
     legal: "Legal Notices",
     srOnly: {
+      home: "Go to home page",
+      add: "Add a new activity",
+      timer: "Access the timer",
+      summary: "View activity summary",
+      mainNavigation: "Main navigation",
+      navigationMenu: "Navigation menu",
+      preferencesSection: "Display preferences and language",
+      languageSelection: "Change language",
       theme: "Change theme",
-      language: "Change language",
+      openSettings: "Open settings menu",
+      settingsMenu: "Settings menu",
+      settingsOptions: "Display preferences, language, and legal notices",
+      switchToLight: "Switch to light mode",
+      switchToDark: "Switch to dark mode",
+      legalPageLink: "View legal notices",
     },
   },
 

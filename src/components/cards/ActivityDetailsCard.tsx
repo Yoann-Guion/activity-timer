@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -7,7 +8,9 @@ import { Button } from "../ui/button";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
@@ -16,7 +19,11 @@ import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { ActivityActions } from "../activity/ActivityActions";
 import { SessionsTable } from "../activity/SessionsTable";
 import { formatMinutes } from "@/lib/utils/time";
-import { formatDate, formatWeekRange } from "@/lib/utils/date";
+import {
+  formatDate,
+  formatWeekRange,
+  getCurrentWeekKey,
+} from "@/lib/utils/date";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { useAvailableWeeksForActivity } from "@/hooks/useAvailableWeeksForActivity";
 import { useCurrentLocale, useI18n, useScopedI18n } from "@locales/client";
@@ -38,18 +45,25 @@ export default function ActivityDetailsCard({
   const currentLocale = useCurrentLocale();
   const t = useI18n();
   const tDetails = useScopedI18n("pages.details");
+  const tA11y = useScopedI18n("accessibility.weekSelector");
 
   const { activeTimer, startTimer } = useActivityStore();
 
   // Get a list of available weeks
   const weeks = useAvailableWeeksForActivity(activity.id);
 
+  const currentWeekKey = useMemo(() => getCurrentWeekKey(), []);
+  const selectedWeekText = useMemo(() => {
+    return formatWeekRange(selectedWeek, currentLocale);
+  }, [selectedWeek, currentLocale]);
+
   return (
     <div className="max-w-4xl mx-auto">
-      <Card className="relative overflow-hidden">
+      <Card className="relative overflow-hidden" role="region">
         <div
           className="absolute top-0 left-0 w-full h-2.5"
           style={{ backgroundColor: activity.color }}
+          aria-hidden="true"
         />
         <CardHeader className="pt-1 flex justify-between items-center">
           <CardTitle className="flex gap-2">
@@ -75,8 +89,17 @@ export default function ActivityDetailsCard({
                   {formatMinutes(activity.weeklyGoal)}
                 </span>
               </div>
-              <Progress value={percentage} className="h-2" />
-              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+              <Progress
+                value={percentage}
+                className="h-2"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={percentage}
+              />
+              <div
+                className="flex justify-between text-xs text-muted-foreground mt-1"
+                aria-live="polite"
+              >
                 <span>
                   {percentage >= 100
                     ? t("pages.summary.goalReached")
@@ -127,30 +150,71 @@ export default function ActivityDetailsCard({
                     router.push(`/${currentLocale}/timer`);
                   }}
                   size="sm"
+                  aria-label={`${t("common.actions.start")} ${activity.name}`}
                 >
-                  <Play className="mr-2 h-4 w-4" />
+                  <Play className="mr-2 h-4 w-4" aria-hidden="true" />
                   {t("common.actions.start")}
                 </Button>
               </div>
 
               <div className="mb-2">
-                <Select value={selectedWeek} onValueChange={setSelectedWeek}>
-                  <SelectTrigger className="w-full md:w-80">
+                <Select
+                  value={selectedWeek}
+                  onValueChange={setSelectedWeek}
+                  aria-label={tA11y("weekSelector")}
+                  aria-describedby="week-status"
+                >
+                  <SelectTrigger
+                    className="w-full md:w-80"
+                    aria-label={tA11y("selectWeekButton")}
+                  >
                     <SelectValue
                       placeholder={t("pages.summary.inputPlaceholder")}
+                      aria-label={`${tA11y(
+                        "selectedWeekLabel"
+                      )}: ${selectedWeekText}`}
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    {weeks.map((weekKey) => (
-                      <SelectItem key={weekKey} value={weekKey}>
-                        {formatWeekRange(weekKey, currentLocale)}
-                      </SelectItem>
-                    ))}
+                    <SelectGroup>
+                      <SelectLabel>{tA11y("availableWeeks")}</SelectLabel>
+                      {weeks.map((weekKey) => {
+                        const formattedWeek = formatWeekRange(
+                          weekKey,
+                          currentLocale
+                        );
+                        const isCurrent = weekKey === currentWeekKey;
+                        return (
+                          <SelectItem
+                            key={weekKey}
+                            value={weekKey}
+                            aria-label={
+                              isCurrent
+                                ? `${formattedWeek} (${tA11y(
+                                    "currentWeekLabel"
+                                  )})`
+                                : formattedWeek
+                            }
+                            aria-current={isCurrent ? "date" : undefined}
+                          >
+                            {formattedWeek}
+
+                            {isCurrent && (
+                              <span className="sr-only">
+                                ({tA11y("currentWeekLabel")})
+                              </span>
+                            )}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectGroup>
                   </SelectContent>
                 </Select>
               </div>
 
-              <SessionsTable activity={activity} />
+              <div aria-labelledby={`sessions-heading-${activity.name}`}>
+                <SessionsTable activity={activity} />
+              </div>
             </div>
           </div>
         </CardContent>
