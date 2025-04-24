@@ -88,7 +88,7 @@ export function getCurrentWeekKey(): string {
   const now = new Date();
   const weekNumber = getWeekNumber(now);
   const year = now.getFullYear();
-  return `${year}-W${weekNumber}`;
+  return `${year}-W${String(weekNumber).padStart(2, "0")}`;
 }
 
 /**
@@ -96,11 +96,14 @@ export function getCurrentWeekKey(): string {
  * @param weekKey - The week key in the format "YYYY-WWW" (ex: "2025-W16")
  * @returns { year: number, weekNumber: number }
  */
-export function getWeekInfoFromKey(weekKey: string) {
-  const [yearStr, weekStr] = weekKey.split("-W");
+export function getWeekInfoFromKey(weekKey: string): {
+  year: number;
+  weekNumber: number;
+} {
+  const parts = weekKey.split("-W");
   return {
-    year: Number(yearStr),
-    weekNumber: Number(weekStr),
+    year: parseInt(parts[0]),
+    weekNumber: parseInt(parts[1]),
   };
 }
 
@@ -115,17 +118,32 @@ export function getWeekDatesFromKey(weekKey: string): {
 } {
   const { year, weekNumber } = getWeekInfoFromKey(weekKey);
 
-  const januaryFirst = new Date(year, 0, 1);
-  const dayOfWeek = januaryFirst.getDay() || 7;
-  const firstMonday = new Date(year, 0, 1 + (8 - dayOfWeek));
+  // Find the first day of the year
+  const firstDayOfYear = new Date(Date.UTC(year, 0, 1));
 
-  const startDate = new Date(firstMonday);
-  startDate.setDate(firstMonday.getDate() + (weekNumber - 1) * 7);
+  // Find the first Thursday of the year (ISO week date system uses Thursday)
+  const firstThursdayOfYear = new Date(firstDayOfYear);
+  firstThursdayOfYear.setDate(
+    firstThursdayOfYear.getDate() + (4 - firstThursdayOfYear.getDay() || 7)
+  );
 
-  const endDate = new Date(startDate);
-  endDate.setDate(startDate.getDate() + 6);
+  // Calculate the Monday of the first week
+  const firstMondayOfYear = new Date(firstThursdayOfYear);
+  firstMondayOfYear.setDate(firstThursdayOfYear.getDate() - 3);
 
-  return { start: startDate, end: endDate };
+  // Calculate the Monday of the requested week
+  const mondayOfRequestedWeek = new Date(firstMondayOfYear);
+  mondayOfRequestedWeek.setDate(
+    firstMondayOfYear.getDate() + (weekNumber - 1) * 7
+  );
+  mondayOfRequestedWeek.setHours(0, 0, 0, 0);
+
+  // Calculate the Sunday of the requested week
+  const sundayOfRequestedWeek = new Date(mondayOfRequestedWeek);
+  sundayOfRequestedWeek.setDate(mondayOfRequestedWeek.getDate() + 6);
+  sundayOfRequestedWeek.setHours(23, 59, 59, 999);
+
+  return { start: mondayOfRequestedWeek, end: sundayOfRequestedWeek };
 }
 
 /**
