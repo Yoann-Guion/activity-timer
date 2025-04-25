@@ -27,14 +27,6 @@ export const useActivityStore = create<StoreState>()(
         ...createTimerSlice(...a),
         ...createHistorySlice(...a),
       };
-
-      // Override the resetWeeklyProgress method to save the week to history before resetting
-      const originalResetWeeklyProgress = store.resetWeeklyProgress;
-      store.resetWeeklyProgress = () => {
-        store.saveWeekToHistory();
-        originalResetWeeklyProgress();
-      };
-
       return store;
     },
     {

@@ -1,29 +1,37 @@
 // hooks/useWeeklyReset.ts
 import { useEffect } from "react";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { getWeekNumber } from "@/lib/utils/date";
+import { getCurrentWeekKey } from "@/lib/utils/date";
 
 // Hook to reset weekly progress
 export function useWeeklyReset() {
-  const { resetWeeklyProgress } = useActivityStore();
+  const { resetWeeklyProgress, getHistoryForWeek, saveWeekToHistory } =
+    useActivityStore();
 
   useEffect(() => {
     // Retrieve the current week number
-    const now = new Date();
-    const currentWeek = `${now.getFullYear()}-W${getWeekNumber(now)
-      .toString()
-      .padStart(2, "0")}`;
-
+    const currentWeekKey = getCurrentWeekKey();
     // Retrieve the last saved week number from the local storage
-    const lastResetWeek = localStorage.getItem("lastResetWeek");
+    const lastResetWeekKey = localStorage.getItem("lastResetWeekKey");
 
-    // If we've never backed up or if we're in a new week
-    if (!lastResetWeek || lastResetWeek !== currentWeek) {
-      // Reset the weekly progress
+    if (lastResetWeekKey && lastResetWeekKey !== currentWeekKey) {
+      // Check if the previous week's data is already saved
+      const previousWeekHistory = getHistoryForWeek(lastResetWeekKey);
+
+      if (!previousWeekHistory) {
+        // If the previous week's data is not saved, save it
+        saveWeekToHistory(lastResetWeekKey);
+      }
+
+      // Then, reset the weekly progress
       resetWeeklyProgress();
 
-      // Save the current week number in local storage
-      localStorage.setItem("lastResetWeek", currentWeek);
+      // Update the last reset week in local storage
+      localStorage.setItem("lastResetWeekKey", currentWeekKey);
     }
-  }, [resetWeeklyProgress]);
+    // If the last reset week is not set, it means it's the first run of the app
+    else if (!lastResetWeekKey) {
+      localStorage.setItem("lastResetWeekKey", currentWeekKey);
+    }
+  }, [resetWeeklyProgress, saveWeekToHistory, getHistoryForWeek]);
 }

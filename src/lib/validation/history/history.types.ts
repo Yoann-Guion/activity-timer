@@ -19,7 +19,7 @@ export interface HistorySliceState {
   weeklyHistory: ValidatedWeeklyHistory;
 
   // Actions
-  saveWeekToHistory: () => void;
+  saveWeekToHistory: (lastResetWeekKey: string) => void;
   getHistoryForWeek: (
     weekKey: string
   ) => ValidatedWeeklyHistoryEntry | undefined;
