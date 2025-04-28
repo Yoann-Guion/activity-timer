@@ -51,12 +51,24 @@ export const createHistorySlice: StateCreator<
         JSON.stringify(activities)
       );
 
+      // Process activities to convert date strings to Date objects
+      const processedActivities = activitiesCopy.map((activity) => ({
+        ...activity,
+        createdAt: new Date(activity.createdAt),
+        sessions:
+          activity.sessions?.map((session) => ({
+            ...session,
+            startTime: new Date(session.startTime),
+            endTime: new Date(session.endTime),
+          })) || [],
+      }));
+
       // Creating and validating the history entry with Zod
       const historyEntry = weeklyHistoryEntrySchema.parse({
         weekKey,
         startDate,
         endDate,
-        activities: activitiesCopy,
+        activities: processedActivities,
       });
 
       set((state) => ({
