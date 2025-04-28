@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Play } from "lucide-react";
+import { Play, RotateCw } from "lucide-react";
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { ActivityActions } from "../activity/ActivityActions";
 import { SessionsTable } from "../activity/SessionsTable";
@@ -152,8 +152,17 @@ export default function ActivityDetailsCard({
                   size="sm"
                   aria-label={`${t("common.actions.start")} ${activity.name}`}
                 >
-                  <Play className="mr-2 h-4 w-4" aria-hidden="true" />
-                  {t("common.actions.start")}
+                  {activeTimer?.activityId === activity.id ? (
+                    <>
+                      <RotateCw className="mr-2 h-4 w-4 animate-spin" />
+                      {t("common.actions.inProgress")}
+                    </>
+                  ) : (
+                    <>
+                      <Play className="mr-2 h-4 w-4" />
+                      {t("common.actions.start")}
+                    </>
+                  )}
                 </Button>
               </div>
 

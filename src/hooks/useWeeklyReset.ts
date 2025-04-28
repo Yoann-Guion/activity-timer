@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { getCurrentWeekKey } from "@/lib/utils/date";
 
-// Hook to reset weekly progress
+// Hook to reset weekly progress and save the previous week's data
 export function useWeeklyReset() {
   const { resetWeeklyProgress, getHistoryForWeek, saveWeekToHistory } =
     useActivityStore();

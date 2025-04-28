@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Play } from "lucide-react";
+import { Hourglass, Play, RotateCw } from "lucide-react";
 
 import { Button } from "../ui/button";
 import {
@@ -23,6 +23,7 @@ import { useCurrentLocale, useScopedI18n } from "@locales/client";
 export default function ActivitiesList() {
   const router = useRouter();
   const tHome = useScopedI18n("pages.home");
+  const tCommon = useScopedI18n("common.actions");
   const currentLocale = useCurrentLocale();
 
   const { activities, startTimer, activeTimer } = useActivityStore();
@@ -94,8 +95,17 @@ export default function ActivitiesList() {
                     router.push(`/${currentLocale}/timer`);
                   }}
                 >
-                  <Play className="mr-2 h-4 w-4" />
-                  Démarrer
+                  {activeTimer?.activityId === activity.id ? (
+                    <>
+                      <RotateCw className="mr-2 h-4 w-4 animate-spin" />
+                      {tCommon("inProgress")}
+                    </>
+                  ) : (
+                    <>
+                      <Play className="mr-2 h-4 w-4" />
+                      {tCommon("start")}
+                    </>
+                  )}
                 </Button>
               </CardFooter>
             </Card>

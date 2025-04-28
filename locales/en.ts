@@ -20,6 +20,7 @@ export default {
       details: "Details",
       edit: "Edit",
       delete: "Delete",
+      inProgress: "In progress",
     },
     emptyState: {
       noActivities: "No activities yet",
