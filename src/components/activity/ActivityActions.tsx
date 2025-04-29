@@ -41,17 +41,7 @@ export function ActivityActions({
   const renderDetailsLink = () => {
     if (isDetailPage) return null;
 
-    return compact ? (
-      <DropdownMenuItem asChild>
-        <Link
-          href={`/${currentLocale}/activity/${activity.id}`}
-          className="flex items-center"
-        >
-          <Info className="mr-2 h-4 w-4" />
-          <span>{tActions("details")}</span>
-        </Link>
-      </DropdownMenuItem>
-    ) : (
+    return compact ? null : (
       <Link
         href={`/${currentLocale}/activity/${activity.id}`}
         className="text-gray-400 hover:text-blue-500 transition-colors"
