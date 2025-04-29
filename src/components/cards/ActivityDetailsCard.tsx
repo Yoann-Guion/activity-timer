@@ -66,7 +66,7 @@ export default function ActivityDetailsCard({
           aria-hidden="true"
         />
         <CardHeader className="pt-1 flex justify-between items-center">
-          <CardTitle className="flex gap-2">
+          <CardTitle className="flex gap-2 my-1">
             {activity.name}
             <div className="text-xs text-muted-foreground pt-0.5">
               {tDetails("createdAt")}
@@ -75,7 +75,9 @@ export default function ActivityDetailsCard({
           </CardTitle>
           <div className="flex items-end space-x-2">
             <div className="ml-2">
-              <ActivityActions activity={activity} />
+              {selectedWeek === currentWeekKey && (
+                <ActivityActions activity={activity} />
+              )}
             </div>
           </div>
         </CardHeader>
