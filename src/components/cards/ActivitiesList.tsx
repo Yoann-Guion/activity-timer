@@ -19,6 +19,8 @@ import { ActivityActions } from "../activity/ActivityActions";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { formatMinutes } from "@/lib/utils/time";
 import { useCurrentLocale, useScopedI18n } from "@locales/client";
+import { ActivityCardSkeleton } from "../skeleton/ActivityCardSkeleton";
+import { useEffect, useState } from "react";
 
 export default function ActivitiesList() {
   const router = useRouter();
@@ -26,9 +28,29 @@ export default function ActivitiesList() {
   const tCommon = useScopedI18n("common.actions");
   const currentLocale = useCurrentLocale();
 
-  const { activities, startTimer, activeTimer } = useActivityStore();
+  const [isLoading, setIsLoading] = useState(true);
 
-  return (
+  const { activities, startTimer, activeTimer, isRehydrated } =
+    useActivityStore();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 250);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  console.log(isRehydrated);
+
+  return !isRehydrated ? (
+    <div className="grid gap-4 md:grid-cols-2">
+      <ActivityCardSkeleton />
+      <ActivityCardSkeleton />
+      <ActivityCardSkeleton />
+      <ActivityCardSkeleton />
+    </div>
+  ) : (
     <>
       {activities.length === 0 ? (
         <NoActivity />

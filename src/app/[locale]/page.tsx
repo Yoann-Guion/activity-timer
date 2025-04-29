@@ -1,6 +1,7 @@
 import { PageTransition } from "@/components/animation/PageTransition";
 import MainTitle from "@/components/title/MainTitle";
 import ActivitiesList from "@/components/cards/ActivitiesList";
+import { ActivityCardSkeleton } from "@/components/skeleton/ActivityCardSkeleton";
 
 export default function HomePage() {
   return (
