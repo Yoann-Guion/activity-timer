@@ -1,9 +1,20 @@
-import { weeklyHistorySchema } from "./history.schemas";
+import { z } from "zod";
+import { weekKeySchema, weeklyHistorySchema } from "./history.schemas";
 import {
   HistoryActivityFromStorage,
   ValidatedWeeklyHistory,
 } from "./history.types";
 
+export function validateWeekKey(
+  weekKey: string | string[] | null | undefined
+): z.infer<typeof weekKeySchema> | null {
+  if (!weekKey) return null;
+
+  const key = typeof weekKey === "string" ? weekKey : weekKey.join("-");
+
+  const result = weekKeySchema.safeParse(key);
+  return result.success ? result.data : null;
+}
 /**
  * Validates the weekly history data from local storage.
  * @param historyData - Data to validate retrieved from local storage.

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import {
+  weekKeySchema,
   weeklyHistoryEntrySchema,
   weeklyHistorySchema,
 } from "./history.schemas";
@@ -14,6 +15,8 @@ export type ValidatedWeeklyHistoryEntry = z.infer<
   typeof weeklyHistoryEntrySchema
 >;
 export type ValidatedWeeklyHistory = z.infer<typeof weeklyHistorySchema>;
+
+export type WeekKey = z.infer<typeof weekKeySchema>;
 
 export interface HistorySliceState {
   weeklyHistory: ValidatedWeeklyHistory;

@@ -43,7 +43,7 @@ export default function ActivitiesOverview({
             );
             return (
               <Link
-                href={`/${currentLocale}/activity/${activity.id}`}
+                href={`/${currentLocale}/activity/${activity.id}/${selectedWeek}`}
                 key={activity.id}
                 className="block"
               >
