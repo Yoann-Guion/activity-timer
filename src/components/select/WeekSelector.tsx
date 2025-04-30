@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { useParams } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -13,6 +14,7 @@ import {
 import { formatWeekRange, getCurrentWeekKey } from "@/lib/utils/date";
 import { useCurrentLocale, useI18n, useScopedI18n } from "@locales/client";
 import { useAvailableWeeks } from "@/hooks/useAvailableWeeks";
+import { useAvailableWeeksForActivity } from "@/hooks/useAvailableWeeksForActivity";
 
 interface WeekSelectorProps {
   selectedWeek: string;
@@ -23,6 +25,7 @@ export default function WeekSelector({
   selectedWeek,
   setSelectedWeek,
 }: WeekSelectorProps) {
+  const params = useParams();
   const currentLocale = useCurrentLocale();
   const t = useI18n();
   const tA11y = useScopedI18n("accessibility.weekSelector");
@@ -30,8 +33,12 @@ export default function WeekSelector({
   // Memoize the key for the current week
   const currentWeekKey = useMemo(() => getCurrentWeekKey(), []);
 
+  const { activityId } = params as { activityId: string };
+
   // Get a list of available weeks
-  const weeks = useAvailableWeeks();
+  const weeks = activityId
+    ? useAvailableWeeksForActivity(activityId)
+    : useAvailableWeeks();
 
   const selectedWeekText = useMemo(() => {
     return formatWeekRange(selectedWeek, currentLocale);
