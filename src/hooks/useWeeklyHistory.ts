@@ -31,6 +31,7 @@ export function useWeeklySummary(weekKey: string): {
       }
     }
   );
+
   return {
     isCurrentWeek,
     activities,

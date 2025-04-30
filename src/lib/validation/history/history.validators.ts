@@ -15,6 +15,7 @@ export function validateWeekKey(
   const result = weekKeySchema.safeParse(key);
   return result.success ? result.data : null;
 }
+
 /**
  * Validates the weekly history data from local storage.
  * @param historyData - Data to validate retrieved from local storage.

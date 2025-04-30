@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
@@ -11,7 +10,7 @@ import { ActivityActions } from "../activity/ActivityActions";
 import { SessionsTable } from "../activity/SessionsTable";
 import WeekSelector from "../select/WeekSelector";
 import { formatMinutes } from "@/lib/utils/time";
-import { formatDate, getCurrentWeekKey } from "@/lib/utils/date";
+import { formatDate } from "@/lib/utils/date";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { useCurrentLocale, useI18n, useScopedI18n } from "@locales/client";
 
@@ -34,8 +33,6 @@ export default function ActivityDetailsCard({
   const tDetails = useScopedI18n("pages.details");
 
   const { activeTimer, startTimer } = useActivityStore();
-
-  const currentWeekKey = useMemo(() => getCurrentWeekKey(), []);
 
   return (
     <div className="max-w-4xl mx-auto">
