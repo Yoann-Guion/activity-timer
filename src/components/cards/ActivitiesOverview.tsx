@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -10,7 +11,6 @@ import { ActivityActions } from "@/components/activity/ActivityActions";
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { formatMinutes } from "@/lib/utils/time";
 import { useCurrentLocale, useScopedI18n } from "@locales/client";
-import Link from "next/link";
 
 interface ActivitiesOverviewProps {
   activities: ValidatedActivity[];

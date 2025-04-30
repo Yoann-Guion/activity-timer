@@ -5,27 +5,14 @@ import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import { Play, RotateCw } from "lucide-react";
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { ActivityActions } from "../activity/ActivityActions";
 import { SessionsTable } from "../activity/SessionsTable";
+import WeekSelector from "../select/WeekSelector";
 import { formatMinutes } from "@/lib/utils/time";
-import {
-  formatDate,
-  formatWeekRange,
-  getCurrentWeekKey,
-} from "@/lib/utils/date";
+import { formatDate, getCurrentWeekKey } from "@/lib/utils/date";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { useAvailableWeeksForActivity } from "@/hooks/useAvailableWeeksForActivity";
 import { useCurrentLocale, useI18n, useScopedI18n } from "@locales/client";
 
 interface ActivityDetailsCardProps {
@@ -45,17 +32,10 @@ export default function ActivityDetailsCard({
   const currentLocale = useCurrentLocale();
   const t = useI18n();
   const tDetails = useScopedI18n("pages.details");
-  const tA11y = useScopedI18n("accessibility.weekSelector");
 
   const { activeTimer, startTimer } = useActivityStore();
 
-  // Get a list of available weeks
-  const weeks = useAvailableWeeksForActivity(activity.id);
-
   const currentWeekKey = useMemo(() => getCurrentWeekKey(), []);
-  const selectedWeekText = useMemo(() => {
-    return formatWeekRange(selectedWeek, currentLocale);
-  }, [selectedWeek, currentLocale]);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -170,58 +150,10 @@ export default function ActivityDetailsCard({
               </div>
 
               <div className="mb-2">
-                <Select
-                  value={selectedWeek}
-                  onValueChange={setSelectedWeek}
-                  aria-label={tA11y("weekSelector")}
-                  aria-describedby="week-status"
-                >
-                  <SelectTrigger
-                    className="w-full md:w-80"
-                    aria-label={tA11y("selectWeekButton")}
-                  >
-                    <SelectValue
-                      placeholder={t("pages.summary.inputPlaceholder")}
-                      aria-label={`${tA11y(
-                        "selectedWeekLabel"
-                      )}: ${selectedWeekText}`}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>{tA11y("availableWeeks")}</SelectLabel>
-                      {weeks.map((weekKey) => {
-                        const formattedWeek = formatWeekRange(
-                          weekKey,
-                          currentLocale
-                        );
-                        const isCurrent = weekKey === currentWeekKey;
-                        return (
-                          <SelectItem
-                            key={weekKey}
-                            value={weekKey}
-                            aria-label={
-                              isCurrent
-                                ? `${formattedWeek} (${tA11y(
-                                    "currentWeekLabel"
-                                  )})`
-                                : formattedWeek
-                            }
-                            aria-current={isCurrent ? "date" : undefined}
-                          >
-                            {formattedWeek}
-
-                            {isCurrent && (
-                              <span className="sr-only">
-                                ({tA11y("currentWeekLabel")})
-                              </span>
-                            )}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <WeekSelector
+                  selectedWeek={selectedWeek}
+                  setSelectedWeek={setSelectedWeek}
+                />
               </div>
 
               <div aria-labelledby={`sessions-heading-${activity.name}`}>

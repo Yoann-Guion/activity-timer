@@ -1,18 +1,9 @@
 "use client";
 
 import { useMemo } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { useAvailableWeeks } from "@/hooks/useAvailableWeeks";
-import { formatWeekRange, getCurrentWeekKey } from "@/lib/utils/date";
-import { useCurrentLocale, useScopedI18n } from "@locales/client";
+import { getCurrentWeekKey } from "@/lib/utils/date";
+import { useScopedI18n } from "@locales/client";
+import WeekSelector from "../select/WeekSelector";
 
 interface SummaryTitleProps {
   selectedWeek: string;
@@ -24,19 +15,10 @@ export default function SummaryTitle({
   setSelectedWeek,
 }: SummaryTitleProps) {
   const tSummary = useScopedI18n("pages.summary");
-  const tA11y = useScopedI18n("accessibility.weekSelector");
-  const currentLocale = useCurrentLocale();
-
-  // Get a list of available weeks
-  const weeks = useAvailableWeeks();
 
   // Memoize the key for the current week
   const currentWeekKey = useMemo(() => getCurrentWeekKey(), []);
   const isCurrentWeek = selectedWeek === currentWeekKey;
-
-  const selectedWeekText = useMemo(() => {
-    return formatWeekRange(selectedWeek, currentLocale);
-  }, [selectedWeek, currentLocale]);
 
   return (
     <div className="mb-6">
@@ -50,48 +32,10 @@ export default function SummaryTitle({
           {isCurrentWeek ? tSummary("currentWeek") : tSummary("selectedWeek")}
         </p>
 
-        <Select
-          value={selectedWeek}
-          onValueChange={setSelectedWeek}
-          aria-label={tA11y("weekSelector")}
-          aria-describedby="week-status"
-        >
-          <SelectTrigger aria-label={tA11y("selectWeekButton")}>
-            <SelectValue
-              placeholder={tSummary("inputPlaceholder")}
-              aria-label={`${tA11y("selectedWeekLabel")}: ${selectedWeekText}`}
-            />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>{tA11y("availableWeeks")}</SelectLabel>
-              {weeks.map((weekKey) => {
-                const formattedWeek = formatWeekRange(weekKey, currentLocale);
-                const isCurrent = weekKey === currentWeekKey;
-
-                return (
-                  <SelectItem
-                    key={weekKey}
-                    value={weekKey}
-                    aria-label={
-                      isCurrent
-                        ? `${formattedWeek} (${tA11y("currentWeekLabel")})`
-                        : formattedWeek
-                    }
-                    aria-current={isCurrent ? "date" : undefined}
-                  >
-                    {formattedWeek}
-                    {isCurrent && (
-                      <span className="sr-only">
-                        ({tA11y("currentWeekLabel")})
-                      </span>
-                    )}
-                  </SelectItem>
-                );
-              })}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <WeekSelector
+          selectedWeek={selectedWeek}
+          setSelectedWeek={setSelectedWeek}
+        />
       </div>
     </div>
   );
