@@ -21,7 +21,10 @@ export default function OverviewContainer({
         <NoActivity />
       ) : (
         <div className="space-y-6">
-          <ActivitiesOverview activities={activities} />
+          <ActivitiesOverview
+            activities={activities}
+            selectedWeek={selectedWeek}
+          />
 
           <div className="grid gap-4 md:grid-cols-2">
             <AchievedGoals activities={activities} />

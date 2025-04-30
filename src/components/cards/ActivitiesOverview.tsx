@@ -14,10 +14,12 @@ import Link from "next/link";
 
 interface ActivitiesOverviewProps {
   activities: ValidatedActivity[];
+  selectedWeek: string;
 }
 
 export default function ActivitiesOverview({
   activities,
+  selectedWeek,
 }: ActivitiesOverviewProps) {
   const tSummary = useScopedI18n("pages.summary");
   const currentLocale = useCurrentLocale();
@@ -64,7 +66,11 @@ export default function ActivitiesOverview({
                           className="ml-2"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <ActivityActions activity={activity} compact={true} />
+                          <ActivityActions
+                            activity={activity}
+                            selectedWeek={selectedWeek}
+                            compact={true}
+                          />
                         </div>
                       </div>
 

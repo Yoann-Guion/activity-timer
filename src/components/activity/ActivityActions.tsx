@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Ellipsis, Info, FilePen, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,14 +15,17 @@ import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { DeleteActivityDialog } from "../dialog/DeleteActivityDialog";
 import { EditActivityDialog } from "../dialog/EditActivityDialog";
 import { useCurrentLocale, useScopedI18n } from "@locales/client";
+import { getCurrentWeekKey } from "@/lib/utils/date";
 
 interface ActivityActionsProps {
   activity: ValidatedActivity;
+  selectedWeek?: string; // Optional selected week for the activity
   compact?: boolean; // Indicates if the component should be in compact mode
 }
 
 export function ActivityActions({
   activity,
+  selectedWeek,
   compact = false,
 }: ActivityActionsProps) {
   const pathname = usePathname();
@@ -36,6 +39,14 @@ export function ActivityActions({
 
   // Check if the current page is the activity detail page
   const isDetailPage = pathname.includes(`/activity/${activity.id}`);
+
+  const currentWeekKey = useMemo(() => getCurrentWeekKey(), []);
+  const isCurrentWeek = selectedWeek === currentWeekKey;
+
+  // If not the current week, do not render anything
+  if (selectedWeek && !isCurrentWeek) {
+    return null;
+  }
 
   // Render details link (only if we're not already on the details page)
   const renderDetailsLink = () => {

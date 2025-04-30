@@ -75,9 +75,10 @@ export default function ActivityDetailsCard({
           </CardTitle>
           <div className="flex items-end space-x-2">
             <div className="ml-2">
-              {selectedWeek === currentWeekKey && (
-                <ActivityActions activity={activity} />
-              )}
+              <ActivityActions
+                activity={activity}
+                selectedWeek={selectedWeek}
+              />
             </div>
           </div>
         </CardHeader>

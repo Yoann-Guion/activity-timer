@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Hourglass, Play, RotateCw } from "lucide-react";
+import { Play, RotateCw } from "lucide-react";
 
 import { Button } from "../ui/button";
 import {
@@ -20,7 +20,6 @@ import { useActivityStore } from "@/lib/useActivityStore";
 import { formatMinutes } from "@/lib/utils/time";
 import { useCurrentLocale, useScopedI18n } from "@locales/client";
 import { ActivityCardSkeleton } from "../skeleton/ActivityCardSkeleton";
-import { useEffect, useState } from "react";
 
 export default function ActivitiesList() {
   const router = useRouter();
@@ -28,20 +27,8 @@ export default function ActivitiesList() {
   const tCommon = useScopedI18n("common.actions");
   const currentLocale = useCurrentLocale();
 
-  const [isLoading, setIsLoading] = useState(true);
-
   const { activities, startTimer, activeTimer, isRehydrated } =
     useActivityStore();
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 250);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  console.log(isRehydrated);
 
   return !isRehydrated ? (
     <div className="grid gap-4 md:grid-cols-2">
