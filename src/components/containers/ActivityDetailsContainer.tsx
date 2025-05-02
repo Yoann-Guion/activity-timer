@@ -14,6 +14,8 @@ import ActivityDetailsCard from "../cards/ActivityDetailsCard";
 import { getCurrentWeekKey } from "@/lib/utils/date";
 import { useWeeklySummary } from "@/hooks/useWeeklyHistory";
 import { validateWeekKey } from "@/lib/validation/history/history.validators";
+import { useActivityStore } from "@/lib/useActivityStore";
+import { ActivityDetailsCardSkeleton } from "../skeletons/components/ActivityDetailsCardSkeleton";
 
 export default function ActivityDetailsContainer() {
   const params = useParams();
@@ -39,6 +41,8 @@ export default function ActivityDetailsContainer() {
 
   // Fetch the summary of the selected week
   const { activities } = useWeeklySummary(selectedWeek);
+  //
+  const { isRehydrated } = useActivityStore();
 
   // Fetch the activity details from the store
   useEffect(() => {
@@ -60,6 +64,7 @@ export default function ActivityDetailsContainer() {
     }
   }, [activityId, activities]);
 
+  // Update the URL when the selected week changes
   const handleWeekChange = (newWeekKey: string) => {
     setSelectedWeek(newWeekKey);
     const params = new URLSearchParams(searchParams.toString());
@@ -68,12 +73,9 @@ export default function ActivityDetailsContainer() {
     router.replace(`${pathname}?${params.toString()}`);
   };
 
-  console.log("activity", activity);
-  console.log("weekKeyFromParams", weekKeyFromParams);
-  console.log("validatedWeekKey", validatedWeekKey);
-  console.log("selectedWeek", selectedWeek);
-
-  return (
+  return !isRehydrated ? (
+    <ActivityDetailsCardSkeleton />
+  ) : (
     <>
       {!activity ? (
         <NoActivity />

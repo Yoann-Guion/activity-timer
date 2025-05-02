@@ -19,7 +19,7 @@ import { ActivityActions } from "../activity/ActivityActions";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { formatMinutes } from "@/lib/utils/time";
 import { useCurrentLocale, useScopedI18n } from "@locales/client";
-import { ActivityCardSkeleton } from "../skeleton/ActivityCardSkeleton";
+import { ActivityCardSkeleton } from "../skeletons/components/ActivityCardSkeleton";
 
 export default function ActivitiesList() {
   const router = useRouter();
