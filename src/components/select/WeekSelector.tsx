@@ -33,12 +33,16 @@ export default function WeekSelector({
   // Memoize the key for the current week
   const currentWeekKey = useMemo(() => getCurrentWeekKey(), []);
 
-  const { activityId } = params as { activityId: string };
+  // Get the activityId from params
+  const { activityId } = params as { activityId?: string };
+
+  const weeksForActivity = useAvailableWeeksForActivity(activityId || "");
+  const allAvailableWeeks = useAvailableWeeks();
 
   // Get a list of available weeks
-  const weeks = activityId
-    ? useAvailableWeeksForActivity(activityId)
-    : useAvailableWeeks();
+  const weeks = useMemo(() => {
+    return activityId ? weeksForActivity : allAvailableWeeks;
+  }, [activityId, weeksForActivity, allAvailableWeeks]);
 
   const selectedWeekText = useMemo(() => {
     return formatWeekRange(selectedWeek, currentLocale);
