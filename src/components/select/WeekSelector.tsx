@@ -48,8 +48,6 @@ export default function WeekSelector({
     return formatWeekRange(selectedWeek, currentLocale);
   }, [selectedWeek, currentLocale]);
 
-  console.log("selectedWeekText", selectedWeekText);
-
   return (
     <Select
       value={selectedWeek}

@@ -53,7 +53,7 @@ export function Navbar() {
       name: tNav("summary"),
       href: "/summary",
       icon: BarChart,
-      ariaLabel: tNav("srOnly.home"),
+      ariaLabel: tNav("srOnly.summary"),
     },
   ];
 
