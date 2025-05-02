@@ -1,7 +1,7 @@
+import { useMemo } from "react";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { getCurrentWeekKey } from "@/lib/utils/date";
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
-import { ValidatedWeeklyHistory } from "@/lib/validation/history/history.types";
 
 /**
  * Custom hook to get the weekly summary of activities.
@@ -16,21 +16,19 @@ export function useWeeklySummary(weekKey: string): {
   const currentWeekKey = getCurrentWeekKey();
   const isCurrentWeek = weekKey === currentWeekKey;
 
-  const activities = useActivityStore(
-    (state: {
-      weeklyHistory?: ValidatedWeeklyHistory;
-      activities: ValidatedActivity[];
-    }) => {
-      if (isCurrentWeek) {
-        return state.activities;
-      } else {
-        const weekEntry = state.weeklyHistory?.find(
-          (entry) => entry.weekKey === weekKey
-        );
-        return weekEntry?.activities || [];
-      }
+  const currentActivities = useActivityStore((state) => state.activities);
+  const weeklyHistory = useActivityStore((state) => state.weeklyHistory);
+
+  const activities = useMemo(() => {
+    if (isCurrentWeek) {
+      return currentActivities;
+    } else {
+      const weekEntry = weeklyHistory?.find(
+        (entry) => entry.weekKey === weekKey
+      );
+      return weekEntry?.activities || [];
     }
-  );
+  }, [isCurrentWeek, currentActivities, weeklyHistory, weekKey]);
 
   return {
     isCurrentWeek,
