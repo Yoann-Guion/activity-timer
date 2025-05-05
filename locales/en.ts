@@ -1,7 +1,9 @@
 export default {
   // Common reusable elements
   common: {
-    appName: "Activity Timer",
+    appName: "Trackivity",
+    metadataDescription:
+      "Track your time spent on activities and reach your goals!",
     accessibility: {
       openMenu: "Open settings menu for {name}",
       edit: "Edit {name}",

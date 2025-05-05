@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { generateMetadata } from "./metadata";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -26,19 +26,17 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Activity Timer App",
-  description: "Suivez vos activités hebdomadaires et atteignez vos objectifs",
-};
+export { generateMetadata };
 
 export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string } | Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale;
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
