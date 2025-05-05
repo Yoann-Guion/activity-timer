@@ -12,7 +12,7 @@ import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import NoActivity from "../activity/NoActivity";
 import ActivityDetailsCard from "../cards/ActivityDetailsCard";
 import { getCurrentWeekKey } from "@/lib/utils/date";
-import { useWeeklySummary } from "@/hooks/useWeeklyHistory";
+import { useWeeklySummary } from "@/hooks/useWeeklySummary";
 import { validateWeekKey } from "@/lib/validation/history/history.validators";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { ActivityDetailsCardSkeleton } from "../skeletons/components/ActivityDetailsCardSkeleton";

@@ -24,7 +24,7 @@ Activity Timer est une application web permettant de suivre et gérer ses activi
 - **Frontend** : Next.js, TypeScript, Zustand
 - **UI** : ShadCN/UI, Tailwind CSS
 - **Validation** : Zod
-- **Internationalisation** : i18n
+- **Internationalisation** : next-international
 
 ### Installation et utilisation
 #### Prérequis
@@ -97,7 +97,7 @@ Activity Timer is a web application that helps you track and manage your weekly 
 - **Frontend**: Next.js, TypeScript, Zustand
 - **UI**: ShadCN/UI, Tailwind CSS
 - **Validation**: Zod
-- **Internationalization**: i18n
+- **Internationalization**: next-international
 
 ### Installation & Usage
 #### Prerequisites

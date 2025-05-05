@@ -4,7 +4,7 @@ import ActivitiesOverview from "../cards/ActivitiesOverview";
 import AchievedGoals from "../cards/AchievedGoals";
 import TotalTimeDisplay from "../cards/TotalTimeDisplay";
 import NoActivity from "../activity/NoActivity";
-import { useWeeklySummary } from "@/hooks/useWeeklyHistory";
+import { useWeeklySummary } from "@/hooks/useWeeklySummary";
 
 interface OverviewContainerProps {
   selectedWeek: string;
