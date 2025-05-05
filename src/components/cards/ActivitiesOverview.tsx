@@ -48,7 +48,7 @@ export default function ActivitiesOverview({
                 className="block"
               >
                 <div
-                  className="sm:mx-0 border dark:border-gray-800 border-gray-200 rounded-2xl p-2.5 
+                  className="sm:mx-0 rounded-2xl p-2
                          dark:hover:border-gray-700 hover:border-gray-300 
                          dark:hover:bg-gray-800 hover:bg-gray-100
                          hover:scale-[1.02] transition-all duration-200 
