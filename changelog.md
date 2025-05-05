@@ -1,5 +1,28 @@
 # Changelog - Activity Timer
 
+## [v0.9.9] - Pre-release – May 5, 2025
+### Added
+- Displayed activity summary and details based on the selected week
+- Enhanced weekly history with previous weeks display
+- Linked each summary card to the corresponding activity details page
+- Introduced in progress status for activities
+- Dynamically fetched available weeks based on selected activity
+- Added loading skeletons to the home, summary and details pages
+- Added performance insights using Vercel Speed Insights
+
+### Improved
+- Refactored week selector into a standalone component
+- Simplified useWeeklySummary hook by separating activity retrieval logic
+- Switched to using query parameters for week selection
+- Improved rehydration handling in the activities list
+
+### Fixed
+- Updated useWeeklyReset to save before reset rather than after
+- Converted date strings to Date objects for Zod validation
+- Fixed conditional rendering in WeekSelector and ActivityActions
+- Removed unused types and improved navbar accessibility
+- Improved formatting and calculation of week start/end dates
+
 ## [v0.9] - 2025-04-17
 ### Added
 - Zod validation for activities and forms, integrated with Zustand rehydration

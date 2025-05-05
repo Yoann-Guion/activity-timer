@@ -5,11 +5,7 @@ import {
 } from "../validation/history/history.types";
 import { weeklyHistoryEntrySchema } from "../validation/history/history.schemas";
 import { ValidatedActivity } from "../validation/activity/activity.types";
-import {
-  getCurrentWeekKey,
-  getWeekEndDate,
-  getWeekStartDate,
-} from "../utils/date";
+import { getCurrentWeekKey, getWeekDatesFromKey } from "../utils/date";
 
 /**
  * Creates the history slice for the Zustand store
@@ -28,17 +24,28 @@ export const createHistorySlice: StateCreator<
   weeklyHistory: [],
 
   // Save the current week's activities to history
-  saveWeekToHistory: () => {
+  saveWeekToHistory: (lastResetWeekKey?) => {
     const { activities } = get();
 
     // If there are no activities, do not proceed
     if (!activities || activities.length === 0) return;
 
-    const weekKey = getCurrentWeekKey();
-    const startDate = getWeekStartDate().toISOString();
-    const endDate = getWeekEndDate().toISOString();
+    // Use the last reset week key if provided, otherwise use the current week key
+    const weekKey = lastResetWeekKey || getCurrentWeekKey();
+
+    const { start, end } = getWeekDatesFromKey(weekKey);
+    const startDate = start.toISOString();
+    const endDate = end.toISOString();
 
     try {
+      // Check if the week already exists in the history
+      const existingEntryIndex = get().weeklyHistory.findIndex(
+        (entry) => entry.weekKey === weekKey
+      );
+      if (existingEntryIndex >= 0) {
+        return;
+      }
+
       // Deep copy of activities to avoid mutation
       const activitiesCopy: ValidatedActivity[] = JSON.parse(
         JSON.stringify(activities)
@@ -48,12 +55,12 @@ export const createHistorySlice: StateCreator<
       const processedActivities = activitiesCopy.map((activity) => ({
         ...activity,
         createdAt: new Date(activity.createdAt),
-
-        sessions: activity.sessions?.map((session) => ({
-          ...session,
-          startTime: new Date(session.startTime),
-          endTime: new Date(session.endTime),
-        })),
+        sessions:
+          activity.sessions?.map((session) => ({
+            ...session,
+            startTime: new Date(session.startTime),
+            endTime: new Date(session.endTime),
+          })) || [],
       }));
 
       // Creating and validating the history entry with Zod

@@ -4,21 +4,14 @@ import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { Play } from "lucide-react";
+import { Play, RotateCw } from "lucide-react";
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import { ActivityActions } from "../activity/ActivityActions";
 import { SessionsTable } from "../activity/SessionsTable";
+import WeekSelector from "../select/WeekSelector";
 import { formatMinutes } from "@/lib/utils/time";
-import { formatDate, formatWeekRange } from "@/lib/utils/date";
+import { formatDate } from "@/lib/utils/date";
 import { useActivityStore } from "@/lib/useActivityStore";
-import { useAvailableWeeksForActivity } from "@/hooks/useAvailableWeeksForActivity";
 import { useCurrentLocale, useI18n, useScopedI18n } from "@locales/client";
 
 interface ActivityDetailsCardProps {
@@ -41,18 +34,16 @@ export default function ActivityDetailsCard({
 
   const { activeTimer, startTimer } = useActivityStore();
 
-  // Get a list of available weeks
-  const weeks = useAvailableWeeksForActivity(activity.id);
-
   return (
     <div className="max-w-4xl mx-auto">
-      <Card className="relative overflow-hidden">
+      <Card className="relative overflow-hidden" role="region">
         <div
           className="absolute top-0 left-0 w-full h-2.5"
           style={{ backgroundColor: activity.color }}
+          aria-hidden="true"
         />
         <CardHeader className="pt-1 flex justify-between items-center">
-          <CardTitle className="flex gap-2">
+          <CardTitle className="flex gap-2 my-1">
             {activity.name}
             <div className="text-xs text-muted-foreground pt-0.5">
               {tDetails("createdAt")}
@@ -61,7 +52,10 @@ export default function ActivityDetailsCard({
           </CardTitle>
           <div className="flex items-end space-x-2">
             <div className="ml-2">
-              <ActivityActions activity={activity} />
+              <ActivityActions
+                activity={activity}
+                selectedWeek={selectedWeek}
+              />
             </div>
           </div>
         </CardHeader>
@@ -75,8 +69,17 @@ export default function ActivityDetailsCard({
                   {formatMinutes(activity.weeklyGoal)}
                 </span>
               </div>
-              <Progress value={percentage} className="h-2" />
-              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+              <Progress
+                value={percentage}
+                className="h-2"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={percentage}
+              />
+              <div
+                className="flex justify-between text-xs text-muted-foreground mt-1"
+                aria-live="polite"
+              >
                 <span>
                   {percentage >= 100
                     ? t("pages.summary.goalReached")
@@ -127,30 +130,32 @@ export default function ActivityDetailsCard({
                     router.push(`/${currentLocale}/timer`);
                   }}
                   size="sm"
+                  aria-label={`${t("common.actions.start")} ${activity.name}`}
                 >
-                  <Play className="mr-2 h-4 w-4" />
-                  {t("common.actions.start")}
+                  {activeTimer?.activityId === activity.id ? (
+                    <>
+                      <RotateCw className="mr-2 h-4 w-4 animate-spin" />
+                      {t("common.actions.inProgress")}
+                    </>
+                  ) : (
+                    <>
+                      <Play className="mr-2 h-4 w-4" />
+                      {t("common.actions.start")}
+                    </>
+                  )}
                 </Button>
               </div>
 
               <div className="mb-2">
-                <Select value={selectedWeek} onValueChange={setSelectedWeek}>
-                  <SelectTrigger className="w-full md:w-80">
-                    <SelectValue
-                      placeholder={t("pages.summary.inputPlaceholder")}
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {weeks.map((weekKey) => (
-                      <SelectItem key={weekKey} value={weekKey}>
-                        {formatWeekRange(weekKey, currentLocale)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <WeekSelector
+                  selectedWeek={selectedWeek}
+                  setSelectedWeek={setSelectedWeek}
+                />
               </div>
 
-              <SessionsTable activity={activity} />
+              <div aria-labelledby={`sessions-heading-${activity.name}`}>
+                <SessionsTable activity={activity} />
+              </div>
             </div>
           </div>
         </CardContent>

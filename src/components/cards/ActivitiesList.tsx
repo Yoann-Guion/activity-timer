@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Play } from "lucide-react";
+import { Play, RotateCw } from "lucide-react";
 
 import { Button } from "../ui/button";
 import {
@@ -19,15 +19,25 @@ import { ActivityActions } from "../activity/ActivityActions";
 import { useActivityStore } from "@/lib/useActivityStore";
 import { formatMinutes } from "@/lib/utils/time";
 import { useCurrentLocale, useScopedI18n } from "@locales/client";
+import { ActivityCardSkeleton } from "../skeletons/components/ActivityCardSkeleton";
 
 export default function ActivitiesList() {
   const router = useRouter();
   const tHome = useScopedI18n("pages.home");
+  const tCommon = useScopedI18n("common.actions");
   const currentLocale = useCurrentLocale();
 
-  const { activities, startTimer, activeTimer } = useActivityStore();
+  const { activities, startTimer, activeTimer, isRehydrated } =
+    useActivityStore();
 
-  return (
+  return !isRehydrated ? (
+    <div className="grid gap-4 md:grid-cols-2">
+      <ActivityCardSkeleton />
+      <ActivityCardSkeleton />
+      <ActivityCardSkeleton />
+      <ActivityCardSkeleton />
+    </div>
+  ) : (
     <>
       {activities.length === 0 ? (
         <NoActivity />
@@ -94,8 +104,17 @@ export default function ActivitiesList() {
                     router.push(`/${currentLocale}/timer`);
                   }}
                 >
-                  <Play className="mr-2 h-4 w-4" />
-                  Démarrer
+                  {activeTimer?.activityId === activity.id ? (
+                    <>
+                      <RotateCw className="mr-2 h-4 w-4 animate-spin" />
+                      {tCommon("inProgress")}
+                    </>
+                  ) : (
+                    <>
+                      <Play className="mr-2 h-4 w-4" />
+                      {tCommon("start")}
+                    </>
+                  )}
                 </Button>
               </CardFooter>
             </Card>

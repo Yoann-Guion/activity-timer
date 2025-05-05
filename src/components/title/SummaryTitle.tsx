@@ -1,16 +1,9 @@
 "use client";
 
 import { useMemo } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { useAvailableWeeks } from "@/hooks/useAvailableWeeks";
-import { formatWeekRange, getCurrentWeekKey } from "@/lib/utils/date";
-import { useCurrentLocale, useScopedI18n } from "@locales/client";
+import { getCurrentWeekKey } from "@/lib/utils/date";
+import { useScopedI18n } from "@locales/client";
+import WeekSelector from "../select/WeekSelector";
 
 interface SummaryTitleProps {
   selectedWeek: string;
@@ -22,10 +15,6 @@ export default function SummaryTitle({
   setSelectedWeek,
 }: SummaryTitleProps) {
   const tSummary = useScopedI18n("pages.summary");
-  const currentLocale = useCurrentLocale();
-
-  // Get a list of available weeks
-  const weeks = useAvailableWeeks();
 
   // Memoize the key for the current week
   const currentWeekKey = useMemo(() => getCurrentWeekKey(), []);
@@ -34,23 +23,19 @@ export default function SummaryTitle({
   return (
     <div className="mb-6">
       <h1 className="text-2xl font-bold">{tSummary("title")} </h1>
-      <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
-        <p className="text-muted-foreground">
+      <div
+        className="flex flex-col items-start gap-2 sm:flex-row sm:items-center"
+        role="region"
+        aria-labelledby="summary-title"
+      >
+        <p className="text-muted-foreground" id="week-status">
           {isCurrentWeek ? tSummary("currentWeek") : tSummary("selectedWeek")}
         </p>
 
-        <Select value={selectedWeek} onValueChange={setSelectedWeek}>
-          <SelectTrigger>
-            <SelectValue placeholder={tSummary("inputPlaceholder")} />
-          </SelectTrigger>
-          <SelectContent>
-            {weeks.map((weekKey) => (
-              <SelectItem key={weekKey} value={weekKey}>
-                {formatWeekRange(weekKey, currentLocale)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <WeekSelector
+          selectedWeek={selectedWeek}
+          setSelectedWeek={setSelectedWeek}
+        />
       </div>
     </div>
   );

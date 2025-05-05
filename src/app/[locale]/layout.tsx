@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { TransitionProvider } from "@/components/animation/TransitionProvider";
 import { Navbar } from "@/components/Navbar";
@@ -61,6 +62,7 @@ export default async function RootLayout({
           </ThemeProvider>
         </I18nProviderClient>
         <Toaster theme="system" position="top-center" richColors />
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>

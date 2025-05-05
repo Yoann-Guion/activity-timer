@@ -4,7 +4,7 @@ import ActivitiesOverview from "../cards/ActivitiesOverview";
 import AchievedGoals from "../cards/AchievedGoals";
 import TotalTimeDisplay from "../cards/TotalTimeDisplay";
 import NoActivity from "../activity/NoActivity";
-import { useWeeklySummary } from "@/hooks/useWeeklyHistory";
+import { useWeeklySummary } from "@/hooks/useWeeklySummary";
 
 interface OverviewContainerProps {
   selectedWeek: string;
@@ -21,7 +21,10 @@ export default function OverviewContainer({
         <NoActivity />
       ) : (
         <div className="space-y-6">
-          <ActivitiesOverview activities={activities} />
+          <ActivitiesOverview
+            activities={activities}
+            selectedWeek={selectedWeek}
+          />
 
           <div className="grid gap-4 md:grid-cols-2">
             <AchievedGoals activities={activities} />
