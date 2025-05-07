@@ -32,7 +32,7 @@ export const useActivityStore = create<StoreState>()(
       return store;
     },
     {
-      name: "activity-timer-storage",
+      name: "trackivity-storage",
       storage: createJSONStorage(() => localStorage),
       // Save only the activities and weeklyHistory to localStorage
       partialize: (state) => ({
