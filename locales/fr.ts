@@ -1,7 +1,9 @@
 export default {
   // Common reusable elements
   common: {
-    appName: "Activity Timer",
+    appName: "Trackivity",
+    metadataDescription:
+      "Suivez le temps passé sur vos activités et atteignez vos objectifs hebdomadaires !",
     accessibility: {
       openMenu: "Ouvrir le menu d'options pour {name}",
       edit: "Modifier {name}",
@@ -202,7 +204,7 @@ export default {
         hostingWebsite: "Site web de l'hébergeur : ",
         liability:
           "Le contenu de ce site est fourni à titre informatif. Bien que des efforts soient faits pour maintenir l'exactitude des informations, l'auteur ne peut garantir leur exactitude ni leur exhaustivité.",
-        data: "Ce site utilise Vercel Analytics pour collecter des données anonymes sur la fréquentation et l'utilisation du site (par exemple, le nombre de visiteurs, les pages vues, etc.). Ces données sont utilisées à des fins statistiques et ne permettent pas d'identifier les utilisateurs individuellement. En utilisant ce site, vous consentez à la collecte de ces données.",
+        data: "Ce site utilise Vercel Analytics et Speed Insights pour collecter des données anonymes sur la fréquentation et la performance du site (par exemple : nombre de visiteurs, pages vues, temps de chargement, interactions, etc.). Ces données sont utilisées à des fins statistiques et d’optimisation, et ne permettent pas d’identifier les utilisateurs individuellement. En utilisant ce site, vous consentez à la collecte de ces données.",
         cookies:
           "Ce site n'utilise pas de cookies à des fins de suivi ou de personnalisation pour le moment. Cependant, il est possible que des cookies nécessaires au bon fonctionnement de certaines fonctionnalités (comme les outils d'analyse) soient installés.",
         propertie:

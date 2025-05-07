@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, PlusCircle, BarChart, Clock } from "lucide-react";
+import { Home, PlusCircle, BarChart, Clock, TimerReset } from "lucide-react";
 import { ThemeToggle } from "./theme/ThemeToggle";
 import { SettingsMenu } from "./SettingsMenu";
 import { cn } from "@/lib/utils/classname";
@@ -64,8 +64,9 @@ export function Navbar() {
       aria-label={tNav("srOnly.mainNavigation")}
     >
       {/* App title - visible only on desktop */}
-      <div className="hidden sm:flex sm:flex-col sm:items-center sm:justify-center sm:h-20 sm:border-b">
-        <h1 className="text-xl font-bold">Activity Timer</h1>
+      <div className="hidden sm:flex sm:flex-row sm:items-center sm:justify-center sm: gap-2 sm:h-20 sm:border-b">
+        <TimerReset />
+        <h1 className="text-xl font-bold">Trackivity</h1>
       </div>
 
       {/* Navigation items */}

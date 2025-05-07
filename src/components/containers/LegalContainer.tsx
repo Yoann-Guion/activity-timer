@@ -8,7 +8,7 @@ export default function LegalContainer() {
   const currentLocale = useCurrentLocale();
 
   // Format the last update date based on the current locale
-  const lastUpdateDate = new Date("2024-04-08");
+  const lastUpdateDate = new Date("2024-05-06");
   const formattedDate =
     currentLocale === "fr"
       ? lastUpdateDate.toLocaleDateString("fr-FR", {

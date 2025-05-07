@@ -40,6 +40,7 @@ export function ActivityActions({
   // Check if the current page is the activity detail page
   const isDetailPage = pathname.includes(`/activity/${activity.id}`);
 
+  // Check if the selected week is the current week
   const currentWeekKey = useMemo(() => getCurrentWeekKey(), []);
   const isCurrentWeek = selectedWeek === currentWeekKey;
 

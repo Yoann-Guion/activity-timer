@@ -63,7 +63,7 @@ export default function TimerCard() {
       const now = new Date().getTime();
       const startTime = new Date(activeTimer.startTime).getTime();
 
-      // Calculer le temps écoulé en soustrayant le temps total de pause
+      // Calculate the total elapsed time
       const elapsed = Math.floor((now - startTime - totalPausedTime) / 1000);
       setElapsedTime(elapsed);
     }, 1000);
