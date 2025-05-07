@@ -44,6 +44,7 @@ export default function WeekSelector({
     return activityId ? weeksForActivity : allAvailableWeeks;
   }, [activityId, weeksForActivity, allAvailableWeeks]);
 
+  // Formats the date according to the locale
   const selectedWeekText = useMemo(() => {
     return formatWeekRange(selectedWeek, currentLocale);
   }, [selectedWeek, currentLocale]);

@@ -1,12 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
   useParams,
   usePathname,
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import { useEffect, useState } from "react";
 
 import { ValidatedActivity } from "@/lib/validation/activity/activity.types";
 import NoActivity from "../activity/NoActivity";

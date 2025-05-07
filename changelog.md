@@ -1,6 +1,15 @@
-# Changelog - Activity Timer
+# Changelog - TRACKIVITY
 
-## [v0.9.9] - Pre-release – May 5, 2025
+## [v1] - Release - 2025-05-07
+### Added
+- Rename of the application from Activity Timer to Trackivity
+- Added translated metadata descriptions for improved internationalization and SEO
+
+### Improved
+- Removed outdated TODOs and added clarifying comments to the code
+- Updated legal notices
+
+## [v0.9.9] - Pre-release – 2025-05-05
 ### Added
 - Displayed activity summary and details based on the selected week
 - Enhanced weekly history with previous weeks display

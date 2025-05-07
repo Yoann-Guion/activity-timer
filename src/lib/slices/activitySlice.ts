@@ -21,7 +21,6 @@ export const createActivitySlice: StateCreator<
     set((state) => {
       const newActivity = buildValidatedActivity(activity);
       if (!newActivity) {
-        // todo : voir pour afficher toast ?
         return state;
       }
       return { activities: [...state.activities, newActivity] };

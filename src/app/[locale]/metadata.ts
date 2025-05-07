@@ -5,11 +5,11 @@ export async function generateMetadata({
 }: {
   params: { locale: string } | Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  // Résoudre les params si c'est une Promise
+  // Resolve the params if it's a promise
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
 
-  // Version hardcodée des métadonnées selon la locale
+  // Hardcoded metadata for the app
   if (locale === "fr") {
     return {
       title: "Trackivity",
